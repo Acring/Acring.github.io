@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html lang="zh-Hans">
 <head>
 
     <!--[if lt IE 9]>
@@ -16,20 +16,21 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Acring">
-<meta property="og:url" content="http://yoursite.com/tags/随笔-文章/index.html">
-<meta property="og:site_name" content="Acring">
+<meta property="og:title" content="标签&分类">
+<meta property="og:url" content="http://acring.me/tags/index.html">
+<meta property="og:site_name" content="Acring的小屋">
+<meta property="og:updated_time" content="2017-03-15T10:40:57.520Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Acring">
+<meta name="twitter:title" content="标签&分类">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
 
-    <link rel="alternate" href="/atom.xml" title="Acring" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Acring的小屋" type="application/atom+xml">
 
 
 
-    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/ring.jpg">
 
 
 
@@ -42,7 +43,7 @@
 
 
     <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="/css/style.css">
@@ -52,7 +53,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: 随笔 | 文章 | Acring</title>
+<title>标签&amp;分类 | Acring的小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -64,11 +65,11 @@
         isHome: false,
         isPost: false,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+        search: true
     }
 </script>
 
@@ -92,7 +93,7 @@
 <div class="intrude-less">
     <header id="header" class="inner">
         <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
+            <img src="/img/ring.png" class="animated zoomIn">
         </a>
         <hgroup>
           <h1 class="header-author"><a href="/">Acring</a></h1>
@@ -100,6 +101,13 @@
 
         
 
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
         
 
 
@@ -164,11 +172,11 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa GitHub" href="https://github.com/Acring" title="GitHub"></a>
                             
-                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/ac-shou-huan" title="知乎"></a>
                             
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                                <a class="fa 简书" href="http://www.jianshu.com/u/dd47393a75cb" title="简书"></a>
                             
                         </ul>
                     </nav>
@@ -177,7 +185,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔-文章/">随笔 | 文章</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
                     </div>
                 </section>
                 
@@ -186,11 +194,19 @@
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
                     
+                      <a class="main-nav-link switch-friends-link" href="https://polluxLee.github.io">PolluxLee</a>
+                    
                       <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
                     
                       <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
                     
                       <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.jitashe.net/">吉他社</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.chuhaiba.cn/">出海吧</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.ursb.me/">Airing</a>
                     
                     </div>
                 </section>
@@ -200,7 +216,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">小小一只手环，妄想探索全世界</div>
                 </section>
                 
             </div>
@@ -217,7 +233,7 @@
     <div class="intrude-less">
         <header id="header" class="inner">
             <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
+                <img src="/img/ring.png" class="animated zoomIn">
             </a>
             <hgroup>
               <h1 class="header-author"><a href="/" title="回到主页">Acring</a></h1>
@@ -240,11 +256,11 @@
             <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Acring" title="GitHub"></a>
                             
-                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/ac-shou-huan" title="知乎"></a>
                             
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/u/dd47393a75cb" title="简书"></a>
                             
                         </ul>
             </nav>
@@ -252,63 +268,197 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/03/15/First/" class="archive-article-date">
-      <time datetime="2017-03-15T07:42:34.000Z" itemprop="datePublished">03-15</time>
+    <div class="article-meta">
+      <a href="/tags/index.html" class="article-date">
+      <time datetime="2017-03-15T10:32:14.000Z" itemprop="datePublished">2017-03-15</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/15/First/">First</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      标签&amp;分类
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔-文章/">随笔 | 文章</a></li></ul>
-    </div>
-
-        </div>
+        
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <style>
+    .article-meta { display: none; }
+    #container .article .article-title { padding-right: 0; }
+    .article-header {
+        padding: 0;
+        padding-top: 26px;
+        border-left: none;
+        text-align: center;
+    }
+    .article-header:hover { border-left: none; }
+    .article-title { font-size: 1.6em }
+    .article-entry hr { margin: 0;}
+    .article-meta,
+    #container .article-info-post.article-info { display: none;}
+    #container .article .article-title { padding: 0; }
+</style>
 
+
+    <!-- Tag Cloud Page -->
+    <hr>
+<br>
+
+
+<p class="count"></p>
+
+<div class="tags">
+    <a href="/tags/随笔/" style="font-size: 16px; color: #808080">随笔</a>
+</div>
+<style>
+    .category-list li{
+        display: inline-block;
+        margin: 0 1em .5em 0;
+        padding: 4px;
+        border: 1px solid lightgray;
+        font-size: 1.2rem;
+    }
+    .category-list a { color: gray; }
+    .category-list-item:hover a {
+        color: gray;
+        text-decoration: none;
+    }
+    .category-list-count {
+        margin-left: 2px;
+        font-size: .9rem;
+    }
+    .article-entry ul li:before{ display: none; }
+    .article-inner { text-align: center; }
+    .tags {
+        max-width: 42em;
+        margin: 2em auto;
+        margin-top: 0em;
+    }
+    .tags a {
+        margin-right: 1em;
+        line-height: 65px;
+        border-bottom: 1px solid gray;
+        white-space: nowrap;
+        transition: border-bottom .5s;
+    }
+    .tags a:hover {
+        border-bottom: 3px dotted gray;
+        text-decoration: none;
+    }
+    #count > span {
+        margin: auto .2em;
+        font-weight: bold;
+    }
+</style>
+
+<!-- Count tags and categories -->
+<p id="count">
+        已有<span><script>document.write($(".category-list-item").length)</script></span>个分类，
+        共计<span><script>document.write($(".tags > a").length)</script></span>个标签
+</p>
+<script>
+    $('#count').appendTo('.count');
+</script>
+
+          
+        
+      
+    </div>
+    
+  </div>
+  
     
 
+
+  
+</article>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"标签&分类　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="tags/index.html" data-title="标签&amp;分类" data-url="http://acring.me/tags/index.html"></div>
+    <script>
+        var duoshuoQuery = {short_name:"acring"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016-2017 Acring
+                2017 Acring
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
@@ -335,6 +485,7 @@
         
     </div>
 </footer>
+
     </div>
     
 <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
@@ -348,7 +499,7 @@
                 $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
             }
             else {
-                var backgroundnum = 5;
+                var backgroundnum = 8;
                 var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
                 $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
             }
@@ -357,6 +508,27 @@
 
 
 
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <div class="scroll" id="scroll">
@@ -385,6 +557,23 @@
         }
     
 </script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "_(:зゝ∠)_这里有咸鱼一只" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "\(≧▽≦)/突然又状态满满了" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
