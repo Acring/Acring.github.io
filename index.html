@@ -195,7 +195,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity3D/">Unity3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博弈论/">博弈论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity3D/">Unity3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博弈论/">博弈论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
                     </div>
                 </section>
                 
@@ -282,6 +282,137 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-JUnit测试入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/08/JUnit测试入门/" class="article-date">
+      <time datetime="2017-04-08T07:22:20.000Z" itemprop="datePublished">2017-04-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/08/JUnit测试入门/">Junit测试入门1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="JUnit测试入门"><a href="#JUnit测试入门" class="headerlink" title="JUnit测试入门"></a>JUnit测试入门</h1><h2 id="创建Junit测试"><a href="#创建Junit测试" class="headerlink" title="创建Junit测试"></a>创建Junit测试</h2><ul>
+<li>打开eclipse</li>
+<li>创建一个项目</li>
+<li>为项目引入Junit包 <strong>右键-&gt;Build Path-&gt;add Libraries-&gt;Junit-&gt;Next-&gt;Junit4-&gt;Finish</strong></li>
+<li>在项目中新建Test文件目录与src目录区分开</li>
+<li>在src目录下创建一个类</li>
+<li>在该类中写出要被单元测试函数</li>
+<li>右键创建一个Junit Test Case</li>
+<li>修改测试类Source folder的位置点击Next</li>
+<li>选中要单元测试的函数</li>
+<li>Finish</li>
+</ul>
+<h2 id="编写Junit测试"><a href="#编写Junit测试" class="headerlink" title="编写Junit测试"></a>编写Junit测试</h2><h3 id="Test"><a href="#Test" class="headerlink" title="@Test"></a>@Test</h3><p>@Test 是每个单元测试必须的修饰</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="comment">//<span class="doctag">TODO:</span></span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="public-void"><a href="#public-void" class="headerlink" title="public void"></a>public void</h3><p>所有的单元测试必须使用public void 修饰，不能持有任何参数</p>
+<h3 id="assertEquals"><a href="#assertEquals" class="headerlink" title="assertEquals"></a>assertEquals</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(expected, actual);</div></pre></td></tr></table></figure>
+<p>assertEquals 的基本用法为</p>
+<blockquote>
+<p><code>expected</code>是预计值，actual是对应的函数</p>
+</blockquote>
+<p>例:</p>
+<p>被测函数:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> a+ b;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>测试函数:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAdd</span><span class="params">()</span></span>&#123;</div><div class="line">		assertEquals(<span class="number">6</span>, <span class="keyword">new</span> Calculate().add(<span class="number">3</span>,<span class="number">3</span>));</div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="运行Junit测试"><a href="#运行Junit测试" class="headerlink" title="运行Junit测试"></a>运行Junit测试</h2><ul>
+<li>右键项目-&gt;Run As-&gt;Junit Test</li>
+<li>观察测试的结果</li>
+</ul>
+<h2 id="编写测试的基本方法要点"><a href="#编写测试的基本方法要点" class="headerlink" title="编写测试的基本方法要点"></a>编写测试的基本方法要点</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"></div><div class="line"> * Created by Administrator on 2015/5/29.</div><div class="line"></div><div class="line"> * 1.测试方法上必须使用<span class="doctag">@Test</span>进行修饰</div><div class="line"></div><div class="line"> * 2.测试方法必须使用public void 进行修饰，不能待任何的参数</div><div class="line"></div><div class="line"> * 3.新建一个源代码目录</div><div class="line"></div><div class="line"> * 4.测试类的爆应该和被测试类保持一致</div><div class="line"></div><div class="line"> * 5.测试单元中的每个方法必须可以独立测试，测试方法间不能有任何的依赖</div><div class="line"></div><div class="line"> * 6.测试类使用Test作为类名的后缀</div><div class="line"></div><div class="line"> * 7.测试方法使用test作为方法名的前缀</div><div class="line"></div><div class="line"> */</div></pre></td></tr></table></figure>
+<h2 id="Error和Failure的区别"><a href="#Error和Failure的区别" class="headerlink" title="Error和Failure的区别"></a>Error和Failure的区别</h2><ol>
+<li>Failure 一般由单元测试使用的方法判断失败所引起的，这表示测试点发现了问题，就是说问题输出的结果和我们预期的不一样。</li>
+<li>error是有代码异常引起的，它可以产生于测试代码本身的错误，也可以是测试代码中一个隐藏的bug</li>
+<li>测试用力不是用来证明你是对的，而是用来证明你没有错。</li>
+</ol>
+<h2 id="JUnit运行流程"><a href="#JUnit运行流程" class="headerlink" title="JUnit运行流程"></a>JUnit运行流程</h2><ol>
+<li>@BeforeClass修饰的方法会在所有方法被小勇前被执行，而且该方法是静态的，所以当测试类被加载后接着就会运行它，而且在内存中只会存在一份实例，所以比较适合加载文件</li>
+<li>@AfterClass 所修饰的方法通常用来对资源的清理，如关闭数据库</li>
+<li>@Before和@After会在每个测试方法的前后各执行一次。</li>
+</ol>
+<h2 id="JUnit常用注解"><a href="#JUnit常用注解" class="headerlink" title="JUnit常用注解"></a>JUnit常用注解</h2><ul>
+<li>@Test:将一个普通的方法修饰成一个测试方法</li>
+</ul>
+<p>Test注解的可选参数有</p>
+<p>(expected=XX.class) 预计报出的错误</p>
+<p>(timeout=XXs) 超时时间,超过时间就结束</p>
+<ul>
+<li>@ BeforeClass: 会在所有方法运行前被执行，static修饰</li>
+<li>@AfterClass: 会在所有方法运行后被执行，static修饰</li>
+<li>@Before: 会在每一个测试方法被运行前执行一次</li>
+<li>@After: 会在每一个测试方法被运行后执行一次</li>
+<li>@Ignore: 所修饰的方法会被测试运行器忽略</li>
+<li>@RunWith: 更改测试运行器</li>
+</ul>
+<h2 id="测试套件"><a href="#测试套件" class="headerlink" title="测试套件"></a>测试套件</h2><ol>
+<li>测试套件就是组织测试类一起运行的</li>
+<li>写一个作为测试套件的入口类，这个类里不包含其他的方法。</li>
+<li>更改测试运行器Suite.class.</li>
+<li>将要测试的类作为数组传入到Suite.SuiteClasses({})</li>
+</ol>
+<p>eg:@RunWith(Suite.class)  @Suite.SuiteClasses({TaskTest1.class,TaskTest2.class,TaskTest3.class})</p>
+<p>public class SuiteTest{}</p>
+<p>//再建几个JUnit的测试类//TaskTest1.class,TaskTest2.class,TaskTest3.class</p>
+<h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><ol>
+<li>创建新的Test类，指定运行器RunWith(Parameterized.class)</li>
+<li>申明变量来存放预期值和结果值</li>
+<li>申明一个返回值为Collection的公共静态方法，并使用@Parameters进行修饰</li>
+<li>未测试类申明一个带有参数的公共构造方法，并在其中为声明变量赋值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.Acring.util;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"><span class="keyword">import</span> java.util.Collection;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.junit.Assert;</div><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.junit.runners.Parameterized;</div><div class="line"><span class="keyword">import</span> org.junit.runners.Parameterized.Parameters;</div><div class="line"></div><div class="line"><span class="meta">@RunWith</span>(Parameterized.class)</div><div class="line"><span class="comment">// 指定运行器runner:使用参数化运行器来运行</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">parameterTest</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> expected;<span class="comment">// 期待的结果值</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> input1;<span class="comment">// 参数1</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> input2;<span class="comment">// 参数2</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> Calculate calculator = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Parameters</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Collection <span class="title">prepareData</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 测试数据</span></div><div class="line">        Object[][] objects = &#123; &#123; <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span> &#125;, &#123; -<span class="number">4</span>, -<span class="number">1</span>, -<span class="number">3</span> &#125;, &#123; <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span> &#125;,</div><div class="line">                &#123; <span class="number">4</span>, -<span class="number">4</span>, <span class="number">8</span> &#125; &#125;;</div><div class="line">        <span class="keyword">return</span> Arrays.asList(objects);<span class="comment">// 将数组转换成集合返回</span></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        calculator = <span class="keyword">new</span> Calculate();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">parameterTest</span><span class="params">(<span class="keyword">int</span> expected, <span class="keyword">int</span> input1, <span class="keyword">int</span> input2)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 构造方法</span></div><div class="line">        <span class="comment">// JUnit会使用准备的测试数据传给构造函数</span></div><div class="line">        <span class="keyword">this</span>.expected = expected;</div><div class="line">        <span class="keyword">this</span>.input1 = input1;</div><div class="line">        <span class="keyword">this</span>.input2 = input2;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAdd</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Assert.assertEquals(<span class="keyword">this</span>.expected,</div><div class="line">                calculator.add(<span class="keyword">this</span>.input1, <span class="keyword">this</span>.input2));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><p>JUnit为我们提供了一些辅助函数，他们用来帮助我们确定被测试的方法是否按照预期的效果正常工作，通常，把这些辅助函数称为断言。</p>
+<p>前面用的 assertEquals 就是断言</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/测试/">测试</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-广州大学数据分析(13-15届)" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -311,12 +442,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts6235" style="width: 100%;height: 750px;margin: 0 auto"></div>
+              <h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts432" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6235'));
+        var myChart = echarts.init(document.getElementById('echarts432'));
         // 指定图表的配置项和数据
         var option = option = {
     
