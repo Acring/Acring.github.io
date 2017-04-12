@@ -4,6 +4,325 @@
   
     
     <entry>
+      <title><![CDATA[网络森林]]></title>
+      <url>http://blog.acring.me/2017/04/12/%E7%BD%91%E7%BB%9C%E6%A3%AE%E6%9E%971/</url>
+      <content type="html"><![CDATA[<h1 id="网络森林-基础篇"><a href="#网络森林-基础篇" class="headerlink" title="网络森林-基础篇"></a>网络森林-基础篇</h1><h2 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h2><blockquote>
+<p>20世纪60年代以来，计算机网络得到了飞速发展。各大厂商和标准组织为了在数据通信网络领域占据主导地位，纷纷推出了各自的网络架构体系和标准，如IBM公司的SNA协议，Novell公司的IPX/SPX协议，以及广泛流行的OSI参考模型和TCP/IP协议。同时，各大厂商根据这些协议生产出了不同的硬件和软件。标准组织和厂商的共同努力促进了网络技术的快速发展和网络设备种类的迅速增长。网络通信中，“协议”和“标准”这两个词汇常常可以混用。同时，协议或标准本身又常常具有层次的特点。</p>
+<p>一般地，关注于逻辑数据关系的协议通常被称为上层协议，而关注于物理数据流的协议通常被称为低层协议。IEEE 802就是一套用来管理物理数据流在局域网中传输的标准，包括在局域网中传输物理数据的802.3以太网标准。</p>
+<p>还有一些用来管理物理数据流在使用串行介质的广域网中传输的标准，如帧中继FR（Frame Relay），高级数据链路控制HDLC（High-Level Data Link Control），异步传输模式ATM（Asynchronous Transfer Mode）。</p>
+</blockquote>
+<p>总的来说，协议就是为了统一计算机之间通讯的规则所建立的一套规定，这样计算机之间的通讯才能正常的进行</p>
+<h2 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h2><blockquote>
+<p>网络模型是一个概念上的模型，是一个试图使各种计算机在世界范围内互连为网络的标准框架。</p>
+<p>网络模型是广义上对网络通讯的架构，网络协议是具体的网络通讯的方法</p>
+</blockquote>
+<h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><blockquote>
+<p>国际标准化组织ISO于1984年提出了OSI RM（Open System Interconnection Reference Model，开放系统互连参考模型）。OSI 参考模型很快成为了计算机网络通信的基础模型。</p>
+</blockquote>
+<p>OSI作为基础的网络模型，很多模型都是在此基础上演变而来</p>
+<p>OSI的结构为:</p>
+<ol>
+<li>应用层 - OSI参考模型中最靠近用户的一层，为应用程序提供网络服务.</li>
+<li>表示层 - 提供各种用于应用层数据的编码和转换功能，确保一个系统的应用层发送的数据能被另一个系统的应用层识别。</li>
+<li>会话层 - 负责建立、管理和终止表示层实体之间的通信会话。该层的通信由不同设备中的应用程序之间的服务请求和响应组成。</li>
+<li>传输层 - 提供面向连接或非面向连接的数据传递以及进行重传前的差错检测。</li>
+<li>网络层 - 提供逻辑地址，供路由器确定路径。</li>
+<li>数据链路层 - 将比特组合成字节，再将字节组合成帧，使用链路层地址（以太网使用MAC地址）来访问介质，并进行差错检测。</li>
+<li>物理层 - 在设备之间传输比特流，规定了电平、速度和电缆针脚。</li>
+</ol>
+<p>从上到下是越来越接近底层的</p>
+<h3 id="TCP-IP模型"><a href="#TCP-IP模型" class="headerlink" title="TCP/IP模型"></a>TCP/IP模型</h3><ol>
+<li>应用层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>网络接口层</li>
+</ol>
+<p>TCP/IP模型的基础是OSI模型，只是对OSI模型进行了精简和归纳</p>
+<h2 id="IP编址"><a href="#IP编址" class="headerlink" title="IP编址"></a>IP编址</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
+<p>网络层位于数据链路层与传输层之间。网络层中包含了许多协议，其中最为重要的协议就是IP协议。网络层提供了IP路由功能。理解IP路由除了要熟悉IP协议的工作机制之外，还必须理解IP编址以及如何合理地使用IP地址来设计网络。</p>
+</blockquote>
+<ul>
+<li>IP地址分为网络部分和主机部分。</li>
+<li>IP地址由32个二进制组成，但是我们一般用10进制来查看</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">网络位</th>
+<th style="text-align:center">主机位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">192.168.1</td>
+<td style="text-align:center">.1</td>
+</tr>
+<tr>
+<td style="text-align:center">11000000.10101000.00000001</td>
+<td style="text-align:center">.00000001</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>IPv4地址为32比特的二进制数，通常用点分十进制表示。IP地址用来标识网络中的设备，具有IP地址的设备可以在同一网段内或跨网段通信。IP地址包括两部分，第一部分是网络号，表示IP地址所属的网段，第二部分是主机号，用来唯一标识本网段上的某台网络设备。</p>
+<p>网络位相同的计算机就属于同一个网段，比如你可以看同一个寝室的IP地址，网络位一般都是一样的。</p>
+</blockquote>
+<ul>
+<li>当然网络位并不是只是看逗号分隔的前三个，而是要由子网掩码来区分网段，在后面会说到</li>
+</ul>
+<h3 id="特殊地址"><a href="#特殊地址" class="headerlink" title="特殊地址"></a>特殊地址</h3><blockquote>
+<p>每个网段上都有两个特殊地址不能分配给主机或网络设备。第一个是该网段的网络地址，该IP地址的主机位为全0，表示一个网段。第二个地址是该网段中的广播地址，目的地址为广播地址的报文会被该网段中的所有网络设备接收。广播地址的主机位为全1。除网络地址和广播地址以外的其他IP地址可以作为网络设备的IP地址。</p>
+</blockquote>
+<ul>
+<li>按我们上述的网段，该网段的<strong>网络地址</strong>为<strong>192.168.1.0</strong>而<strong>广播地址</strong>为<strong>192.168.1.255</strong></li>
+<li>这两个地址是不能分配给主机使用的，如果你把自己的主机的IP地址改成这两个估计是用不了的，有兴趣的可以试试</li>
+<li>特殊地址汇中私有IP地址，在后面会讲到。</li>
+</ul>
+<h3 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h3><ul>
+<li>之前说到IPv4是32位二进制的数，那么我们就有可能遇到要直接看二进制IP地址的情况，所以要我们能从二进制数转十进制数。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">11000000.</th>
+<th style="text-align:center">10101000.</th>
+<th style="text-align:center">00000001.</th>
+<th style="text-align:center">00000001</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$2^7+2^6$</td>
+<td style="text-align:center">$2^7+2^5+2^3$</td>
+<td style="text-align:center">$2^0$</td>
+<td style="text-align:center">$2^0$</td>
+</tr>
+<tr>
+<td style="text-align:center">192.</td>
+<td style="text-align:center">168.</td>
+<td style="text-align:center">1.</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>相信你能从上面的转换示例很快的理解他的转换方法</p>
+</blockquote>
+<h3 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h3><blockquote>
+<p>IPv4地址被划分为A、B、C、D、E五类，每类地址的网络号包含不同的字节数。A类，B类，和C类地址为可分配IP地址，每类地址支持的网络数和主机数不同。比如，A类地址可支持126个网络，每个网络支持224 （16,777,216 )个主机地址，另外每个网段中的网络地址和广播地址不能分配给主机。C类地址支持200多万个网络，每个网络支持256个主机地址，其中254个地址可以分配给主机使用。</p>
+<p>D类地址为组播地址。主机收到以D类地址为目的地址的报文后，且该主机是该组播组成员，就会接收并处理该报文。各类IP地址可以通过第一个字节中的比特位进行区分。如A类地址第一字节的最高位固定为0，B类地址第一字节的高两位固定为10，C类地址第一字节的高三位固定为110，D类地址第一字节的高四位固定为1110，E类地址第一字节的高四位固定为1111。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>网络位开头</th>
+<th>网络位</th>
+<th>主机位</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A类</td>
+<td>0</td>
+<td>网络位(8bit)</td>
+<td>主机位(24bit)</td>
+<td>0.0.0.0~127.255.255.255</td>
+</tr>
+<tr>
+<td>B类</td>
+<td>10</td>
+<td>网络位(16bit)</td>
+<td>主机位(16bit)</td>
+<td>128.0.0.0~191.255.255.255</td>
+</tr>
+<tr>
+<td>C类</td>
+<td>110</td>
+<td>网络位(24bit)</td>
+<td>主机位(8bit)</td>
+<td>192.0.0.0~223.255.255.255</td>
+</tr>
+</tbody>
+</table>
+<p>可以看到A,B,C类的区别其实就在于网络数量其同一网段的主机数，网络位越小，可分配的主机数就越多，反之越少。D,E类，我们一般不管。</p>
+<ul>
+<li><strong>bilibili首页</strong>的IP地址为<strong>183.131.3.45</strong>，即为B类地址</li>
+<li><strong>百度网盘首页</strong>IP地址为<strong>119.75.222.122</strong>，即为A类地址</li>
+<li><strong>Youtube首页</strong>IP地址(那是啥)为<strong>208.65.153.238</strong>，即为C类地址</li>
+<li><strong>数字广大首页</strong>IP地址为<strong>202.192.18.234</strong>，也是C类IP地址</li>
+</ul>
+<p>这些谈的都是<strong>公网地址</strong>，也就是说外界可以直接访问的，你可能会兴冲冲的看看自己的IP地址(windows打开cmd输入ipconfig&amp;Linux终端输入ifconfig),在<strong>以太网</strong>那里你会看到172.xx.xx.xx或者192.168.xx.xx或者10.xx.xx.xx，先冷静，我们先来谈谈<strong>私有地址</strong>吧</p>
+<h3 id="私有地址"><a href="#私有地址" class="headerlink" title="私有地址"></a>私有地址</h3><p>我们先来做一个测试，用命令找到你的以太网地址（如果你是在校园网就最好了），打开网页<a href="http://ip.lockview.cn，把地址复制到查询框中，在查询之前你就会发现一个问题，这个网站本身就显示了*您的IP地址是...*,但是这个地址好像和我们本地查询的不一样啊，为什么呢，这时候你点击查询按钮，一看结果:**本地局域网或网管**" target="_blank" rel="external">http://ip.lockview.cn，把地址复制到查询框中，在查询之前你就会发现一个问题，这个网站本身就显示了*您的IP地址是...*,但是这个地址好像和我们本地查询的不一样啊，为什么呢，这时候你点击查询按钮，一看结果:**本地局域网或网管**</a></p>
+<blockquote>
+<p>局域网（Local Area Network, LAN），又称内网。指覆盖局部区域（如办公室或楼层）的计算机网络。按照网络覆盖的区域（距离）不同，其他的网络类型还包括个人网、城域网、广域网等。</p>
+</blockquote>
+<p>通俗的来讲局域网就是小范围的网络通讯，两台用网线连接起来的计算机就可以称为局域网了，校园网也是一种局域网，一般来说局域网会有一个统一的出口连接到广域网，也就是公网</p>
+<ul>
+<li>如果你和你同一个寝室的同学都上这个IP查询网站<a href="http://ip.lockview.cn，会发现他告诉你，你们的IP地址是一样的，但实际上没有一台主机的公网IP能一样，答案就是你们都是通过这个IP地址所对应的主机所转发的信息，所以查询到的IP地址都是一样的。" target="_blank" rel="external">http://ip.lockview.cn，会发现他告诉你，你们的IP地址是一样的，但实际上没有一台主机的公网IP能一样，答案就是你们都是通过这个IP地址所对应的主机所转发的信息，所以查询到的IP地址都是一样的。</a></li>
+</ul>
+<p>那我们电脑上用命令行得到的IP地址就没用了吗，并不是，他是你再内网中的<strong>唯一IP标识</strong>，你和你宿友的肯定不一样。而且这个IP地址有一个特点，就是<strong>一定是以10或172或192开头的</strong>。这就是所谓的<strong>私有地址</strong>。</p>
+<blockquote>
+<p>IPv4中的部分IP地址被保留用作特殊用途。为节省IPv4地址，A， B， C类地址段中都预留了特定范围的地址作为私网地址。现在，世界上所有终端系统和网络设备需要的IP地址总数已经超过了32位IPv4地址所能支持的最大地址数4，294，967，296。为主机分配私网地址节省了公网地址，可以用来缓解IP地址短缺的问题。企业网络中普遍使用私网地址，不同企业网络中的私网地址可以重叠。默认情况下，网络中的主机无法使用私网地址与公网通信；当需要与公网通信时，私网地址必须转换成公网地址。</p>
+</blockquote>
+<ul>
+<li>私有地址范围</li>
+<li>10.0.0.0-10.255.255.255</li>
+<li>172.16.0.0-172.31.255.255</li>
+<li>192.168.0.0-192.168.255</li>
+</ul>
+<p>这些私有地址在公网是访问不了的，公网中也不存在这样的地址，因为在<strong>不同的局域网中都可能出现这样的私有地址</strong>，但是<strong>同一个局域网的主机是可以通过私有地址访问</strong>的。</p>
+<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h3><blockquote>
+<p> 子网掩码用于区分网络部分和主机部分。子网掩码与IP地址的表示方法相同。每个IP地址和子网掩码一起可以用来唯一的标识一个网段中的某台网络设备。子网掩码中的1表示网络位，0表示主机位。</p>
+</blockquote>
+<p>前面我们在IP地址分类已经说到了A类，B类，C类地址的网络位和主机位的位数，那我们来看看这些不同类地址的子网掩码对应的是什么吧</p>
+<ul>
+<li>A类</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">网络位(8bit)</th>
+<th style="text-align:center">主机位(24bit)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">11111111.</td>
+<td style="text-align:center">00000000.00000000.000000</td>
+</tr>
+</tbody>
+</table>
+<p>即A类地址的子网掩码为255.0.0.0</p>
+<ul>
+<li>B类</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">网络位(16bit)</th>
+<th style="text-align:center">主机位(16bit)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1111111.11111111</td>
+<td style="text-align:center">00000000.00000000</td>
+</tr>
+</tbody>
+</table>
+<p>即B类地址的子网掩码为255.255.0.0</p>
+<ul>
+<li>C类</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">网络位(24bit)</th>
+<th style="text-align:center">主机位(8bit)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1111111.11111111.11111111</td>
+<td style="text-align:center">00000000</td>
+</tr>
+</tbody>
+</table>
+<p>即B类地址的子网掩码为255.255.255.0</p>
+<blockquote>
+<p>每类IP地址有一个缺省子网掩码。A类地址的缺省子网掩码为8位，即第一个字节表示网络位，其他三个字节表示主机位。B类地址的缺省子网掩码为16位，因此B类地址支持更多的网络，但是主机数也相应减少。C类地址的缺省子网掩码为24位，支持的网络最多，同时也限制了单个网络中主机的数量。</p>
+</blockquote>
+<p>这样子看好像有点弱智，我们都知道A,B,C类的网络位和主机位了还要什么子网掩码来告诉我们怎么区分吗？ABC类地址我们确实可以很简单的知道他们的子网掩码，这个例子只是告诉我们子网掩码和网络位和主机位的关系。</p>
+<ul>
+<li>到了实际应用中会出现加长网络位在一个网络中再分不同网络的情况，在后面会说到</li>
+<li>192.168.191.1/24即是192.168.191.1/255.255.255.0</li>
+</ul>
+<h3 id="小练习"><a href="#小练习" class="headerlink" title="小练习"></a>小练习</h3><p>1.</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP地址</td>
+<td>192.</td>
+<td>168.</td>
+<td>191.</td>
+<td>1</td>
+</tr>
+<tr>
+<td>子网掩码</td>
+<td>255.</td>
+<td>255.</td>
+<td>255.</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>2.</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP地址</td>
+<td>172.</td>
+<td>16.</td>
+<td>1.</td>
+<td>7</td>
+</tr>
+<tr>
+<td>子网掩码</td>
+<td>255.</td>
+<td>255.</td>
+<td>0.</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>根据给出的IP地址和子网掩码，请算出此网络中包含的主机地址数量以及可用主机地址的数量。</li>
+</ul>
+<p>答案: </p>
+<p>1.该网络中包含的主机地址数量为$2^8$个，可用主机位$2^8-2$个</p>
+<p>2.该网络中包含的主机地址数量为$2^16$个，可用主机位$2^16-2$个</p>
+<h3 id="变长子网掩码"><a href="#变长子网掩码" class="headerlink" title="变长子网掩码"></a>变长子网掩码</h3><p>从练习中我们知道了C类地址的可用主机位为254个，但是有时候我们一个局域网中可能没有那么多的主机，比如我这局域网中只有100台主机，即使用C类地址的子网掩码也有154个地址被浪费了，所以为了不浪费，想到了另一种方法，就是把子网掩码变长</p>
+<p><img src="http://omudx2uw8.bkt.clouddn.com/%E5%8F%98%E9%95%BF%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81.png" alt=""></p>
+<p>通过那子网掩码变长，我们可以进一步划分网络，让可用主机数减少，更多的IP地址的到利用。</p>
+<h3 id="无类域间路由"><a href="#无类域间路由" class="headerlink" title="无类域间路由"></a>无类域间路由</h3><blockquote>
+<p>无类域间路由CIDR（Classless Inter Domain Routing）由RFC1817定义。CIDR突破了传统IP地址的分类边界，将路由表中的若干条路由汇聚为一条路由，减少了路由表的规模，提高了路由器的可扩展性。如上图所示，一个企业分配到了一段A类网络地址，10.24.0.0/22。该企业准备把这些A类网络分配给各个用户群，目前已经分配了四个网段给用户。如果没有实施CIDR技术，企业路由器的路由表中会有四条下连网段的路由条目，并且会把它通告给其他路由器。通过实施CIDR技术，我们可以在企业的路由器上把这四条路由10.24.0.0/24，10.24.1.0/24，10.24.2.0/24，10.24.3.0/24汇聚成一条路由10.24.0.0/22。这样，企业路由器只需通告10.24.0.0/22这一条路由，大大减少了路由表的规模。</p>
+</blockquote>
+<h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><ul>
+<li>网关用来转发来自不同网段之间的数据包。</li>
+</ul>
+<p>像之前我们所说，校园网是局域网，我们要通过校园网向外界发送信息必须要经过一个叫网关的东西，消息进入校园网也需要经过网关。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 网络 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Junit测试入门1]]></title>
       <url>http://blog.acring.me/2017/04/08/JUnit%E6%B5%8B%E8%AF%95%E5%85%A5%E9%97%A8/</url>
       <content type="html"><![CDATA[<h1 id="JUnit测试入门"><a href="#JUnit测试入门" class="headerlink" title="JUnit测试入门"></a>JUnit测试入门</h1><h2 id="创建Junit测试"><a href="#创建Junit测试" class="headerlink" title="创建Junit测试"></a>创建Junit测试</h2><ul>
