@@ -154,13 +154,13 @@
 <li><strong>数字广大首页</strong>IP地址为<strong>202.192.18.234</strong>，也是C类IP地址</li>
 </ul>
 <p>这些谈的都是<strong>公网地址</strong>，也就是说外界可以直接访问的，你可能会兴冲冲的看看自己的IP地址(windows打开cmd输入ipconfig&amp;Linux终端输入ifconfig),在<strong>以太网</strong>那里你会看到172.xx.xx.xx或者192.168.xx.xx或者10.xx.xx.xx，先冷静，我们先来谈谈<strong>私有地址</strong>吧</p>
-<h3 id="私有地址"><a href="#私有地址" class="headerlink" title="私有地址"></a>私有地址</h3><p>我们先来做一个测试，用命令找到你的以太网地址（如果你是在校园网就最好了），打开网页<a href="http://ip.lockview.cn，把地址复制到查询框中，在查询之前你就会发现一个问题，这个网站本身就显示了*您的IP地址是...*,但是这个地址好像和我们本地查询的不一样啊，为什么呢，这时候你点击查询按钮，一看结果:**本地局域网或网管**" target="_blank" rel="external">http://ip.lockview.cn，把地址复制到查询框中，在查询之前你就会发现一个问题，这个网站本身就显示了*您的IP地址是...*,但是这个地址好像和我们本地查询的不一样啊，为什么呢，这时候你点击查询按钮，一看结果:**本地局域网或网管**</a></p>
+<h3 id="私有地址"><a href="#私有地址" class="headerlink" title="私有地址"></a>私有地址</h3><p>我们先来做一个测试，用命令找到你的以太网地址（如果你是在校园网就最好了），打开<a href="http://ip.lockview.cn" target="_blank" rel="external">IP查询网站</a>，把地址复制到查询框中，在查询之前你就会发现一个问题，这个网站本身就显示了<em>您的IP地址是…</em>,但是这个地址好像和我们本地查询的不一样啊，为什么呢，这时候你点击查询按钮，一看结果:<strong>本地局域网或网管</strong></p>
 <blockquote>
 <p>局域网（Local Area Network, LAN），又称内网。指覆盖局部区域（如办公室或楼层）的计算机网络。按照网络覆盖的区域（距离）不同，其他的网络类型还包括个人网、城域网、广域网等。</p>
 </blockquote>
 <p>通俗的来讲局域网就是小范围的网络通讯，两台用网线连接起来的计算机就可以称为局域网了，校园网也是一种局域网，一般来说局域网会有一个统一的出口连接到广域网，也就是公网</p>
 <ul>
-<li>如果你和你同一个寝室的同学都上这个IP查询网站<a href="http://ip.lockview.cn，会发现他告诉你，你们的IP地址是一样的，但实际上没有一台主机的公网IP能一样，答案就是你们都是通过这个IP地址所对应的主机所转发的信息，所以查询到的IP地址都是一样的。" target="_blank" rel="external">http://ip.lockview.cn，会发现他告诉你，你们的IP地址是一样的，但实际上没有一台主机的公网IP能一样，答案就是你们都是通过这个IP地址所对应的主机所转发的信息，所以查询到的IP地址都是一样的。</a></li>
+<li>如果你和你同一个寝室的同学都上这个<a href="http://ip.lockview.cn" target="_blank" rel="external">IP查询网站</a>，会发现他告诉你，你们的IP地址是一样的，但实际上没有一台主机的公网IP能一样，答案就是你们都是通过这个IP地址所对应的主机所转发的信息，所以查询到的IP地址都是一样的。</li>
 </ul>
 <p>那我们电脑上用命令行得到的IP地址就没用了吗，并不是，他是你再内网中的<strong>唯一IP标识</strong>，你和你宿友的肯定不一样。而且这个IP地址有一个特点，就是<strong>一定是以10或172或192开头的</strong>。这就是所谓的<strong>私有地址</strong>。</p>
 <blockquote>
@@ -411,12 +411,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts5150" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts1684" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5150'));
+        var myChart = echarts.init(document.getElementById('echarts1684'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -1766,12 +1766,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts1176" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts9416" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1176'));
+        var myChart = echarts.init(document.getElementById('echarts9416'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -3115,12 +3115,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts2857" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts2037" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2857'));
+        var myChart = echarts.init(document.getElementById('echarts2037'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -3475,12 +3475,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts2295" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts9829" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2295'));
+        var myChart = echarts.init(document.getElementById('echarts9829'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -3660,12 +3660,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts6480" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts6772" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6480'));
+        var myChart = echarts.init(document.getElementById('echarts6772'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -4418,12 +4418,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts6137" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts6681" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6137'));
+        var myChart = echarts.init(document.getElementById('echarts6681'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -4606,12 +4606,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts5433" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts647" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5433'));
+        var myChart = echarts.init(document.getElementById('echarts647'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -4929,12 +4929,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts8737" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts7759" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8737'));
+        var myChart = echarts.init(document.getElementById('echarts7759'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -5021,12 +5021,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts6652" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts3153" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6652'));
+        var myChart = echarts.init(document.getElementById('echarts3153'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {
