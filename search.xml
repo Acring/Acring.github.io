@@ -60,7 +60,7 @@
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  selector: <span class="string">'app-root'</span>,</div><div class="line">  templateUrl: <span class="string">'./app.component.html'</span>,</div><div class="line">  styleUrls: [<span class="string">'./app.component.css'</span>]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent &#123;</div><div class="line">  title = <span class="string">'app'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这里我们看到了熟悉的东西-&gt;<code>app-root</code></p>
 <p>也就是说这个模块找到了index中的app-root标签，并对这个标签做了自己的处理，具体处理是什么呢</p>
-<p>我们来看Component里面的参数</p>
+<p>我们先来看Component里面的参数</p>
 <ul>
 <li>selector 用这个来筛选相应的标签</li>
 <li>templateUrl 这个来指定模板网页,angular会将<app-root>标签替换成 app.component.html中的内容</app-root></li>
@@ -69,11 +69,13 @@
 <p>多说无益,我们打开app.component.html，代码如下</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--The content below is only a placeholder and can be replaced.--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"text-align:center"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">    Welcome to &#123;&#123; title &#125;&#125;!</div><div class="line">  <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">alt</span>=<span class="string">"Angular Logo"</span> <span class="attr">src</span>=<span class="string">"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Here are some links to help you start: <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"noopener"</span> <span class="attr">href</span>=<span class="string">"https://angular.io/tutorial"</span>&gt;</span>Tour of Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"noopener"</span> <span class="attr">href</span>=<span class="string">"https://github.com/angular/angular-cli/wiki"</span>&gt;</span>CLI Documentation<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"noopener"</span> <span class="attr">href</span>=<span class="string">"https://blog.angular.io/"</span>&gt;</span>Angular blog<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>把这段代码和我们在浏览器打开的网页一对比就能知道，这就是网页中显示的内容，也是index.html最终被渲染的内容</p>
+<p>也就是说Angular找到<code>app-root</code>标签后会去找selector为app-root的组件然后用相应的模板网页文件去替换app-root这个标签，然后用相应的样式文件来渲染，至少现在你可以简单地这么理解，接下来我们修改一下这个文件看看会发生什么.</p>
 <h3 id="插值表达式显示数据"><a href="#插值表达式显示数据" class="headerlink" title="插值表达式显示数据"></a>插值表达式显示数据</h3><p>我们全部删除修改成如下</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">  Hello world,this is &#123;&#123;title&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>网页如下</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-335de66d693e49f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>注意这里的title，他被解析成了app, 因为它的两边有<figure class="highlight plain"><figcaption><span>这种叫**插值表达式**, 他会从对应的组件中取出相应的值,回到`app.component.ts`,可以看到这里的AppComponent类中有成员变量 title = app.</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```ts</div><div class="line">export class AppComponent &#123;</div><div class="line">  title = &apos;app&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意这里的title，他被解析成了app, 因为它的两边有两个大括号 这种叫<strong>插值表达式</strong>, 他会从对应的组件中取出相应的title变量的值,回到<code>app.component.ts</code>,可以看到这里的AppComponent类中有成员变量 title = ‘app’.</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent &#123;</div><div class="line">  title = <span class="string">'app'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>修改如下</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent &#123;</div><div class="line">  title = <span class="string">'Acring'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>显示如下:</p>
@@ -249,6 +251,8 @@
 <blockquote>
 <p>学会找到问题的关键，学会问出正确的问题，学会找到解决问题的方法</p>
 </blockquote>
+<p>前端代码Demo: <a href="https://github.com/Acring/quick-web" target="_blank" rel="external">https://github.com/Acring/quick-web</a></p>
+<p>后端代码Demo: <a href="https://github.com/Acring/quick-web-mgr" target="_blank" rel="external">https://github.com/Acring/quick-web-mgr</a></p>
 ]]></content>
       
         
@@ -728,12 +732,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts4021" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts233" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4021'));
+        var myChart = echarts.init(document.getElementById('echarts233'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -2083,12 +2087,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts9235" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts9136" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9235'));
+        var myChart = echarts.init(document.getElementById('echarts9136'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -3432,12 +3436,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts1232" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts7868" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1232'));
+        var myChart = echarts.init(document.getElementById('echarts7868'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -3792,12 +3796,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts5365" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts5323" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5365'));
+        var myChart = echarts.init(document.getElementById('echarts5323'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -3977,12 +3981,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts6754" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts5568" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6754'));
+        var myChart = echarts.init(document.getElementById('echarts5568'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -4735,12 +4739,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts3913" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts4453" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3913'));
+        var myChart = echarts.init(document.getElementById('echarts4453'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -4923,12 +4927,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts7178" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts5460" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7178'));
+        var myChart = echarts.init(document.getElementById('echarts5460'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -5246,12 +5250,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts4317" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts2069" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4317'));
+        var myChart = echarts.init(document.getElementById('echarts2069'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -5338,12 +5342,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts4348" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts9863" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4348'));
+        var myChart = echarts.init(document.getElementById('echarts9863'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {
