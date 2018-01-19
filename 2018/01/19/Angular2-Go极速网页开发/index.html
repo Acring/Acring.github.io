@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Acring" />
+
+
+
+<meta name="description" content="快速认识网页开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular2-Go极速网页开发">
+<meta property="og:url" content="http://blog.acring.me/2018/01/19/Angular2-Go极速网页开发/index.html">
+<meta property="og:site_name" content="Acring的小屋">
+<meta property="og:description" content="快速认识网页开发">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-413a6b2aa2d4f25e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-661a5f63f0b8fc79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-335de66d693e49f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-c652c2640e7eb636.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-92813a82348c07cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-fb9107b3e6f1d327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-e65fbb7a9623b86f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-19T07:29:00.251Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular2-Go极速网页开发">
+<meta name="twitter:description" content="快速认识网页开发">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3026741-413a6b2aa2d4f25e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Acring的小屋" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/ring.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Angular2-Go极速网页开发 | Acring的小屋</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+<script src="http://echarts.baidu.com/dist/echarts.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/province/guangdong.js"></script> -->
+
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/ring.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Acring</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Love You Like the Movies</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/Acring" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/ac-shou-huan" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/u/dd47393a75cb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity3D/">Unity3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博弈论/">博弈论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://polluxLee.github.io">PolluxLee</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.jitashe.net/">吉他社</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.chuhaiba.cn/">出海吧</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.ursb.me/">Airing</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://recallhyx.github.io">recall</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">小小一只手环，妄想探索全世界</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Acring</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/ring.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Acring</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Love You Like the Movies</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Acring" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/ac-shou-huan" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/u/dd47393a75cb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Angular2-Go极速网页开发" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/19/Angular2-Go极速网页开发/" class="article-date">
+      <time datetime="2018-01-19T07:29:00.000Z" itemprop="datePublished">2018-01-19</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Angular2-Go极速网页开发
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Angular2-Go极速网页开发"><a href="#Angular2-Go极速网页开发" class="headerlink" title="Angular2-Go极速网页开发"></a>Angular2-Go极速网页开发</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>本教程纯属用最简单的例子带稍微有基础的新手了解网页开发的整体流程.</strong></p>
+<h3 id="知识概述"><a href="#知识概述" class="headerlink" title="知识概述"></a>知识概述</h3><p><strong>前端</strong></p>
+<ul>
+<li>nodejs</li>
+<li>npm包管理</li>
+<li>Angular-cli搭建开发环境</li>
+</ul>
+<p>这里稍微解释下:</p>
+<p>Angular是一种流行的前端框架，它以特定的方式来组织前端页面，交互逻辑，http服务，数据交互等，让前端开发者只需要专注于特定的业务逻辑，而不需要处理类似页面渲染，变量绑定，事件响应等问题,</p>
+<p>要学好Angular框架首先要将前端的HTML，JS(TS)，CSS基本了解，之后就了解Angular中的各种组件和基本功能，这里我们不需要用到所有的功能，只用到最最基本的模块，组件，服务来实现最简单的网页开发</p>
+<p><strong>后端</strong></p>
+<ul>
+<li>Go语言环境搭建</li>
+<li>postgresql数据库环境搭建</li>
+</ul>
+<p>后端Go语言是为服务器搭建而生，可以十分简单的搭建出一个后台，且兼具效率和代码可读性，需要了解大概的Go语言语法和sql语法</p>
+<h2 id="前端环境搭建"><a href="#前端环境搭建" class="headerlink" title="前端环境搭建"></a>前端环境搭建</h2><p>不多加赘述，环境搭建用下面的教程一般足够了，或者自己去网上查,注意是angular2,我们用cli来搭建最基本的框架(cli是官方的脚手架，能把最基本的环境搭好，我们只用在最基本的环境上工作就行了, 不用自己从零搭建)</p>
+<p><a href="https://www.jianshu.com/p/f39358d5ac53" target="_blank" rel="external">使用Angular-cli搭建Angular2开发环境</a></p>
+<p>Angular2可以用javascript,typescript来写，官方推荐用typescript来写，typescript是javascript的超集，结合了静态类型和动态变量类型，具有很强的灵活性的同时又解决了javascript在开发大型应用中的语言短板.</p>
+<p>以下教程不会介绍详细的typescript语法,只会稍微提及，请自行学习.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-413a6b2aa2d4f25e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>稍微介绍下项目的结构</p>
+<ul>
+<li>node_modules</li>
+</ul>
+<p>提供项目各种需要需要的库,在第一次创建的时候会下载很多的库，所以每次初始化很慢的原因一般都是卡在下载上了，如果里面是空的可以执行<code>npm install</code>重新下载,一般从github上下载下来后要重新下载，因为一般不会把依赖包也上传到git上去，太大了</p>
+<ul>
+<li>angular-cli.json</li>
+</ul>
+<p>angular-cli的配置文件,知道就行</p>
+<ul>
+<li>style.css</li>
+</ul>
+<p>全局样式文件</p>
+<ul>
+<li>src/index.html</li>
+</ul>
+<p>网页主页面,angular是单页面应用，单页面即所有的页面都是基于这个index页面的.</p>
+<ul>
+<li>src/app</li>
+</ul>
+<p>这里面的文件才是所有核心,都是以文件名开头(app),表示这个模块的名字, 中间用component，表示组件，是一种习惯命名,后面是类型,包括<strong>css-样式文件</strong>,<strong>html-网页界面</strong>,<strong>spec.ts-测试文件</strong>， <strong>module.ts-模块管理文件</strong>，用来管理模块或子模块, <strong>ts-模块文件</strong>，最重要的文件</p>
+<p>这样说肯定新手还是看得云里雾里的,所以我们直接开始前端的开发,废话不说了.</p>
+<h2 id="从Hello-World开始"><a href="#从Hello-World开始" class="headerlink" title="从Hello World开始."></a>从Hello World开始.</h2><p>我们用cli搭建完环境之后，二话不说直接运行，运行命令是 <code>ng serve --port 6660</code>,即启动angular2服务，指定服务端口为6660，等待显示<code>webpack: Compiled successfully.</code> 后在本地浏览器输入<a href="http://localhost:6660/" target="_blank" rel="external">http://localhost:6660/</a> 查看</p>
+<p>如果显示以下页面</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-661a5f63f0b8fc79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>则表示我们的环境搭建成功了,接下来就是开始自己的魔改了.如果没有请再回去好好搭建环境，好运.</p>
+<h3 id="从index-html开始"><a href="#从index-html开始" class="headerlink" title="从index.html开始"></a>从index.html开始</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!doctype html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>QuickWeb<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">base</span> <span class="attr">href</span>=<span class="string">"/"</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span> <span class="attr">href</span>=<span class="string">"favicon.ico"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">app-root</span>&gt;</span><span class="tag">&lt;/<span class="name">app-root</span>&gt;</span><span class="comment">&lt;!--注意这一行--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>首先,打开index.html</p>
+<p>这段代码稍微看过的html的应该都能看，除了app-root，html中并没有这个标签，所以它不是给浏览器看的，而是给angular2框架用的.</p>
+<p>打开src/app/app.component.ts</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  selector: <span class="string">'app-root'</span>,</div><div class="line">  templateUrl: <span class="string">'./app.component.html'</span>,</div><div class="line">  styleUrls: [<span class="string">'./app.component.css'</span>]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent &#123;</div><div class="line">  title = <span class="string">'app'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我们看到了熟悉的东西-&gt;<code>app-root</code></p>
+<p>也就是说这个模块找到了index中的app-root标签，并对这个标签做了自己的处理，具体处理是什么呢</p>
+<p>我们来看Component里面的参数</p>
+<ul>
+<li>selector 用这个来筛选相应的标签</li>
+<li>templateUrl 这个来指定模板网页,angular会将<app-root>标签替换成 app.component.html中的内容</app-root></li>
+<li>styleUrls 这个来指定相应模板使用的css样式文件,可以有多个样式文件，所以是列表</li>
+</ul>
+<p>多说无益,我们打开app.component.html，代码如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--The content below is only a placeholder and can be replaced.--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"text-align:center"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">    Welcome to &#123;&#123; title &#125;&#125;!</div><div class="line">  <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">alt</span>=<span class="string">"Angular Logo"</span> <span class="attr">src</span>=<span class="string">"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Here are some links to help you start: <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"noopener"</span> <span class="attr">href</span>=<span class="string">"https://angular.io/tutorial"</span>&gt;</span>Tour of Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"noopener"</span> <span class="attr">href</span>=<span class="string">"https://github.com/angular/angular-cli/wiki"</span>&gt;</span>CLI Documentation<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">rel</span>=<span class="string">"noopener"</span> <span class="attr">href</span>=<span class="string">"https://blog.angular.io/"</span>&gt;</span>Angular blog<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>把这段代码和我们在浏览器打开的网页一对比就能知道，这就是网页中显示的内容，也是index.html最终被渲染的内容</p>
+<h3 id="插值表达式显示数据"><a href="#插值表达式显示数据" class="headerlink" title="插值表达式显示数据"></a>插值表达式显示数据</h3><p>我们全部删除修改成如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">  Hello world,this is &#123;&#123;title&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>网页如下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-335de66d693e49f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>注意这里的title，他被解析成了app, 因为它的两边有<figure class="highlight plain"><figcaption><span>这种叫**插值表达式**, 他会从对应的组件中取出相应的值,回到`app.component.ts`,可以看到这里的AppComponent类中有成员变量 title = app.</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```ts</div><div class="line">export class AppComponent &#123;</div><div class="line">  title = &apos;app&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>修改如下</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent &#123;</div><div class="line">  title = <span class="string">'Acring'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>显示如下:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-c652c2640e7eb636.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>到这里我们,已经简单的接触了angular的组件和最基本的数据交互方式-插值表达式，还很好理解吧，那么接下来要开始加速了.</p>
+<h2 id="创建自己的组件并注册"><a href="#创建自己的组件并注册" class="headerlink" title="创建自己的组件并注册"></a>创建自己的组件并注册</h2><p>之前我们都是在app组件上操作的，这是最基本的组件，我们当然不能满足于此，自己创建组件，走起</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-92813a82348c07cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>在src/app目录下创建login目录并按如上架构创建文件</p>
+<p>login.component.ts如下</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component, OnInit &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  selector: <span class="string">'app-login'</span>,</div><div class="line">  templateUrl: <span class="string">'./login.component.html'</span>,</div><div class="line">  styleUrls: [<span class="string">'./login.component.css'</span>]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> LoginComponent <span class="keyword">implements</span> OnInit &#123;</div><div class="line"></div><div class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123; &#125;</div><div class="line"></div><div class="line">  ngOnInit() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里分为两部分</p>
+<ol>
+<li>Component定义 像上文所述要写出selector筛选标签，templateUrl模板网页，styleUrls样式文件</li>
+<li>组件类定义 constructor是类的构造函数, ngOnInit是组件的初始化函数，详情请谷歌angular组件的生命周期</li>
+</ol>
+<p>修改login.component.ts和login.component.html</p>
+<ul>
+<li>login.component.ts</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> LoginComponent <span class="keyword">implements</span> OnInit &#123;</div><div class="line"></div><div class="line">  username: <span class="built_in">string</span>;</div><div class="line">  password: <span class="built_in">string</span>;</div><div class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123; &#125;</div><div class="line"></div><div class="line">  ngOnInit() &#123;</div><div class="line">    <span class="keyword">this</span>.username = <span class="string">'acring'</span>;</div><div class="line">    <span class="keyword">this</span>.password = <span class="string">'2333'</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>login.component.html</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">  username: &#123;&#123;username&#125;&#125;</div><div class="line">  password: &#123;&#123;password&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>我们再在app.component.html中加入app-login标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></div><div class="line">  Hello world,this is &#123;&#123;title&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">app-login</span>&gt;</span><span class="tag">&lt;/<span class="name">app-login</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这个时候查看浏览器，会发现</p>
+<p><strong>啥都没显示</strong></p>
+<p>按F12打开开发者工具的console，会发现报错了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">compiler.js:485 Uncaught Error: Template parse errors:</div><div class="line">&apos;app-login&apos; is not a known element:</div><div class="line">1. If &apos;app-login&apos; is an Angular component, then verify that it is part of this module.</div><div class="line">2. If &apos;app-login&apos; is a Web Component then add &apos;CUSTOM_ELEMENTS_SCHEMA&apos; to the &apos;@NgModule.schemas&apos; of this component to suppress this message. (&quot;</div><div class="line">  Hello world,this is &#123;&#123;title&#125;&#125;</div><div class="line">&lt;/h1&gt;</div><div class="line">[ERROR -&gt;]&lt;app-login&gt;&lt;/app-login&gt;</div><div class="line">&quot;): ng:///AppModule/AppComponent.html@3:0</div><div class="line">    at syntaxError (compiler.js:485)</div><div class="line">    at TemplateParser.parse (compiler.js:24661)</div><div class="line">    at JitCompiler._parseTemplate (compiler.js:34601)</div><div class="line">    at JitCompiler._compileTemplate (compiler.js:34576)</div><div class="line">    at eval (compiler.js:34477)</div><div class="line">    at Set.forEach (&lt;anonymous&gt;)</div><div class="line">    at JitCompiler._compileComponents (compiler.js:34477)</div><div class="line">    at eval (compiler.js:34347)</div><div class="line">    at Object.then (compiler.js:474)</div><div class="line">    at JitCompiler._compileModuleAndComponents (compiler.js:34346)</div></pre></td></tr></table></figure>
+<p>稍微看看就明白了，报错的意思是现在angular还没法理解<code>&lt;app-login&gt;</code>这个标签是什么意思，因为我们的组件还没有在angular的模块管理文件中注册,所以我们要去注册我们的模块</p>
+<p>打开app.module.ts并修改,在NgModule中的declarations中添加组件的类名LoginComponent，</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; LoginComponent &#125; <span class="keyword">from</span> <span class="string">'./login/login.component'</span>;</div><div class="line">...</div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  declarations: [</div><div class="line">    AppComponent,</div><div class="line">    LoginComponent</div><div class="line">  ],</div><div class="line">  imports: [</div><div class="line">    BrowserModule</div><div class="line">  ],</div><div class="line">  providers: [],</div><div class="line">  bootstrap: [AppComponent]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>查看效果</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-fb9107b3e6f1d327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>OK,我们的基本组件已经搞定了，我们可以在我们的新组件中继续我们的业务流程实现了,下一步，我们会接触更多的angular2用法和基本登录界面的开发，敬请期待.</p>
+<h2 id="登录界面开发"><a href="#登录界面开发" class="headerlink" title="登录界面开发"></a>登录界面开发</h2><h3 id="数据开始流动-数据绑定"><a href="#数据开始流动-数据绑定" class="headerlink" title="数据开始流动-数据绑定"></a>数据开始流动-数据绑定</h3><h4 id="双向数据绑定-输入输出"><a href="#双向数据绑定-输入输出" class="headerlink" title="双向数据绑定-输入输出"></a>双向数据绑定-输入输出</h4><p>在login.component.html中添加代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>username<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"username"</span> <span class="attr">placeholder</span>=<span class="string">"请输入用户名"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>password<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"password"</span> <span class="attr">placeholder</span>=<span class="string">"请输入密码"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>注意代码中的<code>[()]</code>,这是angular中的双向绑定标志,即让input的输入和组件中的username变量绑定，两者同步变化,为了让input能使用这个绑定,我们要在模块管理文件中添加FormsModule模块, 在</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;FormsModule&#125; <span class="keyword">from</span> <span class="string">'@angular/forms'</span>; <span class="comment">// import 表单模块</span></div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  declarations: [</div><div class="line">    AppComponent,</div><div class="line">    LoginComponent</div><div class="line">  ],</div><div class="line">  imports: [</div><div class="line">    FormsModule, <span class="comment">// 在import中添加这一行</span></div><div class="line">    BrowserModule</div><div class="line">  ],</div><div class="line">  providers: [],</div><div class="line">  bootstrap: [AppComponent]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>运行如下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-e65fbb7a9623b86f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>试着修改输入框中的文字，你会发现在上面的文字也会跟着变,这其中涉及到了两层数据流动，html中的input中的输入和组件中username绑定，<strong>在初始化的时候，组件中的username和input中的输入框数据同步，在修改input标签中的数据会同时改变username中的数据,组件中的username改变后html中的也随之改变</strong>, 最终达到一个username变量控制多个数据显示的改变，很酷，对吧。</p>
+<h3 id="按钮开始响应"><a href="#按钮开始响应" class="headerlink" title="按钮开始响应"></a>按钮开始响应</h3><p>接下来我们添加登录和注册按钮</p>
+<h4 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h4><p>修改login.component.html添加</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> (<span class="attr">click</span>)=<span class="string">"login()"</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> (<span class="attr">click</span>)=<span class="string">"register()"</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里涉及到了另一种绑定方式<code>()</code>,这个一般用于事件绑定，很简单，对登录的button的点击将引发组件的login事件(函数),</p>
+<p>对注册的button的点击将引发组件的register事件(函数)，所以我们也得在组件中添加响应的函数.</p>
+<ul>
+<li>login.component.ts添加两个函数</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">login() &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">"登录"</span>, <span class="keyword">this</span>.username, <span class="keyword">this</span>.password);</div><div class="line">&#125;</div><div class="line"></div><div class="line">register()&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">"注册"</span>, <span class="keyword">this</span>.username, <span class="keyword">this</span>.password);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>点击登录按钮，在开发者工具的console可以看到相应的输出, <code>登录 acring 2333</code></p>
+<p><strong>说明事件绑定成功,恭喜</strong></p>
+<blockquote>
+<p>以上的界面都是比较简陋的，因为开发中的界面开发是相对比较耗时间的，所以这里不多加赘述，对初学者来说，在实现基本功能之后再去思考美化的问题吧</p>
+</blockquote>
+<h2 id="开始和外界通信-服务"><a href="#开始和外界通信-服务" class="headerlink" title="开始和外界通信-服务"></a>开始和外界通信-服务</h2><p>前端徘徊已久，我们该试着走出去了，向外界发出我们的声音吧</p>
+<h3 id="创建服务并注册"><a href="#创建服务并注册" class="headerlink" title="创建服务并注册"></a>创建服务并注册</h3><p>在src/app下新建文件夹<code>service</code>并在service中创建两个文件<code>login.service.ts</code>, <code>login.service.spec.ts</code>, spec是测试文件，我们暂时不用管，只是作为一种好习惯，</p>
+<ul>
+<li>login.service.ts</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123;Headers, Http&#125; <span class="keyword">from</span> <span class="string">"@angular/http"</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Injectable</span>()</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> LoginService &#123; <span class="comment">// 登录服务</span></div><div class="line"></div><div class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> http:Http </span>) &#123; <span class="built_in">console</span>.log(<span class="string">"登录服务初始化"</span>)&#125;</div><div class="line"></div><div class="line">  login(username, password)&#123;</div><div class="line">    <span class="keyword">const</span> headers = <span class="keyword">new</span> Headers();</div><div class="line">    headers.append(<span class="string">'Content-Type'</span>, <span class="string">'text/plain'</span>);</div><div class="line"></div><div class="line">    <span class="keyword">let</span> data = &#123;username: username,password: password&#125;;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.post(<span class="string">"http://127.0.0.1:6661/api/login"</span>,<span class="built_in">JSON</span>.stringify(data), &#123;headers: headers&#125;);</div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这边我们先规定好与后端通信的接口/api/login，虽然后端还没开始做.</p>
+<p>@Injectable最好加上虽然不加上也不会报错，这个是用于依赖注入的，暂时不用在意</p>
+<p>我们要用angular提供的Http库来完成对外界的通信,在app.module.ts文件中，还要导入 HttpModule模块</p>
+<ul>
+<li>app.module.ts</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">imports: [</div><div class="line">    FormsModule,</div><div class="line">    BrowserModule,</div><div class="line">    HttpModule,  <span class="comment">//Http模块库</span></div><div class="line">  ],</div></pre></td></tr></table></figure>
+<ul>
+<li>login.component.ts</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">login() &#123;</div><div class="line">    <span class="keyword">this</span>.loginService.login(<span class="keyword">this</span>.username, <span class="keyword">this</span>.password).subscribe(</div><div class="line">      <span class="function"><span class="params">fb</span>=&gt;</span>&#123;  <span class="comment">// 反馈信息</span></div><div class="line">        <span class="keyword">const</span> ret = fb.json();</div><div class="line">        <span class="built_in">console</span>.log(ret);</div><div class="line">      &#125;,</div><div class="line">      <span class="function"><span class="params">err</span> =&gt;</span>&#123;  <span class="comment">// 错误信息</span></div><div class="line">        <span class="built_in">console</span>.log(err);</div><div class="line">      &#125;</div><div class="line">    )</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>login函数处理返回的Observable对象，这边不了解请自行谷歌Angular2 Observable的使用,其实原理很简单,这是一个异步操作，系统会等待网络请求的返回，返回的对象装载fb里面，subscribe意为订阅，也就是网络请求一旦返回就触发这个订阅，进行下一步操作，返回<code>网络反馈数据fb</code>或者返回<code>请求错误err</code></p>
+<p>Angualr的服务是一种单例,也就是说在整个应用中只存在一个实例，它会给各个组件提供服务，多个组件共享服务</p>
+<p>现在点击登录按钮还没什么反应，因为我们的后端还没有搭建好，不管怎么叫也不会有人回应的.</p>
+<h2 id="后端环境搭建"><a href="#后端环境搭建" class="headerlink" title="后端环境搭建"></a>后端环境搭建</h2><p>为了让前端不要太孤独，我们直接开始后端的搭建,后端我们用Go语言来搭建，Go语言本身就是为了搭建服务器而生，所以很容易就能搭建出我们想要的后台.</p>
+<p>首先我们要把环境弄好,参考以下教程</p>
+<p><a href="https://www.jianshu.com/p/eb35a47a157e" target="_blank" rel="external">https://www.jianshu.com/p/eb35a47a157e</a></p>
+<p>Go的语法就不用说了,自己去找教程学吧,</p>
+<h2 id="不从Hello-World开始"><a href="#不从Hello-World开始" class="headerlink" title="不从Hello World开始"></a>不从Hello World开始</h2><p>我们这次就不从Hello World 开始了, 我们直接开始用Go搭建Http后台，和我们的前端开始对话</p>
+<p>创建文件夹quick-web-mgr并在文件夹下创建main.go</p>
+<ul>
+<li>main.go</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"net/http"</span></div><div class="line">	<span class="string">"io/ioutil"</span></div><div class="line">	<span class="string">"encoding/json"</span></div><div class="line">)</div><div class="line"><span class="keyword">type</span> USER <span class="keyword">struct</span>&#123;  <span class="comment">//用户信息</span></div><div class="line">	Username <span class="keyword">string</span> <span class="string">`json:"username"`</span></div><div class="line">	Password <span class="keyword">string</span> <span class="string">`json:"password"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">type</span> LoginFeedBack <span class="keyword">struct</span>&#123;  <span class="comment">// 登录反馈</span></div><div class="line">	Code <span class="keyword">int</span> <span class="string">`json:"code"`</span></div><div class="line">	Ok <span class="keyword">bool</span> <span class="string">`json:"ok"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loginHandle</span><span class="params">(res http.ResponseWriter, req *http.Request)</span></span>&#123; <span class="comment">// 登录处理函数</span></div><div class="line">	res.Header().Set(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>) <span class="comment">//设置跨域</span></div><div class="line"></div><div class="line">	result, err := ioutil.ReadAll(req.Body)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(err)</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> userInfo USER</div><div class="line">	err = json.Unmarshal(result, &amp;userInfo)  <span class="comment">// 解析json数据</span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(err)</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	fmt.Print(userInfo)</div><div class="line"></div><div class="line">	<span class="keyword">var</span> fb LoginFeedBack</div><div class="line"></div><div class="line">	<span class="keyword">if</span> userInfo.Username == <span class="string">"acring"</span> &amp;&amp; userInfo.Password == <span class="string">"2333"</span>&#123;</div><div class="line">		fb.Code = <span class="number">200</span></div><div class="line">		fb.Ok = <span class="literal">true</span></div><div class="line">		fbData,err := json.Marshal(fb)</div><div class="line">		fmt.Print(<span class="keyword">string</span>(fbData))</div><div class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">			fmt.Print(<span class="string">"反馈数据解析失败"</span>)</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		fmt.Fprintln(res, <span class="keyword">string</span>(fbData))</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		fb.Code = <span class="number">200</span></div><div class="line">		fb.Ok = <span class="literal">false</span></div><div class="line">		fbData,err := json.Marshal(fb)</div><div class="line">		fmt.Print(<span class="keyword">string</span>(fbData))</div><div class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">			fmt.Print(<span class="string">"反馈数据解析失败"</span>)</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		fmt.Fprintln(res, <span class="keyword">string</span>(fbData))</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">defer</span> req.Body.Close()</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Print(<span class="string">"开始服务.."</span>)</div><div class="line">	http.HandleFunc(<span class="string">"/api/login"</span>, loginHandle)</div><div class="line">	http.ListenAndServe(<span class="string">":6661"</span>, <span class="literal">nil</span>)</div><div class="line">	fmt.Print(<span class="string">"服务结束\n"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>首先我们需要import Go的Http库, 用http.HandleFunc将接口地址和请求处理函数对应,然后用http.ListenAndServe设置监听端口.就是这么简单</p>
+<p>接下来我们来到关键的地方loginHandle函数, 这里分为四个部分</p>
+<ol>
+<li>解决跨域请求的问题</li>
+<li>获取参数并解析成json格式</li>
+<li>判断获取到的信息是否正确</li>
+<li>返回信息</li>
+</ol>
+<h3 id="如何读代码"><a href="#如何读代码" class="headerlink" title="如何读代码"></a>如何读代码</h3><p>以上出现的许多的代码，非常简单，但是对于刚入门的新手肯定是没法理解</p>
+<p>这时候就要学会自己去读代码了</p>
+<ol>
+<li>按程序的运行逻辑读代码，如上述代码你需要从<strong>func main()</strong>开始读起</li>
+<li>遇到不懂的怎么办，不懂有两种可能，第一，语法不懂,那赶紧回去看一遍基本的语法吧,第二，基本库不懂，比如说http库不懂，那就上网查相应的库说明或者教程</li>
+<li>运行代码，确定代码的正确性，理解代码的输入输出从哪里开始，在哪里结束</li>
+<li>修改代码，看看自己到底懂了没有，如果修改成自己想要的样子，说明你至少是懂了1/3了，恭喜自己吧</li>
+</ol>
+<p>系统的学习是必要的，但是通过代码去快速学习是更加需要具备的能力</p>
+<h2 id="开始我们的悄悄话"><a href="#开始我们的悄悄话" class="headerlink" title="开始我们的悄悄话"></a>开始我们的悄悄话</h2><p>运行上面的Go代码，再点击晾在一旁的登录按钮 你可以在F12开发者工具-&gt;netWork中看到发送的请求和响应<code>{&quot;code&quot;:200,&quot;ok&quot;:true}</code></p>
+<p>这是我们得到的返回，说明登录成功,修改用户名和密码再次点击登录按钮</p>
+<p><code>{&quot;code&quot;:200,&quot;ok&quot;:false}</code></p>
+<p>这次说明我们的用户名或者密码输入错误了</p>
+<p>于是前后端终于第一次说上了话，谁红了脸</p>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h2 id="保存那些珍贵的数据-数据库"><a href="#保存那些珍贵的数据-数据库" class="headerlink" title="保存那些珍贵的数据 - 数据库"></a>保存那些珍贵的数据 - 数据库</h2><p>接下来我们该实现注册的功能了，但是注册说明我们要将一个用户名和密码保存到本地，那自然要用到我们的数据库了，我们这里用的是postgresql数据库， 以及个人推荐的数据库管理工具推荐navicat，找个破解版吧，正版太贵了</p>
+<p>安装教程<a href="http://www.yiibai.com/postgresql/install-postgresql.html" target="_blank" rel="external">http://www.yiibai.com/postgresql/install-postgresql.html</a>, 自己搜也行</p>
+<p>接下来就要用Go语言去连接Postgresql了,</p>
+<p>首先引入两个驱动包 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"database/sql"</span></div><div class="line">_ <span class="string">"github.com/lib/pq"</span></div></pre></td></tr></table></figure>
+<p>前者是Go连接数据库的通用接口，后者是postgresql的驱动</p>
+<p>初始化数据库函数， 为数据库创建新的用户信息表,这里用很简单的username 和password 来表示一个用户实体的信息</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"net/http"</span></div><div class="line">	<span class="string">"io/ioutil"</span></div><div class="line">	<span class="string">"encoding/json"</span></div><div class="line">	<span class="string">"database/sql"</span></div><div class="line">	_ <span class="string">"github.com/lib/pq"</span></div><div class="line">	<span class="string">"errors"</span></div><div class="line">)</div><div class="line"><span class="keyword">type</span> USER <span class="keyword">struct</span>&#123;  <span class="comment">//用户信息</span></div><div class="line">	Username <span class="keyword">string</span> <span class="string">`json:"username"`</span></div><div class="line">	Password <span class="keyword">string</span> <span class="string">`json:"password"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">type</span> LoginFeedBack <span class="keyword">struct</span>&#123;  <span class="comment">// 登录反馈</span></div><div class="line">	Code <span class="keyword">int</span> <span class="string">`json:"code"`</span></div><div class="line">	Ok <span class="keyword">bool</span> <span class="string">`json:"ok"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span>(</div><div class="line">	host = <span class="string">"localhost"</span></div><div class="line">	port = <span class="number">5432</span></div><div class="line">	user = <span class="string">"postgres"</span></div><div class="line">	sqlpassword = <span class="string">"Alf1netC"</span></div><div class="line">	dbname = <span class="string">"testdb"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">InitDB</span><span class="params">()</span></span>&#123;  <span class="comment">// 初始化数据库</span></div><div class="line">	psqlInfo := fmt.Sprintf(<span class="string">"host=%s port=%d user=%s "</span>+</div><div class="line">		<span class="string">"password=%s dbname=%s sslmode=disable"</span>,</div><div class="line">		host, port, user, sqlpassword, dbname)</div><div class="line"></div><div class="line">	db,err := sql.Open(<span class="string">"postgres"</span>, psqlInfo)  <span class="comment">// 打开数据库连接</span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		<span class="built_in">panic</span>(err)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">defer</span> db.Close()</div><div class="line"></div><div class="line">	err = db.Ping()</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		<span class="built_in">panic</span>(err)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Print(<span class="string">"连接成功\n"</span>)</div><div class="line"></div><div class="line">	sqlStatement := <span class="string">`CREATE TABLE  IF NOT EXISTS "userinfo"(</span></div><div class="line">		username VARCHAR(25) not null primary key,</div><div class="line">		password VARCHAR(25)</div><div class="line">	);`</div><div class="line"></div><div class="line">	_, err = db.Exec(sqlStatement)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		<span class="built_in">panic</span>(err)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Print(<span class="string">"数据库初始化成功!\n"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	InitDB()</div><div class="line">	fmt.Print(<span class="string">"开始服务..\n"</span>)</div><div class="line">	http.HandleFunc(<span class="string">"/api/login"</span>, loginHandle)</div><div class="line">	http.ListenAndServe(<span class="string">":6661"</span>, <span class="literal">nil</span>)</div><div class="line">	fmt.Print(<span class="string">"服务结束\n"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然，你也可以直接手动创建数据库</p>
+<p>之后我们要开始注册和登录的后端代码编写了</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"net/http"</span></div><div class="line">	<span class="string">"io/ioutil"</span></div><div class="line">	<span class="string">"encoding/json"</span></div><div class="line">	<span class="string">"database/sql"</span></div><div class="line">	_ <span class="string">"github.com/lib/pq"</span></div><div class="line">	<span class="string">"errors"</span></div><div class="line">)</div><div class="line"><span class="keyword">type</span> USER <span class="keyword">struct</span>&#123;  <span class="comment">//用户信息</span></div><div class="line">	Username <span class="keyword">string</span> <span class="string">`json:"username"`</span></div><div class="line">	Password <span class="keyword">string</span> <span class="string">`json:"password"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">type</span> FeedBack <span class="keyword">struct</span>&#123;  <span class="comment">// 数据反馈</span></div><div class="line">	Code <span class="keyword">int</span> <span class="string">`json:"code"`</span></div><div class="line">	Ok <span class="keyword">bool</span> <span class="string">`json:"ok"`</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span>(</div><div class="line">	host = <span class="string">"localhost"</span></div><div class="line">	port = <span class="number">5432</span></div><div class="line">	user = <span class="string">"postgres"</span></div><div class="line">	sqlpassword = <span class="string">"Alf1netC"</span></div><div class="line">	dbname = <span class="string">"testdb"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkExist</span><span class="params">(username <span class="keyword">string</span>)</span><span class="params">(<span class="keyword">bool</span>, error)</span></span>&#123;</div><div class="line">	psqlInfo := fmt.Sprintf(<span class="string">"host=%s port=%d user=%s "</span>+</div><div class="line">		<span class="string">"password=%s dbname=%s sslmode=disable"</span>,</div><div class="line">		host, port, user, sqlpassword, dbname)</div><div class="line"></div><div class="line">	db,err := sql.Open(<span class="string">"postgres"</span>, psqlInfo)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(<span class="string">"连接数据库错误"</span>)</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>, errors.New(<span class="string">"连接数据库出错"</span>)</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	sqlStat := <span class="string">"SELECT from userInfo WHERE username = $1"</span></div><div class="line">	</div><div class="line">	stmt, err := db.Prepare(sqlStat)</div><div class="line">	</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Print(<span class="string">"准备语句失败"</span>, err.Error())</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>, errors.New(<span class="string">"准备语句失败"</span>)</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	rows ,err := stmt.Query(username)</div><div class="line">	</div><div class="line">	<span class="keyword">if</span> rows.Next()&#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>, <span class="literal">nil</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span>, <span class="literal">nil</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkLogin</span><span class="params">(username <span class="keyword">string</span>, password <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">bool</span>, error)</span></span>&#123;</div><div class="line">	psqlInfo := fmt.Sprintf(<span class="string">"host=%s port=%d user=%s "</span>+</div><div class="line">		<span class="string">"password=%s dbname=%s sslmode=disable"</span>,</div><div class="line">		host, port, user, sqlpassword, dbname)</div><div class="line"></div><div class="line">	db,err := sql.Open(<span class="string">"postgres"</span>, psqlInfo)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(<span class="string">"连接数据库错误"</span>)</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>, errors.New(<span class="string">"连接数据库出错"</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	sqlStatement := <span class="string">"SELECT * FROM userinfo WHERE username = $1 AND password = $2;"</span></div><div class="line"></div><div class="line">	stmt, err := db.Prepare(sqlStatement)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		<span class="built_in">print</span>(err.Error())</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>, errors.New(<span class="string">"准备数据失败"</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	rows, err := stmt.Query(username, password)</div><div class="line">	<span class="keyword">defer</span> rows.Close()</div><div class="line">	<span class="keyword">var</span> user USER</div><div class="line">	<span class="keyword">for</span> rows.Next()&#123;</div><div class="line">		rows.Scan(user.Username, user.Password)</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>, <span class="literal">nil</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span>, <span class="literal">nil</span>  <span class="comment">// 没有查询到数据</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkRegister</span><span class="params">(username <span class="keyword">string</span> , password <span class="keyword">string</span>)</span><span class="params">(<span class="keyword">bool</span>, error)</span></span>&#123;  <span class="comment">// 注册</span></div><div class="line">	psqlInfo := fmt.Sprintf(<span class="string">"host=%s port=%d user=%s "</span>+</div><div class="line">		<span class="string">"password=%s dbname=%s sslmode=disable"</span>,</div><div class="line">		host, port, user, sqlpassword, dbname)</div><div class="line"></div><div class="line">	db,err := sql.Open(<span class="string">"postgres"</span>, psqlInfo)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(<span class="string">"连接数据库错误"</span>)</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>, errors.New(<span class="string">"连接数据库出错"</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	sqlStatement := <span class="string">"INSERT INTO userinfo(username, password) VALUES ($1, $2);"</span></div><div class="line"></div><div class="line">	stmt, err := db.Prepare(sqlStatement)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(<span class="string">"准备语句失败"</span>, err.Error())</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>, errors.New(<span class="string">"准备语句失败"</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	_, err = stmt.Exec(username, password)</div><div class="line">	<span class="keyword">defer</span> stmt.Close()</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(<span class="string">"插入数据失败"</span>, err.Error())</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>, errors.New(<span class="string">"插入数据失败"</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span>, <span class="literal">nil</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loginHandle</span><span class="params">(res http.ResponseWriter, req *http.Request)</span></span>&#123; <span class="comment">// 登录处理函数</span></div><div class="line">	res.Header().Set(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>) <span class="comment">//设置跨域</span></div><div class="line"></div><div class="line">	result, err := ioutil.ReadAll(req.Body)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(err)</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> userInfo USER</div><div class="line">	err = json.Unmarshal(result, &amp;userInfo)  <span class="comment">// 解析json数据</span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(err)</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	fmt.Print(userInfo)</div><div class="line"></div><div class="line">	<span class="keyword">var</span> fb FeedBack</div><div class="line"></div><div class="line">	ok, err := checkLogin(userInfo.Username, userInfo.Password)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Print(err.Error())</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ok&#123;</div><div class="line">		fb.Code = <span class="number">200</span></div><div class="line">		fb.Ok = <span class="literal">true</span></div><div class="line">		fbData,err := json.Marshal(fb)</div><div class="line">		fmt.Print(<span class="keyword">string</span>(fbData))</div><div class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">			fmt.Print(<span class="string">"反馈数据解析失败"</span>)</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		fmt.Fprintln(res, <span class="keyword">string</span>(fbData))</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		fb.Code = <span class="number">200</span></div><div class="line">		fb.Ok = <span class="literal">false</span></div><div class="line">		fbData,err := json.Marshal(fb)</div><div class="line">		fmt.Print(<span class="keyword">string</span>(fbData))</div><div class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">			fmt.Print(<span class="string">"反馈数据解析失败"</span>)</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		fmt.Fprintln(res, <span class="keyword">string</span>(fbData))</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">defer</span> req.Body.Close()</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">InitDB</span><span class="params">()</span></span>&#123;  <span class="comment">// 初始化数据库</span></div><div class="line">	psqlInfo := fmt.Sprintf(<span class="string">"host=%s port=%d user=%s "</span>+</div><div class="line">		<span class="string">"password=%s dbname=%s sslmode=disable"</span>,</div><div class="line">		host, port, user, sqlpassword, dbname)</div><div class="line"></div><div class="line">	db,err := sql.Open(<span class="string">"postgres"</span>, psqlInfo)  <span class="comment">// 打开数据库连接</span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		<span class="built_in">panic</span>(err)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">defer</span> db.Close()</div><div class="line"></div><div class="line">	err = db.Ping()</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		<span class="built_in">panic</span>(err)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Print(<span class="string">"连接成功\n"</span>)</div><div class="line"></div><div class="line">	sqlStatement := <span class="string">`CREATE TABLE  IF NOT EXISTS "userinfo"(</span></div><div class="line">		username VARCHAR(25) not null primary key,</div><div class="line">		password VARCHAR(25)</div><div class="line">	);`</div><div class="line"></div><div class="line">	_, err = db.Exec(sqlStatement)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		<span class="built_in">panic</span>(err)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Print(<span class="string">"数据库初始化成功!\n"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">registerHandle</span><span class="params">(res http.ResponseWriter, req *http.Request)</span></span>&#123;</div><div class="line"></div><div class="line">	res.Header().Set(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>) <span class="comment">//设置跨域</span></div><div class="line"></div><div class="line">	result, err := ioutil.ReadAll(req.Body)</div><div class="line"></div><div class="line">	<span class="keyword">defer</span> req.Body.Close()</div><div class="line">	<span class="keyword">if</span> err!= <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(<span class="string">"获取请求参数失败"</span>, err.Error())</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> userInfo USER</div><div class="line"></div><div class="line">	err = json.Unmarshal(result, &amp;userInfo)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Print(<span class="string">"解析数据失败"</span>, err.Error())</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	exist, err := checkExist(userInfo.Username)</div><div class="line"></div><div class="line">	<span class="keyword">var</span> fb FeedBack</div><div class="line">	<span class="keyword">if</span> exist&#123;</div><div class="line">		fmt.Print(<span class="string">"用户已存在"</span>)</div><div class="line">		fb.Code = <span class="number">200</span></div><div class="line">		fb.Ok = <span class="literal">false</span></div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		ok, err := checkRegister(userInfo.Username, userInfo.Password)</div><div class="line"></div><div class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">			fmt.Print(<span class="string">"注册失败"</span>, err.Error())</div><div class="line">			fb.Code = <span class="number">200</span></div><div class="line">			fb.Ok = <span class="literal">false</span></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">if</span> ok &#123;</div><div class="line">			fb.Code = <span class="number">200</span></div><div class="line">			fb.Ok = <span class="literal">true</span></div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			fb.Code = <span class="number">200</span></div><div class="line">			fb.Ok = <span class="literal">false</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fbData,err := json.Marshal(fb)</div><div class="line"></div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</div><div class="line">		fmt.Print(<span class="string">"解析反馈信息错误"</span>, err.Error())</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	fmt.Fprintln(res, <span class="keyword">string</span>(fbData))</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	InitDB()</div><div class="line">	fmt.Print(<span class="string">"开始服务..\n"</span>)</div><div class="line">	http.HandleFunc(<span class="string">"/api/login"</span>, loginHandle)</div><div class="line">	http.HandleFunc(<span class="string">"/api/register"</span>, registerHandle)</div><div class="line">	http.ListenAndServe(<span class="string">":6661"</span>, <span class="literal">nil</span>)</div><div class="line">	fmt.Print(<span class="string">"服务结束\n"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我直接把所有代码给出来了, loginHandle接收登录接口数据，checklogin查询用户存在,register接收注册接口数据并调用checklogin检查用户是否存在,不存在则调用checkregister向数据库插入新的用户数据.</p>
+<p>这已经是不能再简单的逻辑了,由于面向新手，所以很多细节都被省略了，且看且珍惜，尝试去理解每一行代码吧</p>
+<p> 前端我们也加上注册的接口和处理函数</p>
+<ul>
+<li>login.component.ts</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">register()&#123;</div><div class="line">  <span class="keyword">this</span>.loginService.register(<span class="keyword">this</span>.username, <span class="keyword">this</span>.password).subscribe(</div><div class="line">    <span class="function"><span class="params">fb</span>=&gt;</span>&#123;</div><div class="line">      <span class="keyword">const</span> ret = fb.json();</div><div class="line">      <span class="built_in">console</span>.log(ret);</div><div class="line">    &#125;,</div><div class="line">    <span class="function"><span class="params">err</span> =&gt;</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(err)</div><div class="line">    &#125;</div><div class="line">  )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>login.service.ts</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">register(username, password)&#123;</div><div class="line">  <span class="keyword">const</span> headers = <span class="keyword">new</span> Headers();</div><div class="line"></div><div class="line">  headers.append(<span class="string">'Content-Type'</span>, <span class="string">'text/plain'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">let</span> data = &#123;username: username,password: password&#125;;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.http.post(<span class="string">"http://127.0.0.1:6661/api/register"</span>, <span class="built_in">JSON</span>.stringify(data), &#123;headers: headers&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>将前端和后端都打开点击登录和注册按钮，在开发者工具的console里看看效果吧</p>
+<h2 id="简单的总结"><a href="#简单的总结" class="headerlink" title="简单的总结"></a>简单的总结</h2><p>这是个简单的不能再简单的网页开发教程，从前端的Anguarl2框架一直到数据库,其实可以看到网页开发并不复杂</p>
+<ol>
+<li><p>前端负责界面，数据发送给后端</p>
+</li>
+<li><p>后端负责数据处理并保存到数据库</p>
+</li>
+<li><p>中间用Http协议作为数据传输协议</p>
+</li>
+<li><p>json数据格式作为数据传输载体</p>
+<p>​</p>
+</li>
+</ol>
+<p>对于新手如果能在一天内看懂这篇教程并开始自己的修改那应该来讲是不错的。</p>
+<h2 id="往后如何走"><a href="#往后如何走" class="headerlink" title="往后如何走"></a>往后如何走</h2><p>从这个简单的教程你至少知道了前端和后端是如何交互的，后端和数据库是如何交互的，这只是整个工程的冰山一角，接下来在前端我们还要做</p>
+<ul>
+<li>路由配置</li>
+</ul>
+<p>一个网页不可能只有一个入口比如一般登录界面的网址是127.0.0.1:6660/login这样的网址，所以我们需要在学会在Angular框架下配置我们的路由</p>
+<ul>
+<li>界面美化</li>
+</ul>
+<p>教程中的界面没有任何美化，实在是太丑陋了，但是界面美化本身是比较费时的事，对初学者来说可以先用类似<a href="http://v3.bootcss.com/" target="_blank" rel="external">bootstrap</a>这样的前端布局框架去做界面</p>
+<ul>
+<li>其他</li>
+</ul>
+<p>Angular2还有很多关键的要点去学，但是我建议边做边学，这样才能更好的理解</p>
+<p>对于后端来说我们还要做</p>
+<ul>
+<li>完善CRUD</li>
+</ul>
+<p>对数据库的基本操作就是CRUD，以上教程并没有完全覆盖，但是相信有上面的例子对于聪明的你已经不能算什么问题了</p>
+<ul>
+<li>分模块处理</li>
+</ul>
+<p>以上教程中只有一个main.go，把所有的处理都放在一起了，Go就是这么任性，但是这在开发中是不允许的，请学着用模块化的思想去组织整个项目目录，可以去理解mvc项目架构</p>
+<ul>
+<li>其他</li>
+</ul>
+<p>后端还有很多要学的，如Cookie区分用户身份，Session跟踪会话，在处理更复杂的业务系统时我们会渐渐遇到，不用着急</p>
+<p>希望这一切能开启你脑子里的火花，这比把所有的一切都告诉你更重要.</p>
+<blockquote>
+<p>学会找到问题的关键，学会问出正确的问题，学会找到解决问题的方法</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/01/19/Angular2-Go极速网页开发/">Angular2-Go极速网页开发</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Acring</a></p>
+        <p><span>发布时间:</span>2018-01-19, 15:29:00</p>
+        <p><span>最后更新:</span>2018-01-19, 15:29:00</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/19/Angular2-Go极速网页开发/" title="Angular2-Go极速网页开发">http://blog.acring.me/2018/01/19/Angular2-Go极速网页开发/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/01/19/Angular2-Go极速网页开发/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/07/30/Vimium/">
+                    Vimium
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Angular2-Go极速网页开发"><span class="toc-number">1.</span> <span class="toc-text">Angular2-Go极速网页开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#知识概述"><span class="toc-number">1.1.1.</span> <span class="toc-text">知识概述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端环境搭建"><span class="toc-number">1.2.</span> <span class="toc-text">前端环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从Hello-World开始"><span class="toc-number">1.3.</span> <span class="toc-text">从Hello World开始.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#从index-html开始"><span class="toc-number">1.3.1.</span> <span class="toc-text">从index.html开始</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插值表达式显示数据"><span class="toc-number">1.3.2.</span> <span class="toc-text">插值表达式显示数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建自己的组件并注册"><span class="toc-number">1.4.</span> <span class="toc-text">创建自己的组件并注册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录界面开发"><span class="toc-number">1.5.</span> <span class="toc-text">登录界面开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据开始流动-数据绑定"><span class="toc-number">1.5.1.</span> <span class="toc-text">数据开始流动-数据绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#双向数据绑定-输入输出"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">双向数据绑定-输入输出</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按钮开始响应"><span class="toc-number">1.5.2.</span> <span class="toc-text">按钮开始响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#事件绑定"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">事件绑定</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始和外界通信-服务"><span class="toc-number">1.6.</span> <span class="toc-text">开始和外界通信-服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建服务并注册"><span class="toc-number">1.6.1.</span> <span class="toc-text">创建服务并注册</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后端环境搭建"><span class="toc-number">1.7.</span> <span class="toc-text">后端环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不从Hello-World开始"><span class="toc-number">1.8.</span> <span class="toc-text">不从Hello World开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何读代码"><span class="toc-number">1.8.1.</span> <span class="toc-text">如何读代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始我们的悄悄话"><span class="toc-number">1.9.</span> <span class="toc-text">开始我们的悄悄话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text"> </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存那些珍贵的数据-数据库"><span class="toc-number">1.11.</span> <span class="toc-text">保存那些珍贵的数据 - 数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单的总结"><span class="toc-number">1.12.</span> <span class="toc-text">简单的总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#往后如何走"><span class="toc-number">1.13.</span> <span class="toc-text">往后如何走</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Angular2-Go极速网页开发　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2128549';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/07/30/Vimium/" title="下一篇: Vimium">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/Angular2-Go极速网页开发/">Angular2-Go极速网页开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/Vimium/">Vimium</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/网络森林1/">网络森林</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/08/JUnit测试入门/">Junit测试入门1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/25/广州大学数据分析(13-15届)/">广州大学数据分析(13-15届)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/海盗分金/">博弈论之五个海盗分金币的问题(以及推广到更多的海盗)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/在Unity中调用Android原生Activity的方法/">在Unity中调用Android原生Activity的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/First/">First</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2018 Acring
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 8;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-96576638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "_(:зゝ∠)_这里有咸鱼一只" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "\(≧▽≦)/突然又状态满满了" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
