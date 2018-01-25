@@ -15,25 +15,18 @@
 
 
 
-<meta name="description" content="终极装逼效率利器Vimium的使用及自定义">
+<meta name="description" content="初步涉及自然语言处理和词向量">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vimium">
-<meta property="og:url" content="http://blog.acring.me/2017/07/30/Vimium/index.html">
+<meta property="og:title" content="Word2Vec学习笔记之基础篇">
+<meta property="og:url" content="http://blog.acring.me/2018/01/25/Word2Vec学习笔记之基础篇/index.html">
 <meta property="og:site_name" content="Acring的小屋">
-<meta property="og:description" content="终极装逼效率利器Vimium的使用及自定义">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-b90a7a5de603772f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-f1bf005b132102f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-ef0580257bbb908d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-b5c9ea8537d8001e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-1eab85b4bf911885.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-d919438aaf737593.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-990da9527414476d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3026741-c91badd41ffb4ec8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-07-30T09:40:00.139Z">
+<meta property="og:description" content="初步涉及自然语言处理和词向量">
+<meta property="og:image" content="http://img.blog.csdn.net/20140525154453750">
+<meta property="og:updated_time" content="2018-01-25T03:33:25.164Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vimium">
-<meta name="twitter:description" content="终极装逼效率利器Vimium的使用及自定义">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3026741-b90a7a5de603772f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Word2Vec学习笔记之基础篇">
+<meta name="twitter:description" content="初步涉及自然语言处理和词向量">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20140525154453750">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -65,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Vimium | Acring的小屋</title>
+<title>Word2Vec学习笔记之基础篇 | Acring的小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -290,11 +283,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Vimium" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Word2Vec学习笔记之基础篇" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/07/30/Vimium/" class="article-date">
-      <time datetime="2017-07-30T09:32:23.000Z" itemprop="datePublished">2017-07-30</time>
+      <a href="/2018/01/25/Word2Vec学习笔记之基础篇/" class="article-date">
+      <time datetime="2018-01-25T03:31:12.000Z" itemprop="datePublished">2018-01-25</time>
 </a>
 
 
@@ -309,7 +302,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Vimium
+      Word2Vec学习笔记之基础篇
     </h1>
   
 
@@ -320,7 +313,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/效率/">效率</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPL/">NPL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -330,50 +323,70 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="浏览器神器Vimium"><a href="#浏览器神器Vimium" class="headerlink" title="浏览器神器Vimium"></a>浏览器神器Vimium</h1><blockquote>
-<p>Vimium是效率与装逼兼具，极客上网的不二选择, 当你能熟练的使用时，你就会对他爱不释手，我也是用熟练之后才发现是vimium如此的好用和舒服，</p>
-<p>接下来我就介绍一下Vimium的基本用法以及自己自定义的一下心得，方便小白快速入门</p>
-</blockquote>
-<h2 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h2><p>首先你得有一个Chrome浏览器，因为Vimium是Chorme浏览器的插件，没有的同学赶紧下一个吧</p>
-<p>有了Chrome后进入Chrome网上应用商店搜索Vimium，点击第一个就能看到这个3000+五星好评的终极极客浏览器神器</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3026741-b90a7a5de603772f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="Vimium是什么"><a href="#Vimium是什么" class="headerlink" title="Vimium是什么"></a>Vimium是什么</h2><p>Vimium是Vim和 Chromium的结合，Vim是linux中让你脱离鼠标编辑文本的利器，同样Vimium是让你脱离鼠标就能上网的终极利器，你不用移动鼠标就能跳转页面，切换标签，打开历史记录，打开书签等等，这比传统的鼠键结合的方式要快得多，就拿百度一个问题来说，我们首先要输入一个问题这个时候我们用到了键盘，然后聪明一点的会直接按下回车，笨一点的右手拿起鼠标点击搜索，搜索结果出来了，我们要用鼠标来回移动点击想要的连接，发现问题问的不对，我们又点击输入框，又切换回键盘输入问题。。。。这样鼠标键盘的来回切换花费了我们大量的时间，对于想要高效工作学习的人是难以忍受的。</p>
-<p>而用上Vimium之后你只需要输入问题，回车，按F，输入链接对应的编号,修改问题?一样输入输入框对应的编号，立马回到输入框.整个过程完全不用鼠标的切换,就是这么优雅而酷炫</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3026741-f1bf005b132102f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="令人窒息的操作"></p>
-<h2 id="听起来Vimium很难"><a href="#听起来Vimium很难" class="headerlink" title="听起来Vimium很难?"></a>听起来Vimium很难?</h2><p>似乎Vimium是很强大的工具，很多人就开始望而却步了，感觉似乎不是一个很容易上手的东西，那我们换种方式来说，Vimium其实可以理解成一种快捷键配置，用过鼠标手势的应该都知道，鼠标手势其实就是把你鼠标的某一种轨迹对应一种浏览器的操作，从而执行，VImium也是一样的，但是Vimium的功能强大所以快捷键更多。但是不用担心，人们只关心自己常用的，所以从常用的入手， 一点点操作就完全没有问题。Vimium还有一个问题，就是它初始化的快捷键设置太过反人类，我会带着你边介绍边一点一点的修改初始快捷，让你熟悉他，他也熟悉你，这就完美了。</p>
-<h2 id="Vimium设置界面"><a href="#Vimium设置界面" class="headerlink" title="Vimium设置界面"></a>Vimium设置界面</h2><p>在你点击添加到Chrome之后你的浏览器右上角就会出现一个蓝色的V,这就是我们今天的主角了，鼠标一上去，右键选项，就进入设置界面了,在这里我们只关注第二个框框，即自定义用户快捷键的输入框，点击Show avaliable commands可以看到现在的快捷键列表，然后我们开始调教我们的Vimium吧</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3026741-ef0580257bbb908d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Vimium"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3026741-b5c9ea8537d8001e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="快捷键对照表"><a href="#快捷键对照表" class="headerlink" title="快捷键对照表"></a>快捷键对照表</h2><p><img src="http://upload-images.jianshu.io/upload_images/3026741-1eab85b4bf911885.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>这个可以先不管，只用知道第一个是快捷键，第二个是快捷键介绍，括号中是自定义代码就行了,跟着我往下走</p>
-<h2 id="最基础的操作-上下左右-w-s-a-d"><a href="#最基础的操作-上下左右-w-s-a-d" class="headerlink" title="最基础的操作-上下左右 -w/s/a/d"></a>最基础的操作-上下左右 -w/s/a/d</h2><p>我们在上网的时候最常见的操作就是滚动滚轮，上下移动界面以及滚动条左右移动界面,在初始化的操作中被设定为jkhl，对于我来说这是很不科学的操作，因为玩游戏玩的多的都知道上下左右是wsad，所以！改!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">map w scrollUp</div><div class="line">map s scrollDown</div><div class="line">map a scrollLeft</div><div class="line">map d scrollRight</div></pre></td></tr></table></figure>
-<p>在编辑框输入这四行代码,表示让w对应向上滚动，s对应向下滚动,a向左滚，d向右滚…从快捷键对照表括号中知道对应的快捷键代码就能修改相应的快捷键。很容易理解对吗?下面的代码都表示在上述的自定义编辑框中添加的内容，修改完成记得点击最下面的<strong>save changes</strong></p>
-<h3 id="半页滚动-h-l"><a href="#半页滚动-h-l" class="headerlink" title="半页滚动-h/l"></a>半页滚动-h/l</h3><p>以上的滚动都只是细微的滚动，我们要快速浏览的时候一般都是滚动半页,对应修改scrollPageDown和scrollpageUp,我个人的喜好是h上滚半页,l下滚半页</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">map l scrollPageDown</div><div class="line">map h scrollPageUp</div></pre></td></tr></table></figure>
-<h3 id="回到顶部-底部-qq-ee"><a href="#回到顶部-底部-qq-ee" class="headerlink" title="回到顶部/底部-qq/ee"></a>回到顶部/底部-qq/ee</h3><p>为了方便直接回到最上面和最下面我们还要对这两个快捷键进行设置，我们的左手边现在还有q和e比较空闲，所以我们可以把q设为回到顶部e回到底部，但是后来发现这样我很容易按错.一旦不小心按到q就会回到顶部,这样会降低效率所以我把回到顶部设为qq，也就是要按两次q才能回到顶部，相当于给我们一个确认的机会，同理，回到底部设为ee</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">map qq scrollToTop</div><div class="line">map ee scrollToBottom</div></pre></td></tr></table></figure>
-<h2 id="后退-前进-j-k"><a href="#后退-前进-j-k" class="headerlink" title="后退/前进-j/k"></a>后退/前进-j/k</h2><p>我们经常会用到后退和前进每次都要在左上角点击实在太麻烦，所以我把两个操作放到了右手边j和k,按j后退，按k前进,这样两个键就可以进退自如了,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">map j goBack</div><div class="line">map k goForward</div></pre></td></tr></table></figure>
-<p>这样子定义的基本上都修改完了，还有一些操作我觉得位置还算合理，没有修改的必要</p>
-<h2 id="终极跳转链接大法-f"><a href="#终极跳转链接大法-f" class="headerlink" title="终极跳转链接大法-f"></a>终极跳转链接大法-f</h2><p>vim大杀器，让你不用鼠标就能跳转各种页面，只需要按下f所有的链接都会被标记出来，连接旁边会有黄色的卡片，卡片上写着英文，输入这个英文就能跳转了，需要注意的是<strong>如果输入的是小写的英文则会在当前标签打开，原来的标签会消失，想要打开新的标签页要输入大写的英文，即按住shift再输入</strong>.</p>
-<p><em>你也可以直接按大写F，这时候都是打开新标签页的操作</em></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3026741-d919438aaf737593.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="跳转标签页-J-K"><a href="#跳转标签页-J-K" class="headerlink" title="跳转标签页-J/K"></a>跳转标签页-J/K</h2><p>之前我们用小写j和k进行前进和后退，为了尽量不移动手指(就是这么懒), 我们直接用大写J和K来跳转标签页，J向前跳，K向后跳，再也不用一直ctrl+tab了</p>
-<h2 id="关闭页面-恢复页面-x-X"><a href="#关闭页面-恢复页面-x-X" class="headerlink" title="关闭页面/恢复页面 - x/X"></a>关闭页面/恢复页面 - x/X</h2><p>关闭当前页面不用再移动鼠标到上面了，只需要按下x，这个页面就over了，就和玩街机一样爽快，什么？不小心关了？大写X，一键回档。</p>
-<h2 id="终极搜索栏-o"><a href="#终极搜索栏-o" class="headerlink" title="终极搜索栏 - o"></a>终极搜索栏 - o</h2><p>o是打开新世界的大门，在这里你可以<strong>搜索历史记录，搜索书签，还可以直接打开一个新的网址(或者直接百度谷歌搜索,依赖你的设置的搜索引擎)</strong>,简直不要太方便,虽然chrome的地址栏也可以搜索，但是第一需要手动去点，第二显示出来没有Vimium好看</p>
+        <h1 id="Word2Vec学习笔记之基础篇"><a href="#Word2Vec学习笔记之基础篇" class="headerlink" title="Word2Vec学习笔记之基础篇"></a>Word2Vec学习笔记之基础篇</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>自然语言处理属于深度学习中的一个分支，但是相对其他分支发展一直比较缓慢，在2013年末，Google发布的word2vec工具引起了一帮人的热捧，都认为这是深度学习在自然语言领域一项了不起的应用，word2vec本身并不是特别的难，只是简单三层神经网络，但是在某种程度上说他的应用是十分有前景的。</p>
+<p>Word2Vec(word to vector)是一种把词表征转化成实数值向量来区分其之间的差别的一种深度学习算法，对于训练好的模型，我们可以刻画出任意两个词语之间的相似度，用向量距离的形式。</p>
+<p>学习材料:</p>
+<p><a href="http://blog.csdn.net/mytestmy/article/details/26961315" target="_blank" rel="external">深度学习word2vec笔记之基础篇</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/26306795" target="_blank" rel="external">[NLP] 秒懂词向量Word2vec的本质</a></p>
+<p><a href="http://techblog.youdao.com/?p=915" target="_blank" rel="external">Deep Learning实战之word2vec</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/33045371" target="_blank" rel="external">学习 Word2Vec 之前，你需要知道这些</a></p>
+<hr>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><h3 id="词向量"><a href="#词向量" class="headerlink" title="词向量"></a>词向量</h3><p>在自然语言相关的任务中，要将自然语言交给计算机处理，计算机可不认识人类的语言，所以要先将自然语言转换成计算机能懂的东西，又要在一定程度上区分出不同词语的区别，人们就想到了用向量来表示不同的词语</p>
+<h4 id="one-hot-representation-向量表示法"><a href="#one-hot-representation-向量表示法" class="headerlink" title="one-hot representation 向量表示法"></a>one-hot representation 向量表示法</h4><p>人们首先想到了一种比较简单的向量表示方法是<strong>one-hot representation</strong>, 就是用一个很长的向量来表示一个词，向量的长度为词典的大小或者说不同词语的数量，比如说</p>
+<p>现在有4个词语 <code>苹果</code>, <code>香蕉</code>, <code>水果</code>, <code>卡车</code>, 用one-hot representation表示法可以这样表示:</p>
+<p>苹果: [1,0,0,0]</p>
+<p>香蕉: [0,1,0,0]</p>
+<p>水果:[0,0,1,0]</p>
+<p>卡车:[0,0,0,1]</p>
+<p>这种表示方式非常的简洁，也就是给每个词分配一个唯一的ID，如果要编程的话，用Hash表给每个词分配一个编号就可以了，这种方式已经能在NLP的绝大多数问题上完成需要的任务了。</p>
+<p>但是这种词表示方式有两个缺点:</p>
+<ol>
+<li>容易受维数灾难的困扰，也就是当向量的长度过长，会导致计算变得困难(具体本人也不熟悉)</li>
+<li>不能很好的刻画词与词之间的相似性(词汇鸿沟): 任意两个词之间都是孤立的，光从向量上看不出两个词之间有关系，就像上面的例子，我们并不能看出苹果和香蕉，以及水果和卡车之间有啥关系</li>
+</ol>
+<p>所以在这种表示方法的基础上，人们有想到了另一种表示法，也是Word2Vec中运用的向量表示法Distributed Representation</p>
+<h4 id="Distributed-Representation-向量表示法"><a href="#Distributed-Representation-向量表示法" class="headerlink" title="Distributed Representation 向量表示法"></a>Distributed Representation 向量表示法</h4><p>这种向量表示方法也很简单，就是直接用一个普通的向量表示一个词，这种向量一般长这样<code>[0.795, -0.568, 0.156, 0.455, ...]</code>, 这种向量表示法的向量维度不是由词典大小决定的，一般由我们自己选定，一般50维和100维比较常见，这样的话维度不会太高，所以我们学习的Word2Vec本质上就是将one-hot representation向量表示转化成distributed representation 向量表示法.</p>
+<p>经过训练的词语被转化成这种形式后，一般其向量具有空间上的意义，也就是将这些向量放在一起形成一个词向量空间，而每个向量都其中的一个点，这个空间是多维的，所以想象起来可能比较困难，但是我们其实不关心他们所在的具体位置，只要知道如何计算其中两个向量的”距离”就行了，因为所谓两个词的”距离”，表示的就是这两个词之间的语法，语义之间的相似性。</p>
+<p><strong>从这里就能看出来Word2Vec的最终目的就是通过将词转换成向量,在通过向量的”距离”来观察两个词之间的相似度</strong></p>
+<p>那么接下来我们看看要如何去做,这里暂时不会涉及到具体的算法知识,只是大概的过程描述</p>
+<h2 id="相似词假说"><a href="#相似词假说" class="headerlink" title="相似词假说"></a>相似词假说</h2><h3 id="分布式假说"><a href="#分布式假说" class="headerlink" title="分布式假说"></a>分布式假说</h3><p>一个词由周围词来推断,相似的词会出现在相似的语境中,</p>
+<h3 id="分布模型"><a href="#分布模型" class="headerlink" title="分布模型"></a>分布模型</h3><p>相似词在相似的上下文中, 例如今天天空中有很多星星,今天天空中有太阳,这两个句子中的太阳和星星就具有相似的上下文,具有纵向相似性.</p>
+<p><strong>从这两个似乎很有道理的假说中就能推出我们要在意的两个语言模型-CBOW和Skip-Gram模型,他们都是Word2Vec工具中用到的模型</strong></p>
 <blockquote>
-<p>小写o是在当前标签页打开，大写O是在新标签页打开</p>
+<p>Word2Vec 是代码项目的名字，只是计算 word embedding 的一个工具，是 CBOW 和 Skip-Gram 这两个模型开源出来的工具。连续实值词表达也叫词嵌入 word embedding。</p>
 </blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/3026741-990da9527414476d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="搜索书签-b"><a href="#搜索书签-b" class="headerlink" title="搜索书签 - b"></a>搜索书签 - b</h2><p>如果你只是想搜索书签，那么一个b就可以了</p>
-<blockquote>
-<p>大小写区别同上</p>
-</blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/3026741-c91badd41ffb4ec8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h2 id="刷新页面-r"><a href="#刷新页面-r" class="headerlink" title="刷新页面 - r"></a>刷新页面 - r</h2><p>是不是比f5要近一点呢，没错，一点懒都要偷</p>
-<h2 id="页面搜索"><a href="#页面搜索" class="headerlink" title="页面搜索 - /"></a>页面搜索 - /</h2><p>相当于ctrl+f的搜索，常用程度一般: )</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>走完上面的流程你会发现基本大部分的浏览器操作都已经有了自己的新快捷键，而且以我的方式自定义你可以操作起来和打拳皇，lf2一样的简单，两手只用放在该放的位置不动就能进行几乎所有的操作，当然还有一些操作是没法替代的，比如玩游戏等等。但是在日常的搜索，阅读，你会发现熟练之后效率奇快而且逼格极高，别人还没看到鼠标动就切换到了下一个页面，当然vimium的极限不止于此，还有很多黑科技，大家自己去探索吧</p>
+<h2 id="过程概述"><a href="#过程概述" class="headerlink" title="过程概述"></a>过程概述</h2><p>再用一个具体的例子来说明:</p>
+<ul>
+<li>如果在一个语料库中,吴彦祖帅到没朋友这句话经常出现,那么最终的训练结果中,[吴彦祖]这个词语会和[帅],[没朋友],这两个词的相似度非常高</li>
+<li>如果在同一个语料库中,手环帅到没朋友这句话也经常出现,那么在最终的训练结果中[手环]这个词语会和[吴彦祖]的相似度也非常高.</li>
+<li>我们可以推断,手环和吴彦祖一样帅</li>
+</ul>
+<h2 id="CBOW模型"><a href="#CBOW模型" class="headerlink" title="CBOW模型"></a>CBOW模型</h2><p>CBOW模型是利用词的上下文来预测当前的单词,比如输入[帅], [没朋友]会输出一个[手环] (或者吴彦祖)</p>
+<h2 id="Skip-Gram模型"><a href="#Skip-Gram模型" class="headerlink" title="Skip-Gram模型"></a>Skip-Gram模型</h2><p>Skip-Gram模型是利用词来预测上下文,比如输入[吴彦祖],会输出[手环],[帅],[没朋友]</p>
+<p>在这里不做模型的具体解析,只是额外介绍一下语言模型的大概概念,以更好的理解自然语言处理的基础问题</p>
+<h2 id="统计语言模型"><a href="#统计语言模型" class="headerlink" title="统计语言模型"></a>统计语言模型</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>语言模型其实就是看一句话是不是正常人说出来的话.</p>
+<p>比如说我们要计算一句话[吴彦祖帅到没朋友]是自然语言的概率,我们先要分词(将一个句子分成一个个词语,英文靠空格分词,中文就比较麻烦了),这句话就变成了[吴彦祖,帅,没朋友] (这里忽略掉到字比较好讲解)</p>
+<p>一句话是自然语言的概率从数学上我们给出的公式是 $P(s) = P(w_1,w_2,w<em>3..w</em>{i}) = p(w_1)p(w_2|w_1)p(w_3|w_1,w_2)…p(w_i|w_1,w_2,…w_i-1)$, </p>
+<p>$w_i$ 代表第i个词语</p>
+<p>用上面的例子来说</p>
+<p>$p(吴彦祖)$ 表示”吴彦祖”这个词在语料库中出现的概率;</p>
+<p>$p(帅|吴彦祖)$ 表示”帅”这个词在”吴彦祖”后面出现的概率</p>
+<p>$p(没朋友|吴彦祖,帅)$ 表示”没朋友”出现在”吴彦祖帅”后面的概率</p>
+<p>最后把这几个概率乘起来就是”吴彦祖帅到没朋友”这句话出现的概率了.</p>
+<p>这种方法简单直接,但是太过暴力了,计算一句话要计算这么多概率,三个词的句子要扫描3次语料库,计算三个子句出现的概率,如果语料库巨大且句子的词语数量较多的话,运算时间会出奇的慢,根本没有使用价值.</p>
+<p>所以为了偷懒,我们可以用更简单的计算方式 -N-gram模型</p>
+<h3 id="N-gram模型"><a href="#N-gram模型" class="headerlink" title="N-gram模型"></a>N-gram模型</h3><p>N-gram模型的核心就在这个N上, N-gram只管这个词前面的n-1个词,加上自己总共n个词,计算概率时指考虑这n个词来计算,即</p>
+<p>$P(s) = P(w_1,w_2,…w<em>i) = \prod</em>{i=1}^T{P(w_i|Context_i)}= p(w<em>i| w</em>{i-n+1}, w<em>{i-n+2},…w</em>{i-1})$</p>
+<p>其中，如果$Context_i$是空的话，就是它自己p(w)，另外如“没朋友”的Context就是“吴彦祖”、“帅”，其余的对号入座。</p>
+<p>如果n取2则”吴彦祖帅到没朋友”就只考虑”帅”和”没朋友”之间的出现概率了</p>
+<p>这里如果n取得比较小的话，就比较省事了，当然也要看到n取得太小，会特别影响效果的，有可能计算出来的那个概率很不准。怎么平衡这个效果和计算就是大牛们的事情了，据大牛们的核算，n取2效果都还凑合，n取3就相当不错了，n取4就顶不住了。看下面的一些数据，假设词表中词的个数 |V| = 20,000 词，那么有下面的一些数据。</p>
+<p><img src="http://img.blog.csdn.net/20140525154453750" alt="img"></p>
+<p>照图中的数据看去，取n=3是目前计算能力的上限了。在实践中用的最多的就是bigram(n=2)和trigram(n=3)了，而且效果也基本够了。</p>
+<h3 id="N-pos模型"><a href="#N-pos模型" class="headerlink" title="N-pos模型"></a>N-pos模型</h3><p>N-pos模型是先将不同的词分为不同的词性(Part of Speech),之后再用上述方法计算,具体就不过多赘述了.</p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>在应用中有更多的方法被开发出来,比如用函数直接你和计算$p(w_i|Context_i)$ ,就是说不是根据庞大的语料库统计出来,而是直接把Context和wi代入函数计算出来,这样就不用统计那个庞大的语料库了,这就是更深入的内容了.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文只是从概念上说明了Word2Vec这个工具的涉及的基础内容,NLP中常用的词向量的表示方法,还有Word2Vec中的词向量表示法,介绍了Word2Vec这个工具的思想本质-两个语言学假说,然后稍微介绍了Word2Vec中常用的两种模型的基础思想,和目的,最后简单介绍了统计语言模型中的目的,这是自然语言中的基础课题,对我们理解自然语言处理有很大的帮助</p>
+<p>博主也是NLP的新手,并不能保证所述文字的正确性,只是从其他博客中提取要点加以自己的理解,请理性看待.</p>
+<p>接下来是关于Word2Vec的基础应用篇,这个应该会更加有趣.</p>
 
       
     </div>
@@ -382,13 +395,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/30/Vimium/">Vimium</a></p>
+        <p><span>本文标题:</span><a href="/2018/01/25/Word2Vec学习笔记之基础篇/">Word2Vec学习笔记之基础篇</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Acring</a></p>
-        <p><span>发布时间:</span>2017-07-30, 17:32:23</p>
-        <p><span>最后更新:</span>2017-07-30, 17:40:00</p>
+        <p><span>发布时间:</span>2018-01-25, 11:31:12</p>
+        <p><span>最后更新:</span>2018-01-25, 11:33:25</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/30/Vimium/" title="Vimium">http://blog.acring.me/2017/07/30/Vimium/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2017/07/30/Vimium/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/25/Word2Vec学习笔记之基础篇/" title="Word2Vec学习笔记之基础篇">http://blog.acring.me/2018/01/25/Word2Vec学习笔记之基础篇/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/01/25/Word2Vec学习笔记之基础篇/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -400,16 +413,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/01/19/Angular2-Go极速网页开发/">
-                    Angular2-Go极速网页开发
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/04/12/网络森林1/">
-                    网络森林
+                <a href="/2018/01/19/Angular2-Go极速网页开发/">
+                    Angular2-Go极速网页开发
                 </a>
             </div>
         
@@ -421,7 +428,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器神器Vimium"><span class="toc-number">1.</span> <span class="toc-text">浏览器神器Vimium</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#首先"><span class="toc-number">1.1.</span> <span class="toc-text">首先</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vimium是什么"><span class="toc-number">1.2.</span> <span class="toc-text">Vimium是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#听起来Vimium很难"><span class="toc-number">1.3.</span> <span class="toc-text">听起来Vimium很难?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vimium设置界面"><span class="toc-number">1.4.</span> <span class="toc-text">Vimium设置界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快捷键对照表"><span class="toc-number">1.5.</span> <span class="toc-text">快捷键对照表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最基础的操作-上下左右-w-s-a-d"><span class="toc-number">1.6.</span> <span class="toc-text">最基础的操作-上下左右 -w/s/a/d</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#半页滚动-h-l"><span class="toc-number">1.6.1.</span> <span class="toc-text">半页滚动-h/l</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回到顶部-底部-qq-ee"><span class="toc-number">1.6.2.</span> <span class="toc-text">回到顶部/底部-qq/ee</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后退-前进-j-k"><span class="toc-number">1.7.</span> <span class="toc-text">后退/前进-j/k</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#终极跳转链接大法-f"><span class="toc-number">1.8.</span> <span class="toc-text">终极跳转链接大法-f</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跳转标签页-J-K"><span class="toc-number">1.9.</span> <span class="toc-text">跳转标签页-J/K</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭页面-恢复页面-x-X"><span class="toc-number">1.10.</span> <span class="toc-text">关闭页面/恢复页面 - x/X</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#终极搜索栏-o"><span class="toc-number">1.11.</span> <span class="toc-text">终极搜索栏 - o</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索书签-b"><span class="toc-number">1.12.</span> <span class="toc-text">搜索书签 - b</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#刷新页面-r"><span class="toc-number">1.13.</span> <span class="toc-text">刷新页面 - r</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#页面搜索"><span class="toc-number">1.14.</span> <span class="toc-text">页面搜索 - /</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.15.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Word2Vec学习笔记之基础篇"><span class="toc-number">1.</span> <span class="toc-text">Word2Vec学习笔记之基础篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背景知识"><span class="toc-number">1.2.</span> <span class="toc-text">背景知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#词向量"><span class="toc-number">1.2.1.</span> <span class="toc-text">词向量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#one-hot-representation-向量表示法"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">one-hot representation 向量表示法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Distributed-Representation-向量表示法"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Distributed Representation 向量表示法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相似词假说"><span class="toc-number">1.3.</span> <span class="toc-text">相似词假说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分布式假说"><span class="toc-number">1.3.1.</span> <span class="toc-text">分布式假说</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分布模型"><span class="toc-number">1.3.2.</span> <span class="toc-text">分布模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过程概述"><span class="toc-number">1.4.</span> <span class="toc-text">过程概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CBOW模型"><span class="toc-number">1.5.</span> <span class="toc-text">CBOW模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Skip-Gram模型"><span class="toc-number">1.6.</span> <span class="toc-text">Skip-Gram模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#统计语言模型"><span class="toc-number">1.7.</span> <span class="toc-text">统计语言模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">1.7.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#N-gram模型"><span class="toc-number">1.7.2.</span> <span class="toc-text">N-gram模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#N-pos模型"><span class="toc-number">1.7.3.</span> <span class="toc-text">N-pos模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展"><span class="toc-number">1.7.4.</span> <span class="toc-text">扩展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.8.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -457,7 +464,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Vimium　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Word2Vec学习笔记之基础篇　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -491,15 +498,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/01/19/Angular2-Go极速网页开发/" title="上一篇: Angular2-Go极速网页开发">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/04/12/网络森林1/" title="下一篇: 网络森林">
+            <a href="/2018/01/19/Angular2-Go极速网页开发/" title="下一篇: Angular2-Go极速网页开发">
                 <i class="fa fa-angle-right"></i>
             </a>
         
