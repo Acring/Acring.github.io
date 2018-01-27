@@ -4,6 +4,124 @@
   
     
     <entry>
+      <title><![CDATA[Word2Vec学习笔记之应用篇(Python)]]></title>
+      <url>http://blog.acring.me/2018/01/27/Word2Vec%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%BA%94%E7%94%A8%E7%AF%87(Python)/</url>
+      <content type="html"><![CDATA[<h1 id="Word2Vec学习笔记之应用篇-Python"><a href="#Word2Vec学习笔记之应用篇-Python" class="headerlink" title="Word2Vec学习笔记之应用篇(Python)"></a>Word2Vec学习笔记之应用篇(Python)</h1><p>笔记参考:</p>
+<p><a href="http://blog.csdn.net/u014595019/article/details/52218249" target="_blank" rel="external">gensim使用方法以及例子</a></p>
+<p><a href="https://rare-technologies.com/word2vec-tutorial/" target="_blank" rel="external">Word2vec Tutorial</a></p>
+<p><a href="https://radimrehurek.com/gensim/models/word2vec.html" target="_blank" rel="external">models.word2vec – Deep learning with word2vec</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/24961011" target="_blank" rel="external">基于 Gensim 的 Word2Vec 实践</a></p>
+<h1 id="gensim模块"><a href="#gensim模块" class="headerlink" title="gensim模块"></a>gensim模块</h1><blockquote>
+<p>gensim是一个python的自然语言处理库，能够将文档根据TF-IDF, LDA, LSI 等模型转化成向量模式，以便进行进一步的处理。此外，gensim还实现了word2vec功能，能够将单词转化为词向量。</p>
+</blockquote>
+<p><strong>gensim是针对自然语言处理的库,本文较多的是对其中word2vec模块的是使用,其他方面还有待探索</strong></p>
+<p>对word2vec的实现最开始是google开源的C代码,后来有人也陆续开发了其他语言下的实现,不过大部分没有实现所有的功能,如下表</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>地址</th>
+<th>CBOW</th>
+<th>CBOW</th>
+<th>Skip-Gram</th>
+<th>Skip-Gram</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C</td>
+<td><a href="http://word2vec.googlecode.com/svn/trunk/" target="_blank" rel="external">http://word2vec.googlecode.com/svn/trunk/</a></td>
+<td>HS</td>
+<td>NEG</td>
+<td>HS</td>
+<td>NEG</td>
+</tr>
+<tr>
+<td>python</td>
+<td><a href="http://radimrehurek.com/gensim/" target="_blank" rel="external">http://radimrehurek.com/gensim/</a></td>
+<td></td>
+<td></td>
+<td>HS</td>
+<td></td>
+</tr>
+<tr>
+<td>Java</td>
+<td><a href="https://github.com/ansjsun/Word2VEC_java" target="_blank" rel="external">https://github.com/ansjsun/Word2VEC_java</a></td>
+<td>HS</td>
+<td></td>
+<td>HS</td>
+<td></td>
+</tr>
+<tr>
+<td>C++</td>
+<td><a href="https://github.com/jdeng/word2vec" target="_blank" rel="external">https://github.com/jdeng/word2vec</a></td>
+<td>未知</td>
+<td>未知</td>
+<td>未知</td>
+<td>未知</td>
+</tr>
+</tbody>
+</table>
+<h2 id="模块安装"><a href="#模块安装" class="headerlink" title="模块安装"></a>模块安装</h2><p>首先得安装python和pip包管理工具</p>
+<p>安装gensim比较简单了,用 <code>pip install --upgrade gensim</code>一键安装</p>
+<h2 id="语料库获取"><a href="#语料库获取" class="headerlink" title="语料库获取"></a>语料库获取</h2><p>自然语言处理的第一步必须获取相应的语料库, 可以去网上自己找,这里我找到其他人处理好的一份语料</p>
+<p><a href="http://pan.baidu.com/s/1jHZCvvo" target="_blank" rel="external">wiki_chinese_preprocessed.simplied.txt</a></p>
+<p><strong>这份语料是处理好的,不需要进行分词处理了</strong></p>
+<h2 id="语料库处理"><a href="#语料库处理" class="headerlink" title="语料库处理"></a>语料库处理</h2><p>如果获取的是比较初始的语料一般是要做处理的,针对中文和英文的处理是不同的</p>
+<p>英文(西方语言）语言的基本单位就是单词，所以分词特别容易做，只需要3步：</p>
+<ol>
+<li>根据空格/符号/段落 分隔,得到单词组</li>
+<li>过滤，排除掉stop word</li>
+<li>提取词干</li>
+</ol>
+<p>中文没有空格,需要将词语划分出来一般要用到一些分词算法,或者用现成的工具比如<a href="https://github.com/fxsjy/jieba" target="_blank" rel="external">结巴分词</a>,是基于Python的分词工具</p>
+<h2 id="训练Word2Vec模型"><a href="#训练Word2Vec模型" class="headerlink" title="训练Word2Vec模型"></a>训练Word2Vec模型</h2><h3 id="引入相应模块"><a href="#引入相应模块" class="headerlink" title="引入相应模块"></a>引入相应模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> gensim <span class="keyword">import</span> models</div></pre></td></tr></table></figure>
+<h3 id="语料库迭代器"><a href="#语料库迭代器" class="headerlink" title="语料库迭代器"></a>语料库迭代器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CorpusIterator</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    语料库迭代器</div><div class="line">    打开语料库并逐行返回数据给Word2Vec</div><div class="line">    """</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :param path: 文件地址</div><div class="line">        """</div><div class="line">        self.path = path</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        迭代器</div><div class="line">        :return: 返回每行的分词</div><div class="line">        """</div><div class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> open(self.path, mode=<span class="string">"r"</span>, encoding=<span class="string">"utf-8"</span>):</div><div class="line">            <span class="keyword">yield</span> line.split(<span class="string">" "</span>)  <span class="comment"># 返回一个词语数组</span></div></pre></td></tr></table></figure>
+<p>主要是用来打开并逐行返回语料给word2vec训练机</p>
+<h3 id="管理类"><a href="#管理类" class="headerlink" title="管理类"></a>管理类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"></div><div class="line">    """</div><div class="line">    min_count = <span class="number">100</span>  <span class="comment"># 最小记数</span></div><div class="line">    size = <span class="number">100</span>  <span class="comment"># 向量维度</span></div><div class="line">    window = <span class="number">5</span>  <span class="comment"># 窗口大小</span></div><div class="line">    model = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, corpus_name, result_name, retrain=True)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :param corpus_name: 语料库地址</div><div class="line">        :param result_name: 训练模型地址</div><div class="line">        :param retrain: 是否允许多次训练</div><div class="line">        """</div><div class="line">        self.corpus_name = corpus_name</div><div class="line">        self.result_name = result_name</div><div class="line">        self.retrain = retrain</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load_model</span><span class="params">(self, name=None)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        加载模型</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        <span class="keyword">if</span> name:</div><div class="line">            self.result_name = name</div><div class="line"></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            self.model = models.Word2Vec.load(self.result_name)</div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">            logging.error(<span class="string">"加载模型失败:"</span>, e)</div><div class="line">            <span class="keyword">return</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_model</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        训练模型</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        sentence = CorpusIterator(self.corpus_name)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(self.result_name):</div><div class="line">            model = models.Word2Vec(sentence, min_count=self.min_count, size=self.size, window=self.window)</div><div class="line">        <span class="keyword">elif</span> self.retrain:</div><div class="line">            logging.info(<span class="string">"模型已存在, 再次训练"</span>)</div><div class="line">            model = models.Word2Vec.load(self.result_name)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            logging.error(<span class="string">"模型存在,禁止再次训练"</span>)</div><div class="line">            <span class="keyword">return</span></div><div class="line"></div><div class="line">        model.train(sentence, total_examples=model.corpus_count, epochs=model.iter)</div><div class="line">        model.save(self.result_name)</div><div class="line"></div><div class="line">        self.model = model</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_model</span><span class="params">(self, function)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        测试模型</div><div class="line">        :param function 测试函数(model)传入训练模型</div><div class="line">        :return:</div><div class="line">        """</div><div class="line"></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.model:</div><div class="line">            logging.ERROR(<span class="string">"模型未加载或未训练"</span>)</div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hasattr(function, <span class="string">"__call__"</span>):</div><div class="line">            logging.ERROR(<span class="string">"未传入测试函数"</span>)</div><div class="line">        function(self.model)</div></pre></td></tr></table></figure>
+<p>管理类的初始化函数<code>__init__</code>是获取这个语料文件的位置以及训练模型的地址,还有是否<strong>可重复训练</strong>, 当可以重复训练时会将已经训练好的模型再次加载并训练,反之,不能对已经生成的训练模型进行再次训练</p>
+<p>load_model就是简单的加载模型</p>
+<p>train_model是比较关键的,用来训练模型,这里涉及到几个参数</p>
+<ul>
+<li>min_count 最小记数值,当某个单词的总数少于这个数值时将不会被统计</li>
+</ul>
+<blockquote>
+<p>min_count是用来修剪内部字典树的。在一个数以亿计的预料中出现一到两次的单词非常有可能是噪音或不需要被关注的。另外，也没有足够的数据对他们进行有意义的训练。因此，最好的办法就是直接将他们忽略掉。</p>
+</blockquote>
+<ul>
+<li>size 向量维度,神经网络NN层单元,对应了训练算法的自由程度</li>
+</ul>
+<blockquote>
+<p>更大的 <code>size</code> 值需要更多的训练数据，但也同时可以得到更准确的模型。合理的取值范围是几十到几百。</p>
+</blockquote>
+<ul>
+<li>window 窗口大小, 是词向量训练时的上下文扫描窗口大小，窗口为5就是考虑前5个词和后5个词； </li>
+</ul>
+<h3 id="测试函数及主函数"><a href="#测试函数及主函数" class="headerlink" title="测试函数及主函数"></a>测试函数及主函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_1</span><span class="params">(model)</span>:</span></div><div class="line">    t1, t2 = <span class="string">'man'</span>, <span class="string">'woman'</span>  <span class="comment"># 测试两个词的相似度</span></div><div class="line">    print(t1+<span class="string">"和"</span>+t2+<span class="string">"的相似度为:"</span>+str(model.wv.similarity(t1, t2)))</div><div class="line"></div><div class="line">    t3, t4 = <span class="string">'china'</span>, <span class="string">'taiwan'</span></div><div class="line">    print(t3+<span class="string">"和"</span>+t4+<span class="string">"的相似度为:"</span>+str(model.wv.similarity(t3, t4)))</div><div class="line"></div><div class="line">    t5 = <span class="string">'like'</span>  <span class="comment"># 测试和某个词最相近的词</span></div><div class="line">    print(<span class="string">"和"</span>+t5+<span class="string">"相似度高的词语有:"</span>)</div><div class="line">    <span class="keyword">for</span> vac <span class="keyword">in</span> model.wv.most_similar(t5):</div><div class="line">        print(vac[<span class="number">0</span>], end=<span class="string">" "</span>)</div><div class="line">    print(<span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    t6 = [<span class="string">'breakfast'</span>, <span class="string">'lunch'</span>, <span class="string">'dinner'</span>, <span class="string">'cat'</span>]  <span class="comment"># 找出最不相似的词语</span></div><div class="line">    print(<span class="string">"在下列词语中最无关的是"</span>, end=<span class="string">"\n"</span>)</div><div class="line">    <span class="keyword">for</span> vac <span class="keyword">in</span> t6:</div><div class="line">        print(vac, end=<span class="string">" "</span>)</div><div class="line">    print(<span class="string">" -&gt; "</span> + model.wv.doesnt_match(t6))</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_2</span><span class="params">(model)</span>:</span></div><div class="line">    t1, t2 = <span class="string">'干净'</span>, <span class="string">'整洁'</span>  <span class="comment"># 测试两个词的相似度</span></div><div class="line">    print(t1+<span class="string">"和"</span>+t2+<span class="string">"的相似度为:"</span>+str(model.wv.similarity(t1, t2)))</div><div class="line"></div><div class="line">    t3, t4 = <span class="string">'中国'</span>, <span class="string">'日本'</span></div><div class="line">    print(t3+<span class="string">"和"</span>+t4+<span class="string">"的相似度为:"</span>+str(model.wv.similarity(t3, t4)))</div><div class="line"></div><div class="line">    t5 = <span class="string">'喜欢'</span>  <span class="comment"># 测试和某个词最相近的词</span></div><div class="line">    print(<span class="string">"和`"</span>+t5+<span class="string">"`相似度高的词语有:"</span>)</div><div class="line">    <span class="keyword">for</span> vac <span class="keyword">in</span> model.wv.most_similar(t5):</div><div class="line">        print(vac[<span class="number">0</span>], end=<span class="string">" "</span>)</div><div class="line">    print(<span class="string">'\n'</span>)</div><div class="line"></div><div class="line">    t6 = [<span class="string">'喜欢'</span>, <span class="string">'害怕'</span>, <span class="string">'可爱'</span>, <span class="string">'汽车'</span>]  <span class="comment"># 找出最不相似的词语</span></div><div class="line">    print(<span class="string">"在下列词语中最无关的是"</span>, end=<span class="string">"\n"</span>)</div><div class="line">    <span class="keyword">for</span> vac <span class="keyword">in</span> t6:</div><div class="line">        print(vac, end=<span class="string">" "</span>)</div><div class="line">    print(<span class="string">" -&gt; "</span> + model.wv.doesnt_match(t6))</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line"></div><div class="line">    logging.basicConfig(format=<span class="string">"%(asctime)s : %(levelname)s : %(message)s"</span>, level=logging.INFO)  <span class="comment"># 显示INFO等级以上日志</span></div><div class="line"></div><div class="line">    manager = Manager(corpus_name=<span class="string">"wiki_chinese_preprocessed.simplied.txt"</span>, result_name=<span class="string">"train.model"</span>, retrain=<span class="keyword">False</span>)</div><div class="line"></div><div class="line">    manager.load_model()</div><div class="line"></div><div class="line">    manager.test_model(test_1)</div></pre></td></tr></table></figure>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p><img src="http://upload-images.jianshu.io/upload_images/3026741-806c1d9a8163094e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="训练结果"><a href="#训练结果" class="headerlink" title="训练结果"></a>训练结果</h3><ul>
+<li>test_1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">man和woman的相似度为:0.6407252643380771</div><div class="line">china和taiwan的相似度为:0.6611304262465649</div><div class="line">和like相似度高的词语有:</div><div class="line">moves loves damn makes stronger it feels that loved doesn </div><div class="line"></div><div class="line">在下列词语中最无关的是</div><div class="line">breakfast lunch dinner cat  -&gt; cat</div></pre></td></tr></table></figure>
+<ul>
+<li>test_2</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">干净和整洁的相似度为:0.7134517184268264</div><div class="line">中国和日本的相似度为:0.4870057569015213</div><div class="line">和`喜欢`相似度高的词语有:</div><div class="line">讨厌 可爱 在意 害羞 调皮 瞧不起 迷恋 贪吃 介意 擅长 </div><div class="line"></div><div class="line">在下列词语中最无关的是</div><div class="line">喜欢 害怕 可爱 汽车  -&gt; 汽车</div></pre></td></tr></table></figure>
+<h2 id="DEMO项目地址"><a href="#DEMO项目地址" class="headerlink" title="DEMO项目地址"></a>DEMO项目地址</h2><p><a href="https://github.com/Acring/gensim-demo" target="_blank" rel="external">gensim-demo</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> NLP </tag>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Word2Vec学习笔记之基础篇]]></title>
       <url>http://blog.acring.me/2018/01/25/Word2Vec%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%9F%BA%E7%A1%80%E7%AF%87/</url>
       <content type="html"><![CDATA[<h1 id="Word2Vec学习笔记之基础篇"><a href="#Word2Vec学习笔记之基础篇" class="headerlink" title="Word2Vec学习笔记之基础篇"></a>Word2Vec学习笔记之基础篇</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>自然语言处理属于深度学习中的一个分支，但是相对其他分支发展一直比较缓慢，在2013年末，Google发布的word2vec工具引起了一帮人的热捧，都认为这是深度学习在自然语言领域一项了不起的应用，word2vec本身并不是特别的难，只是简单三层神经网络，但是在某种程度上说他的应用是十分有前景的。</p>
@@ -812,12 +930,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts3408" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts1756" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3408'));
+        var myChart = echarts.init(document.getElementById('echarts1756'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -2167,12 +2285,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts9027" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts3686" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9027'));
+        var myChart = echarts.init(document.getElementById('echarts3686'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -3516,12 +3634,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts8853" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts8473" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8853'));
+        var myChart = echarts.init(document.getElementById('echarts8473'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -3876,12 +3994,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts2755" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts4379" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2755'));
+        var myChart = echarts.init(document.getElementById('echarts4379'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -4061,12 +4179,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts9956" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts5863" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9956'));
+        var myChart = echarts.init(document.getElementById('echarts5863'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -4819,12 +4937,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts2283" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts5067" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2283'));
+        var myChart = echarts.init(document.getElementById('echarts5067'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -5007,12 +5125,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts9501" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts9366" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9501'));
+        var myChart = echarts.init(document.getElementById('echarts9366'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -5330,12 +5448,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts8575" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts7814" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8575'));
+        var myChart = echarts.init(document.getElementById('echarts7814'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -5422,12 +5540,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts4949" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts1266" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4949'));
+        var myChart = echarts.init(document.getElementById('echarts1266'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {
