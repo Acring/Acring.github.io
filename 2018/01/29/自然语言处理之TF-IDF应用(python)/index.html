@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Acring" />
+
+
+
+<meta name="description" content="gensim中TF-IDF模块的简单使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自然语言处理之TF-IDF应用(python)">
+<meta property="og:url" content="http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF应用(python)/index.html">
+<meta property="og:site_name" content="Acring的小屋">
+<meta property="og:description" content="gensim中TF-IDF模块的简单使用">
+<meta property="og:updated_time" content="2018-01-29T14:24:50.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自然语言处理之TF-IDF应用(python)">
+<meta name="twitter:description" content="gensim中TF-IDF模块的简单使用">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Acring的小屋" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/ring.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>自然语言处理之TF-IDF应用(python) | Acring的小屋</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+<script src="http://echarts.baidu.com/dist/echarts.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/province/guangdong.js"></script> -->
+
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/ring.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Acring</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Love You Like the Movies</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/Acring" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/ac-shou-huan" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/u/dd47393a75cb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPL/">NPL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity3D/">Unity3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博弈论/">博弈论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://polluxLee.github.io">PolluxLee</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.jitashe.net/">吉他社</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.chuhaiba.cn/">出海吧</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.ursb.me/">Airing</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://recallhyx.github.io">recall</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">小小一只手环，妄想探索全世界</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Acring</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/ring.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Acring</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Love You Like the Movies</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Acring" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/ac-shou-huan" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/u/dd47393a75cb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-自然语言处理之TF-IDF应用(python)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/01/29/自然语言处理之TF-IDF应用(python)/" class="article-date">
+      <time datetime="2018-01-29T14:20:51.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自然语言处理之TF-IDF应用(python)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="自然语言处理之TF-IDF应用-python"><a href="#自然语言处理之TF-IDF应用-python" class="headerlink" title="自然语言处理之TF-IDF应用(python)"></a>自然语言处理之TF-IDF应用(python)</h1><p>笔记参考:</p>
+<p><a href="http://blog.csdn.net/m0_37306360/article/details/76826121" target="_blank" rel="external">Gensim-TFIDF,LDA,LSI实战</a></p>
+<p><a href="https://radimrehurek.com/gensim/tutorial.html" target="_blank" rel="external">Gensim Tutorials</a></p>
+<h2 id="gensim"><a href="#gensim" class="headerlink" title="gensim"></a>gensim</h2><p>python的第三方库gensim提供了一些关于自然语言的模块,其中就包括TF-IDF的模型,这里稍作应用介绍,</p>
+<h2 id="先导"><a href="#先导" class="headerlink" title="先导"></a>先导</h2><h3 id="TF-IDF基础"><a href="#TF-IDF基础" class="headerlink" title="TF-IDF基础"></a>TF-IDF基础</h3><p><a href="">自然语言处理之TF-IDF算法基础篇</a></p>
+<h3 id="corpora和dictionary"><a href="#corpora和dictionary" class="headerlink" title="corpora和dictionary"></a>corpora和dictionary</h3><p>文档集和字典是自然语言中处理中必须理解的概念,可以参考我之前的文章</p>
+<p><a href="">TODO</a></p>
+<h2 id="TF-IDF模块使用"><a href="#TF-IDF模块使用" class="headerlink" title="TF-IDF模块使用"></a>TF-IDF模块使用</h2><h3 id="准备文档集和要测试的文章"><a href="#准备文档集和要测试的文章" class="headerlink" title="准备文档集和要测试的文章"></a>准备文档集和要测试的文章</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">documents = [<span class="string">"Human machine interface for lab abc computer applications applications"</span>,</div><div class="line">                 <span class="string">"A survey of user opinion of computer system response time"</span>,</div><div class="line">                 <span class="string">"The EPS user interface management system"</span>,</div><div class="line">                 <span class="string">"System and human system engineering testing of EPS"</span>,</div><div class="line">                 <span class="string">"Relation of user perceived response time to error measurement"</span>,</div><div class="line">                 <span class="string">"The generation of random binary unordered trees"</span>,</div><div class="line">                 <span class="string">"The intersection graph of paths in trees"</span>,</div><div class="line">                 <span class="string">"Graph minors IV Widths of trees and well quasi ordering"</span>,</div><div class="line">                 <span class="string">"Graph minors A survey"</span>]</div><div class="line"></div><div class="line">test_document = <span class="string">"Human like machine while interface is survey abc"</span></div></pre></td></tr></table></figure>
+<p>假设上面的documents表示整个网络的英文文章列表,每个字符串表示一篇文章, test_document表示一篇要测试的文章, 我们想要知道这篇文章和全网中哪篇文章的相似度比较高</p>
+<h3 id="转换文档集"><a href="#转换文档集" class="headerlink" title="转换文档集"></a>转换文档集</h3><p>我们先要将全网文章转换成gensim中的corpus和dictionary</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GensimTest</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    corpus = <span class="keyword">None</span></div><div class="line">    dictionary = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, documents=None, filename=None)</span>:</span></div><div class="line">        <span class="keyword">if</span> documents:</div><div class="line">            texts = [[word <span class="keyword">for</span> word <span class="keyword">in</span> document.lower().split()] <span class="keyword">for</span> document <span class="keyword">in</span> documents]</div><div class="line"></div><div class="line">            <span class="comment"># 词典</span></div><div class="line">            dictionary = corpora.Dictionary(texts)</div><div class="line">            <span class="comment"># 词库，以(词，词频)方式存贮</span></div><div class="line">            corpus = [dictionary.doc2bow(text) <span class="keyword">for</span> text <span class="keyword">in</span> texts]</div><div class="line">            print(<span class="string">"词典:"</span>, dictionary)</div><div class="line">            print(<span class="string">"词库:"</span>, corpus)</div><div class="line">            self.dictionary = dictionary</div><div class="line">            self.corpus = corpus</div></pre></td></tr></table></figure>
+<ul>
+<li>main</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">manager = GensimTest(documents=documents)</div></pre></td></tr></table></figure>
+<p>将用corpora.Dictionary讲全网文章转换成词典, 其实就是一个不重复的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="string">'abc'</span>, <span class="string">'applications'</span>, <span class="string">'computer'</span>, <span class="string">'for'</span>, <span class="string">'human'</span>]...</div></pre></td></tr></table></figure>
+<p>然后用dictionary.doc2bow将每篇文章变成用词典表示的形式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[(<span class="number">0</span>, <span class="number">1</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">1</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">5</span>, <span class="number">1</span>), (<span class="number">6</span>, <span class="number">1</span>), (<span class="number">7</span>, <span class="number">1</span>)], [(<span class="number">2</span>, <span class="number">1</span>), (<span class="number">8</span>, <span class="number">1</span>), (<span class="number">9</span>, <span class="number">2</span>), (<span class="number">10</span>, <span class="number">1</span>), (<span class="number">11</span>, <span class="number">1</span>), (<span class="number">12</span>, <span class="number">1</span>), (<span class="number">13</span>, <span class="number">1</span>), (<span class="number">14</span>, <span class="number">1</span>), (<span class="number">15</span>, <span class="number">1</span>)], [(<span class="number">5</span>, <span class="number">1</span>), (<span class="number">13</span>, <span class="number">1</span>), (<span class="number">15</span>, <span class="number">1</span>), (<span class="number">16</span>, <span class="number">1</span>), (<span class="number">17</span>, <span class="number">1</span>), (<span class="number">18</span>, <span class="number">1</span>)], [(<span class="number">4</span>, <span class="number">1</span>), (<span class="number">9</span>, <span class="number">1</span>), (<span class="number">13</span>, <span class="number">2</span>), (<span class="number">16</span>, <span class="number">1</span>), (<span class="number">19</span>, <span class="number">1</span>), (<span class="number">20</span>, <span class="number">1</span>), (<span class="number">21</span>, <span class="number">1</span>)], [(<span class="number">9</span>, <span class="number">1</span>), (<span class="number">11</span>, <span class="number">1</span>), (<span class="number">14</span>, <span class="number">1</span>), (<span class="number">15</span>, <span class="number">1</span>), (<span class="number">22</span>, <span class="number">1</span>), (<span class="number">23</span>, <span class="number">1</span>), (<span class="number">24</span>, <span class="number">1</span>), (<span class="number">25</span>, <span class="number">1</span>), (<span class="number">26</span>, <span class="number">1</span>)], [(<span class="number">9</span>, <span class="number">1</span>), (<span class="number">18</span>, <span class="number">1</span>), (<span class="number">27</span>, <span class="number">1</span>), (<span class="number">28</span>, <span class="number">1</span>), (<span class="number">29</span>, <span class="number">1</span>), (<span class="number">30</span>, <span class="number">1</span>), (<span class="number">31</span>, <span class="number">1</span>)], [(<span class="number">9</span>, <span class="number">1</span>), (<span class="number">18</span>, <span class="number">1</span>), (<span class="number">30</span>, <span class="number">1</span>), (<span class="number">32</span>, <span class="number">1</span>), (<span class="number">33</span>, <span class="number">1</span>), (<span class="number">34</span>, <span class="number">1</span>), (<span class="number">35</span>, <span class="number">1</span>)], [(<span class="number">9</span>, <span class="number">1</span>), (<span class="number">19</span>, <span class="number">1</span>), (<span class="number">30</span>, <span class="number">1</span>), (<span class="number">32</span>, <span class="number">1</span>), (<span class="number">36</span>, <span class="number">1</span>), (<span class="number">37</span>, <span class="number">1</span>), (<span class="number">38</span>, <span class="number">1</span>), (<span class="number">39</span>, <span class="number">1</span>), (<span class="number">40</span>, <span class="number">1</span>), (<span class="number">41</span>, <span class="number">1</span>)], [(<span class="number">8</span>, <span class="number">1</span>), (<span class="number">12</span>, <span class="number">1</span>), (<span class="number">32</span>, <span class="number">1</span>), (<span class="number">37</span>, <span class="number">1</span>)]]</div></pre></td></tr></table></figure>
+<p>这里的每一个数组代表一篇文章, 数组里的一个元组表示这个文章中一个词典下标和数量的对应关系,如第1个数组中(0,1)表示在第一篇文章中出现’abc’(词典中abc对应的下标为0)的次数为1, 我们看一下第一篇文章:”Human machine interface for lab abc computer applications applications”, 确实有出现一个abc,但是位置并不是第一位,也就是说这种corpus表示方法并不会在意文章中词的排列顺序,这是显而易见的.</p>
+<h3 id="转换文章"><a href="#转换文章" class="headerlink" title="转换文章"></a>转换文章</h3><p>接下来要把我们要查询的文章也转换成相同的corpus表示形式, 这时候要基于文档集的词典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GensimTest</span><span class="params">(object)</span>:</span></div><div class="line">	    <span class="function"><span class="keyword">def</span> <span class="title">get_vec</span><span class="params">(self, document)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        根据当前的语料库将文章生成新的向量表示</div><div class="line">        :param document:</div><div class="line">        :return:</div><div class="line">        """</div><div class="line">        text = [word <span class="keyword">for</span> word <span class="keyword">in</span> document.lower().split()]</div><div class="line"></div><div class="line">        <span class="comment"># 生成文档集</span></div><div class="line">        vec = self.dictionary.doc2bow(text)</div><div class="line">        print(vec)</div><div class="line">        <span class="keyword">return</span> vec</div></pre></td></tr></table></figure>
+<p>.main</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test_vec = manager.get_vec(test_document)</div></pre></td></tr></table></figure>
+<p>结果:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[(<span class="number">0</span>, <span class="number">1</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">5</span>, <span class="number">1</span>), (<span class="number">7</span>, <span class="number">1</span>), (<span class="number">12</span>, <span class="number">1</span>)]</div></pre></td></tr></table></figure>
+<p>现在我们要搜索的文章也转换成了相同的表达形式,接下来要利用TF-IDF来计算我们的相似度了</p>
+<h3 id="检测相似度"><a href="#检测相似度" class="headerlink" title="检测相似度"></a>检测相似度</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tf_idf</span><span class="params">(self, doc_bow)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    根据此类的文档集来检测文档相似度</div><div class="line">    :param doc_bow:</div><div class="line">    :return:</div><div class="line">    """</div><div class="line">    <span class="comment"># initialize a model</span></div><div class="line">    tfidf = models.TfidfModel(self.corpus)  <span class="comment"># 初始化tf-idf模型, corpus 作为语料库</span></div><div class="line"></div><div class="line">    <span class="comment"># 使用tfidf模型将自身的词库转换成tf-idf表示</span></div><div class="line">    corpus_tfidf = tfidf[self.corpus]</div><div class="line">    <span class="keyword">for</span> doc <span class="keyword">in</span> corpus_tfidf:</div><div class="line">        print(doc)</div><div class="line"></div><div class="line">    <span class="comment"># 使用模型tfidf，将doc_bow(由词,词频)表示转换成(词,tfidf)表示</span></div><div class="line">    print(tfidf[doc_bow])</div><div class="line"></div><div class="line">    <span class="comment"># 检查和每个文档的相似度</span></div><div class="line">    index = similarities.SparseMatrixSimilarity(tfidf[self.corpus], num_features=len(self.dictionary))</div><div class="line">    sims = index[doc_bow]</div><div class="line"></div><div class="line">    print(sims)</div></pre></td></tr></table></figure>
+<ul>
+<li>main</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">manager.tf_idf(test_vec)</div></pre></td></tr></table></figure>
+<p>首先要利用models.TfidfModel和我们已有的语料库来初始化TF-IDF模型, 作为后面的使用.</p>
+<blockquote>
+<p>这里也可以阅读源码发现可以指定dictionary参数为词典,此时会忽略corpus, 具体原因还需要研究</p>
+</blockquote>
+<p>初始化模型会计算逆文档频率等等</p>
+<p>接着用tfidf[self.corpus]可以所有文章都转换成TF-IDF表示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[(<span class="number">0</span>, <span class="number">0.3260640645717635</span>), (<span class="number">1</span>, <span class="number">0.652128129143527</span>), (<span class="number">2</span>, <span class="number">0.22320230461737825</span>), (<span class="number">3</span>, <span class="number">0.3260640645717635</span>), (<span class="number">4</span>, <span class="number">0.22320230461737825</span>), (<span class="number">5</span>, <span class="number">0.22320230461737825</span>), (<span class="number">6</span>, <span class="number">0.3260640645717635</span>), (<span class="number">7</span>, <span class="number">0.3260640645717635</span>)]</div><div class="line">[(<span class="number">2</span>, <span class="number">0.3431629039936792</span>), (<span class="number">8</span>, <span class="number">0.3431629039936792</span>), (<span class="number">9</span>, <span class="number">0.1850178511620907</span>), (<span class="number">10</span>, <span class="number">0.5013079568252677</span>), (<span class="number">11</span>, <span class="number">0.3431629039936792</span>), (<span class="number">12</span>, <span class="number">0.3431629039936792</span>), (<span class="number">13</span>, <span class="number">0.25065397841263387</span>), (<span class="number">14</span>, <span class="number">0.3431629039936792</span>), (<span class="number">15</span>, <span class="number">0.25065397841263387</span>)]</div><div class="line">[(<span class="number">5</span>, <span class="number">0.41758763104062496</span>), (<span class="number">13</span>, <span class="number">0.30501548925628524</span>), (<span class="number">15</span>, <span class="number">0.30501548925628524</span>), (<span class="number">16</span>, <span class="number">0.41758763104062496</span>), (<span class="number">17</span>, <span class="number">0.6100309785125705</span>), (<span class="number">18</span>, <span class="number">0.30501548925628524</span>)]</div><div class="line">[(<span class="number">4</span>, <span class="number">0.3248726433615307</span>), (<span class="number">9</span>, <span class="number">0.08757828669209215</span>), (<span class="number">13</span>, <span class="number">0.4745887133388771</span>), (<span class="number">16</span>, <span class="number">0.3248726433615307</span>), (<span class="number">19</span>, <span class="number">0.3248726433615307</span>), (<span class="number">20</span>, <span class="number">0.4745887133388771</span>), (<span class="number">21</span>, <span class="number">0.4745887133388771</span>)]</div><div class="line">[(<span class="number">9</span>, <span class="number">0.07398452919469625</span>), (<span class="number">11</span>, <span class="number">0.27444644643304716</span>), (<span class="number">14</span>, <span class="number">0.27444644643304716</span>), (<span class="number">15</span>, <span class="number">0.20046191723835088</span>), (<span class="number">22</span>, <span class="number">0.40092383447670177</span>), (<span class="number">23</span>, <span class="number">0.40092383447670177</span>), (<span class="number">24</span>, <span class="number">0.40092383447670177</span>), (<span class="number">25</span>, <span class="number">0.40092383447670177</span>), (<span class="number">26</span>, <span class="number">0.40092383447670177</span>)]</div><div class="line">[(<span class="number">9</span>, <span class="number">0.08666340187847339</span>), (<span class="number">18</span>, <span class="number">0.23481546593665256</span>), (<span class="number">27</span>, <span class="number">0.4696309318733051</span>), (<span class="number">28</span>, <span class="number">0.4696309318733051</span>), (<span class="number">29</span>, <span class="number">0.4696309318733051</span>), (<span class="number">30</span>, <span class="number">0.23481546593665256</span>), (<span class="number">31</span>, <span class="number">0.4696309318733051</span>)]</div><div class="line">[(<span class="number">9</span>, <span class="number">0.09486377910307431</span>), (<span class="number">18</span>, <span class="number">0.25703448062005</span>), (<span class="number">30</span>, <span class="number">0.25703448062005</span>), (<span class="number">32</span>, <span class="number">0.25703448062005</span>), (<span class="number">33</span>, <span class="number">0.5140689612401</span>), (<span class="number">34</span>, <span class="number">0.5140689612401</span>), (<span class="number">35</span>, <span class="number">0.5140689612401</span>)]</div><div class="line">[(<span class="number">9</span>, <span class="number">0.07254134860864744</span>), (<span class="number">19</span>, <span class="number">0.26909295175363984</span>), (<span class="number">30</span>, <span class="number">0.1965516031449924</span>), (<span class="number">32</span>, <span class="number">0.1965516031449924</span>), (<span class="number">36</span>, <span class="number">0.3931032062899848</span>), (<span class="number">37</span>, <span class="number">0.26909295175363984</span>), (<span class="number">38</span>, <span class="number">0.3931032062899848</span>), (<span class="number">39</span>, <span class="number">0.3931032062899848</span>), (<span class="number">40</span>, <span class="number">0.3931032062899848</span>), (<span class="number">41</span>, <span class="number">0.3931032062899848</span>)]</div><div class="line">[(<span class="number">8</span>, <span class="number">0.5319813250092166</span>), (<span class="number">12</span>, <span class="number">0.5319813250092166</span>), (<span class="number">32</span>, <span class="number">0.38857124124710346</span>), (<span class="number">37</span>, <span class="number">0.5319813250092166</span>)]</div><div class="line">[(<span class="number">0</span>, <span class="number">0.5418669471286024</span>), (<span class="number">4</span>, <span class="number">0.37092695741841886</span>), (<span class="number">5</span>, <span class="number">0.37092695741841886</span>), (<span class="number">7</span>, <span class="number">0.5418669471286024</span>), (<span class="number">12</span>, <span class="number">0.37092695741841886</span>)]</div></pre></td></tr></table></figure>
+<p>前面是词对应词典的下标, 后面是TF-IDF值</p>
+<p>用tfidf[doc_bow]则是得到测试文章的TF-IDF表示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">index = similarities.SparseMatrixSimilarity(tfidf[self.corpus], num_features=len(self.dictionary))</div><div class="line">sims = index[doc_bow]</div></pre></td></tr></table></figure>
+<p>剩下这两行代码即是计算相似度, 先将所有文章的<strong>TF-IDF表示</strong>作为参数调用稀疏向量相似性计算函数similarities.SparseMatrixSimilarity(), 以<strong>词典的大小</strong>作为<strong>num_features</strong>,这个参数是必须的.</p>
+<p>index[doc_bow]即计算doc_bow这个corpus 和所有corpus的相似程度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="number">0.49127877</span> <span class="number">0.1534671</span>  <span class="number">0.18675087</span> <span class="number">0.14528745</span> <span class="number">0.</span>         <span class="number">0.</span></div><div class="line"> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.23790929</span>]</div></pre></td></tr></table></figure>
+<p>数字长度为9, 对应9篇文章的相似度, 可以看到测试文章和第一篇文章的相似度最高,为0.49.和实际观察一样,可以说初步得到了正确的应用.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/01/29/自然语言处理之TF-IDF应用(python)/">自然语言处理之TF-IDF应用(python)</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Acring</a></p>
+        <p><span>发布时间:</span>2018-01-29, 22:20:51</p>
+        <p><span>最后更新:</span>2018-01-29, 22:24:50</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/29/自然语言处理之TF-IDF应用(python)/" title="自然语言处理之TF-IDF应用(python)">http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF应用(python)/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF应用(python)/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/">
+                    自然语言处理之TF-IDF算法基础篇
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自然语言处理之TF-IDF应用-python"><span class="toc-number">1.</span> <span class="toc-text">自然语言处理之TF-IDF应用(python)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gensim"><span class="toc-number">1.1.</span> <span class="toc-text">gensim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#先导"><span class="toc-number">1.2.</span> <span class="toc-text">先导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TF-IDF基础"><span class="toc-number">1.2.1.</span> <span class="toc-text">TF-IDF基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#corpora和dictionary"><span class="toc-number">1.2.2.</span> <span class="toc-text">corpora和dictionary</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TF-IDF模块使用"><span class="toc-number">1.3.</span> <span class="toc-text">TF-IDF模块使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备文档集和要测试的文章"><span class="toc-number">1.3.1.</span> <span class="toc-text">准备文档集和要测试的文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换文档集"><span class="toc-number">1.3.2.</span> <span class="toc-text">转换文档集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换文章"><span class="toc-number">1.3.3.</span> <span class="toc-text">转换文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检测相似度"><span class="toc-number">1.3.4.</span> <span class="toc-text">检测相似度</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"自然语言处理之TF-IDF应用(python)　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2128549';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/" title="下一篇: 自然语言处理之TF-IDF算法基础篇">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF应用(python)/">自然语言处理之TF-IDF应用(python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/">自然语言处理之TF-IDF算法基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/">Word2Vec学习笔记之应用篇(Python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Word2Vec学习笔记之基础篇/">Word2Vec学习笔记之基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/Angular2-Go极速网页开发/">Angular2-Go极速网页开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/Vimium/">Vimium</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/网络森林1/">网络森林</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/08/JUnit测试入门/">Junit测试入门1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/25/广州大学数据分析(13-15届)/">广州大学数据分析(13-15届)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/海盗分金/">博弈论之五个海盗分金币的问题(以及推广到更多的海盗)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/在Unity中调用Android原生Activity的方法/">在Unity中调用Android原生Activity的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/First/">First</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2018 Acring
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 8;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-96576638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "_(:зゝ∠)_这里有咸鱼一只" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "\(≧▽≦)/突然又状态满满了" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

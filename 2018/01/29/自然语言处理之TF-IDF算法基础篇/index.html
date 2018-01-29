@@ -15,12 +15,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Acring的小屋">
-<meta property="og:url" content="http://blog.acring.me/tags/算法/index.html">
+<meta name="description" content="TF-IDF算法的基本原理概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自然语言处理之TF-IDF算法基础篇">
+<meta property="og:url" content="http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF算法基础篇/index.html">
 <meta property="og:site_name" content="Acring的小屋">
+<meta property="og:description" content="TF-IDF算法的基本原理概述">
+<meta property="og:updated_time" content="2018-01-29T14:24:52.426Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Acring的小屋">
+<meta name="twitter:title" content="自然语言处理之TF-IDF算法基础篇">
+<meta name="twitter:description" content="TF-IDF算法的基本原理概述">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: 算法 | Acring的小屋</title>
+<title>自然语言处理之TF-IDF算法基础篇 | Acring的小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -66,9 +70,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -277,99 +281,235 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-自然语言处理之TF-IDF算法基础篇" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/" class="archive-article-date">
-      <time datetime="2018-01-29T14:20:33.000Z" itemprop="datePublished">01-29</time>
+    <div class="article-meta">
+      <a href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/" class="article-date">
+      <time datetime="2018-01-29T14:20:33.000Z" itemprop="datePublished">2018-01-29</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/">自然语言处理之TF-IDF算法基础篇</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自然语言处理之TF-IDF算法基础篇
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 
-          
+        
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="自然语言处理之TF-IDF算法基础篇"><a href="#自然语言处理之TF-IDF算法基础篇" class="headerlink" title="自然语言处理之TF-IDF算法基础篇"></a>自然语言处理之TF-IDF算法基础篇</h1><p>参考文档:</p>
+<p><a href="http://www.ruanyifeng.com/blog/2013/03/tf-idf.html" target="_blank" rel="external">TF-IDF与余弦相似性的应用（一）：自动提取关键词</a></p>
+<h2 id="TF-IDF的目的"><a href="#TF-IDF的目的" class="headerlink" title="TF-IDF的目的"></a>TF-IDF的目的</h2><ol>
+<li>有一篇很长的文章,要用计算机去提取关键词,来概括这篇文章, 这个问题涉及到数据挖掘,文本处理,信息检索等很多计算机前沿领域, 实际上用TF-IDF这个很简单的算法就能达到, 甚至不需要高等数学的知识</li>
+<li>从一个文章找到相似的文章,即文章关键词接近的文章, 做智能推荐</li>
+</ol>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>TF-IDF的全称为 Term Frequency - Inverse Document Frequency(词频-逆文档频率)</p>
+<p>从名字就能看出来这个算法的关键点就是两个:<code>词频</code>, <code>逆文档频率</code></p>
+<h3 id="词频"><a href="#词频" class="headerlink" title="词频"></a>词频</h3><p>首先我们针对一篇文章把所有的词语的频率都统计出来, 很容易想到,如果一个词语出现的频率很大,那么很大概率是这篇文章的关键词,但是一篇文章中可能出现比较多的是—“的”,”是”,”在”这样词,这些词又叫做停用词,是需要提前从文档中过滤的词语,假设这些词语都过滤掉之后,剩下的都是有意义的词语,这时候我们就可以统计出他们的<code>词频</code>了</p>
+<h3 id="逆文档频率"><a href="#逆文档频率" class="headerlink" title="逆文档频率"></a>逆文档频率</h3><blockquote>
+<p>停用词去掉了,词频有了,那是不是就能够直接取词频最多的为关键词呢, 依然还是不行,因为在语言中会有一些比较常用的有意义的词语, 比如说”中国”, “我”, “人们”, 如果说如果说一篇介绍苹果的文章,那么”中国”, “人们”这些词的词频可能和”苹果”的词频差不多,这时候就要用到逆文档频率了</p>
+</blockquote>
+<p>如果某个词比较少见,但是它在一篇文章中出现的次数却比较多,那么这个词就很可能是这篇文章的关键词了.依据这个思想,我们需要给每个词分配一个重要性的权重,这个重要性的权重需要通过统计更大的语料库(比如全网文章)得出, 在全集文档中出现较多的词给予最小的权重(比如中国,人们,我), 较少见的词给予较大的权重, 这个权重就叫做<code>逆文档频率</code></p>
+<blockquote>
+<p>词频是从你想要获取关键词的文章中统计的,逆文档频率是从更大的语料库统计的</p>
+</blockquote>
+<h3 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h3><p>词频和逆文档频率都知道了,TF-IDF就是两个值的乘积了, 某个词对于文章的重要性越高,则它的TF-IDF值越大, 所以TF-IDF排在前面的几个词就是这篇文章的关键词了.</p>
+<h2 id="TF-IDF计算流程"><a href="#TF-IDF计算流程" class="headerlink" title="TF-IDF计算流程"></a>TF-IDF计算流程</h2><p>再从数学的角度描述这个过程</p>
+<p>$$  TF =\frac {某个词在文章中出现次数}{文章的总词数} $$ 或者 $$TF = \frac{某个词在文章中出现的次数}{出现次数最多的词的出现次数}$$</p>
+<p>$$IDF=log\frac{语料库的文档总数}{包含该词的文档数+1} $$</p>
+<p>$$ TF-IDF = TF * IDF$$</p>
+<blockquote>
+<p>除了自动提取关键词，TF-IDF算法还可以用于许多别的地方。比如，信息检索时，对于每个文档，都可以分别计算一组搜索词（”中国”、”蜜蜂”、”养殖”）的TF-IDF，将它们相加，就可以得到整个文档的TF-IDF。这个值最高的文档就是与搜索词最相关的文档。</p>
+<p>TF-IDF算法的优点是简单快速，结果比较符合实际情况。缺点是，单纯以”词频”衡量一个词的重要性，不够全面，有时重要的词可能出现次数并不多。而且，这种算法无法体现词的位置信息，出现位置靠前的词与出现位置靠后的词，都被视为重要性相同，这是不正确的。（一种解决方法是，对全文的第一段和每一段的第一句话，给予较大的权重。）</p>
+</blockquote>
+<p>计算出一个文章每个词的TF-IDF就能的得到这个文章的关键词了,是不是很简单又很实用呢.</p>
+<h2 id="找出相似文章"><a href="#找出相似文章" class="headerlink" title="找出相似文章"></a>找出相似文章</h2><p>找出一篇相似的文章需要通过余弦相似性来求解</p>
+<h3 id="余弦相似性"><a href="#余弦相似性" class="headerlink" title="余弦相似性"></a>余弦相似性</h3><p>以二维空间举例</p>
+<p>空间中有两条线段, 都是从原点出发, 指向不同的方向.两个线段之间形成一个夹角,如果夹角为0则说明两个向量重合且方向一致. 如果夹角为90°, 说明夹角垂直, 如果夹角为180, 意味着方向正好相反.<strong>因此我们可以通过夹角的大小来判断两个向量的相似程度, 夹角越小说明越相似.</strong></p>
+<p>余弦定理中可知:</p>
+<p>$cosθ=\frac{a^2+b^2-c^2}{2ab}$</p>
+<p>而如果a是向量[x1,y1],b向量是[x2,y2], 那么可以将余弦定理改写成</p>
+<p>$$ cosθ=\frac{x_1x_2+y_1y_2}{\sqrt{x_1^2+y_1^2}*\sqrt{x_2^2+y_2^2}}$$</p>
+<p>如果推广到多维向量</p>
+<p>若:$A=[A_1, A_2, …,A_n] $, $B=[B_1, B_2, …, B_n]$</p>
+<p>则:</p>
+<p>$$ cosθ=\frac{\sum_{i=1}^n(A_i <em> B<em>i)}{\sqrt{\sum</em>{i=1}^n(A_i)^2}</em>\sqrt{\sum_{i=1}^n(B_i)^2}} $$</p>
+<p><strong>余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似，这就叫”余弦相似性”</strong></p>
+<p>也就是说我们要把文章转化成多维向量的形式去计算,这也很简单,把一篇文章所有词语的TF-IDF值作为向量维度的值</p>
+<p>假如两篇文章的词的TF-IDF值分布如下:</p>
+<ol>
+<li>[{中国: 0.25}, {养殖: 0.75}, {青蛙: 0.95}, {改变: 0.65} ]</li>
+<li>[{中国: 0.24}, {狗: 0.77}, {国家: 0.33}, {青蛙: 0.90}]</li>
+</ol>
+<p>我们可以统计出现的词汇</p>
+<blockquote>
+<p>中国, 养殖, 青蛙, 改变, 狗, 国家</p>
+</blockquote>
+<p>那么文章一的向量就可以表示为[0.25, 0.75, 0.95, 0.65, 0, 0], 文章二的向量表示为[0.24, 0, 0.90, 0, 0.77, 0.33]</p>
+<p>代入上面的向量公式就能算出来两个文章的相似度了.</p>
+
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/03/18/海盗分金/" class="archive-article-date">
-      <time datetime="2017-03-18T07:38:47.000Z" itemprop="datePublished">03-18</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/海盗分金/">博弈论之五个海盗分金币的问题(以及推广到更多的海盗)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博弈论/">博弈论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/">自然语言处理之TF-IDF算法基础篇</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Acring</a></p>
+        <p><span>发布时间:</span>2018-01-29, 22:20:33</p>
+        <p><span>最后更新:</span>2018-01-29, 22:24:52</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/" title="自然语言处理之TF-IDF算法基础篇">http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF算法基础篇/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF算法基础篇/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/01/29/自然语言处理之TF-IDF应用(python)/">
+                    自然语言处理之TF-IDF应用(python)
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/">
+                    Word2Vec学习笔记之应用篇(Python)
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自然语言处理之TF-IDF算法基础篇"><span class="toc-number">1.</span> <span class="toc-text">自然语言处理之TF-IDF算法基础篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TF-IDF的目的"><span class="toc-number">1.1.</span> <span class="toc-text">TF-IDF的目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.2.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#词频"><span class="toc-number">1.2.1.</span> <span class="toc-text">词频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逆文档频率"><span class="toc-number">1.2.2.</span> <span class="toc-text">逆文档频率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TF-IDF"><span class="toc-number">1.2.3.</span> <span class="toc-text">TF-IDF</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TF-IDF计算流程"><span class="toc-number">1.3.</span> <span class="toc-text">TF-IDF计算流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#找出相似文章"><span class="toc-number">1.4.</span> <span class="toc-text">找出相似文章</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#余弦相似性"><span class="toc-number">1.4.1.</span> <span class="toc-text">余弦相似性</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
 
     
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"自然语言处理之TF-IDF算法基础篇　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
 
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2128549';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/01/29/自然语言处理之TF-IDF应用(python)/" title="上一篇: 自然语言处理之TF-IDF应用(python)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/" title="下一篇: Word2Vec学习笔记之应用篇(Python)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF应用(python)/">自然语言处理之TF-IDF应用(python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/">自然语言处理之TF-IDF算法基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/">Word2Vec学习笔记之应用篇(Python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Word2Vec学习笔记之基础篇/">Word2Vec学习笔记之基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/Angular2-Go极速网页开发/">Angular2-Go极速网页开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/Vimium/">Vimium</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/网络森林1/">网络森林</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/08/JUnit测试入门/">Junit测试入门1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/25/广州大学数据分析(13-15届)/">广州大学数据分析(13-15届)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/海盗分金/">博弈论之五个海盗分金币的问题(以及推广到更多的海盗)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/在Unity中调用Android原生Activity的方法/">在Unity中调用Android原生Activity的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/First/">First</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
