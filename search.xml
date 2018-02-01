@@ -4,6 +4,88 @@
   
     
     <entry>
+      <title><![CDATA[Gensim模块处理之dictionary和corpora]]></title>
+      <url>http://blog.acring.me/2018/02/01/Gensim%E6%A8%A1%E5%9D%97%E5%A4%84%E7%90%86%E4%B9%8Bdictionary%E5%92%8Ccorpora/</url>
+      <content type="html"><![CDATA[<h1 id="Gensim模块处理之dictionary和corpora"><a href="#Gensim模块处理之dictionary和corpora" class="headerlink" title="Gensim模块处理之dictionary和corpora"></a>Gensim模块处理之dictionary和corpora</h1><p>参考资料:</p>
+<p><a href="https://radimrehurek.com/gensim/tut1.html" target="_blank" rel="external">Corpora and Vector Spaces</a></p>
+<p><a href="http://blog.csdn.net/u014595019/article/details/52218249" target="_blank" rel="external">gensim使用方法以及例子</a></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>自然语言处理的第一步就是将原始文本处理成计算机能够处理的形式</p>
+<p>gensim中最基本的两种存储形式就是dictionary和corpora, 本文就是介绍如何用gensim去将原始文本转换成上述的两种形式,其实也是相当简单的</p>
+<h3 id="词典-dictionary"><a href="#词典-dictionary" class="headerlink" title="词典(dictionary)"></a>词典(dictionary)</h3><p>词典是所有文档中所有单词的集合,就像一个我们平时用的字典类似,将使用中所有可能出现的词都存下来, 并且记录各个词出现的次数等信息.</p>
+<p>假设有两篇文章:</p>
+<ol>
+<li>when I love you</li>
+<li>I like the feeling</li>
+</ol>
+<p>那词典就是[“when”, “I”, “love”, “you”, “like”, “the”, “feeling”], 也就是出现过的单词的集合, 单词自然是不重复的.</p>
+<p>在实际应用中, 类似”the”这样的单词是会在分词的阶段被去掉的, 因为他对整个文章没有实际的意义.</p>
+<p>分词对于中文来说比较麻烦,因为中文词语之间是没有分隔的, 英文自带词语的分隔,所以相对容易, 分词同样是需要研究的课题, 这里暂时不讨论.</p>
+<p>词典的单位是”词”, 他不会管每篇文章中出现的词的个数, 如果要和文章相关就要用到文档集(corpora)了</p>
+<h3 id="文档集-corpora"><a href="#文档集-corpora" class="headerlink" title="文档集(corpora)"></a>文档集(corpora)</h3><p>文档集是用来表示每篇文档的词数的, 从本质上来说,corpora是一种约定的表达方式, 是一个二维矩阵.</p>
+<p>在实际的操作中，对于字符串形式的文档，首先要将字符串分割成词语列表。比如”hurry up”要分割成[“hurry”,”up”]。</p>
+<p>如果将上述的两篇文章转换成文档集就是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[(<span class="number">0</span>,<span class="number">1</span>),(<span class="number">1</span>,<span class="number">1</span>),(<span class="number">2</span>,<span class="number">1</span>),(<span class="number">3</span>,<span class="number">1</span>)],[(<span class="number">1</span>,<span class="number">1</span>),(<span class="number">4</span>,<span class="number">1</span>),(<span class="number">5</span>,<span class="number">1</span>),(<span class="number">6</span>,<span class="number">1</span>)]]</div></pre></td></tr></table></figure>
+<p>上面的数组中有两个数组, 分别表示一篇文章, 每个数组中有一个元组, 元组中其实是一个对应关系, 表示的是词典中的第n个词在这篇文章中出现的次数(n从0开始数), 比如第一个数组中的第一个元组是(0,1)说明第一篇文章中出现了词典中第0个词一次,即出现”when”一次.注意这种表示和词在文章中的位置是没有关系的, 只是统计数量而已.</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>接下来介绍gensim中的dictionary和corpora的基本创建方法和使用方法</p>
+<p>首先是生成,保存,加载</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_load</span><span class="params">(filename)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    简单的保存和加载</div><div class="line">    :return:</div><div class="line">    """</div><div class="line"></div><div class="line">    documents = []</div><div class="line">    <span class="comment"># 打开原始文本</span></div><div class="line">    <span class="keyword">with</span> open(filename, <span class="string">"r"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:</div><div class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</div><div class="line">            documents.append(line.split(<span class="string">" "</span>))</div><div class="line"></div><div class="line">    <span class="comment"># 生成词典</span></div><div class="line">    dictionary = corpora.Dictionary(documents)</div><div class="line"></div><div class="line">    print(dictionary)</div><div class="line">    <span class="comment"># 将词典保存到本地文件</span></div><div class="line">    dictionary.save(<span class="string">"tmp\\dictionary.dic"</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 加载词典</span></div><div class="line">    dictionary2 = corpora.Dictionary.load(<span class="string">"tmp\\dictionary.dic"</span>)</div><div class="line">    print(dictionary2)</div><div class="line"></div><div class="line">    <span class="comment"># 生成词库</span></div><div class="line">    corpus = [dictionary.doc2bow(document) <span class="keyword">for</span> document <span class="keyword">in</span> documents]</div><div class="line">    print(len(corpus))</div><div class="line"></div><div class="line">    <span class="comment"># 保存词库</span></div><div class="line">    corpora.MmCorpus.serialize(<span class="string">"tmp\\corpus.m"</span>, corpus)</div><div class="line"></div><div class="line">    <span class="comment"># 加载词库</span></div><div class="line">    corpus2 = corpora.MmCorpus(<span class="string">'tmp\\corpus.m'</span>)</div><div class="line">    print(len(corpus2))</div><div class="line"></div><div class="line">    <span class="keyword">return</span> dictionary, corpus</div></pre></td></tr></table></figure>
+<h3 id="加载语料库"><a href="#加载语料库" class="headerlink" title="加载语料库"></a>加载语料库</h3><p>先打开文件, 读取文件中的字符串, 生成一个二维数组, 类似下边的结构</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[<span class="string">"我"</span>,<span class="string">"爱"</span>,<span class="string">"中国"</span>],[<span class="string">"他"</span>, <span class="string">"改变"</span>, <span class="string">"了"</span>]]</div></pre></td></tr></table></figure>
+<p>其中内部的一个数组代表一篇文章, 比如”我爱中国”就是一片文章</p>
+<h3 id="生成词典"><a href="#生成词典" class="headerlink" title="生成词典"></a>生成词典</h3><p>然后就可以用corpora.Dictionary来将这样的二维数组转换成一个词典dictionary了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Dictionary(<span class="number">29550</span> unique tokens: [<span class="string">'arrivée'</span>, <span class="string">'arroseur'</span>, <span class="string">'arrosé'</span>, <span class="string">'av'</span>, <span class="string">'bébé'</span>]...)</div></pre></td></tr></table></figure>
+<p>可以看到这个词典有29550个词.词典中有一些数据结构在使用的时候我们再说.</p>
+<p>我们先用dictionary.save来保存这个词典, 之后重新加载并输出.输出结果是一样的.说明保存和加载都是没有问题的.</p>
+<h3 id="生成文档集"><a href="#生成文档集" class="headerlink" title="生成文档集"></a>生成文档集</h3><p>之后我们可以用这个词典去将那些文章转换成corpus的形式, 也就是说, corpus的生成是基于词典的.</p>
+<p>dictionary.doc2bow(document)可以将一篇文章(一个一维数组)转换成corpus向量表示</p>
+<p>然后用corpora.MmCorpus.serialize来保存corpus</p>
+<p>用corpora.MmCorpus来加载corpus</p>
+<h3 id="dictionary的基本使用"><a href="#dictionary的基本使用" class="headerlink" title="dictionary的基本使用"></a>dictionary的基本使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">use_dic_cor</span><span class="params">(dictionary, corpus)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    dictionary的简单使用</div><div class="line">    :return:</div><div class="line">    """</div><div class="line">    <span class="comment"># 获取某个词的id</span></div><div class="line">    print(dictionary.token2id[<span class="string">"中国"</span>]) <span class="comment"># out:46</span></div><div class="line"></div><div class="line">    <span class="comment"># 用id获取某个词</span></div><div class="line">    print(dictionary[<span class="number">46</span>]) <span class="comment"># out: 中国</span></div><div class="line"></div><div class="line">    <span class="comment"># 和上面的效果相同</span></div><div class="line">    print(dictionary.id2token[<span class="number">46</span>]) <span class="comment"># out: 中国</span></div><div class="line"></div><div class="line">    <span class="comment"># 用id获取几个文档中出现过这个词</span></div><div class="line">    print(dictionary.dfs[<span class="number">46</span>]) <span class="comment"># out: 55</span></div><div class="line"></div><div class="line">    <span class="comment"># 按词出现文档的次个数对词进行排序</span></div><div class="line">    max_tuple = sorted(dictionary.dfs.items(), key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>], reverse=<span class="keyword">True</span>)</div><div class="line">    <span class="comment"># 出现次数第10个词语的id和出现次数</span></div><div class="line">    print(max_tuple[<span class="number">10</span>]) <span class="comment"># out: (31, 80)</span></div><div class="line">    <span class="comment"># 出现次数第10个词语的实际字符表示</span></div><div class="line">    print(dictionary[max_tuple[<span class="number">10</span>][<span class="number">0</span>]]) <span class="comment"># out: 一</span></div><div class="line"></div><div class="line">    <span class="comment"># 新的文章按照词典转换成corpus的向量表示形式</span></div><div class="line">    new_doc = <span class="string">"我 爱 中国"</span></div><div class="line">    new_vec = dictionary.doc2bow(new_doc.split())</div><div class="line">    print(new_vec) <span class="comment"># out:[(46, 1), (346, 1), (5493, 1)] </span></div><div class="line">    </div><div class="line">    <span class="comment"># 新的文章按照词典转换成下标的形式</span></div><div class="line">    new_doc = <span class="string">"我 爱 中国"</span></div><div class="line">    new_vec = dictionary.doc2idx(new_doc.split())</div><div class="line">    print(new_vec) <span class="comment"># out: [5493, 346, 46]</span></div></pre></td></tr></table></figure>
+<p>通过阅读源码可以看到dictionary中有几个基本的数据结构</p>
+<ul>
+<li>token2id</li>
+<li>id2token</li>
+<li>dfs</li>
+<li>num_docs</li>
+<li>num_pos</li>
+</ul>
+<p>其中token2id表示一个词语的的词和词id的对应关系,如{“中国”:0, “美国”:2}, id2token则是相反, 如{0:”中国”, 1:”美国”}</p>
+<p>所以用dictionary.token2id[“中国”]就可以知道一个词在词典中对应的id编号是多少,这里输出的是46,所以说中国这个词在词典中的编号是46.那我就可以用dictionary.id2token[46]去获取46这个编号的词,输出也确实是”中国”, 直接用dictionary和调用dictionary.id2token是一样的,只是dictionary会做一层检查, 同步id2token和token2id,具体查看源码.</p>
+<p>dfs是对应词id和词出现的文档的个数dictionary.dfs[46]获得的是有几个文档中出现过”中国”这个词语, 注意是文档的个数,而不是这个词总共出现的次数.</p>
+<p>然后就是num_docs 表示文档的总数, num_pos表示总共出现的词的词数(包括重复的词语)</p>
+<p>除了数据结构, dictionary还提供一些处理函数</p>
+<ul>
+<li>doc2bow</li>
+<li>doc2idx</li>
+</ul>
+<p>前者是生成corpus用的, 后者是将文章转换成下标形式的数组,如[“我”, “爱”, “中国”]被装换成[5493, 346, 46]</p>
+<h3 id="合并dictionary"><a href="#合并dictionary" class="headerlink" title="合并dictionary"></a>合并dictionary</h3><p>有时候如果语料库太大我们需要分批创建字典, 再将两个字典合并, 这时候要用到dictionary.merge_with()函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dictionary1 = corpora.Dictionary(ducuments1)</div><div class="line">dictionary2 = corpora.Dictionary(ducuments2)</div><div class="line"></div><div class="line">dictionary2_to_dictionary1 = dictionary1.merge_with(dictionary2)</div></pre></td></tr></table></figure>
+<p>注意这里dictionary1是最终合并的到的合并词典, 那函数返回的dictionary2_to_dictionary1是啥呢, 是原来在dictionary2的下标表示在dictionary1新词典中的下标表示</p>
+<p>比如说从”我爱中国”这个语料库生成的词典, 中国这个词的编号是2, 而在”他改变了中国”这个语料库生成的词典中, 中国这个词的编号是3, 那合并的时候中国这个词的编号肯定会变, 要不是用前者的词典编号, 要不是用后者的, 就看是谁合并谁.</p>
+<p>那么现在有个问题, 如果我用词典1和词典2分别创建了两个corpus1和corpus2, 我想要合并两个corpus, 这就要进行编号转换了, 假设是dictionary1去合并corpus2, 则合并corpus的方法如下, itertools是python自带的类, 可用来合并两个数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">new_corpus2 = dict2_to_dict1[corpus2]</div><div class="line">merged_corpus = itertools.chain(corpus1, new_corpus2)</div><div class="line">merged_corpus = [x <span class="keyword">for</span> x <span class="keyword">in</span> merged_corpus]</div></pre></td></tr></table></figure>
+<h3 id="dictionary的其他用法"><a href="#dictionary的其他用法" class="headerlink" title="dictionary的其他用法"></a>dictionary的其他用法</h3><blockquote>
+<p>dictionary还有其他的一些用法，现罗列一部分</p>
+<p><strong>dictionary.filter_n_most_frequent(N)</strong><br>过滤掉出现频率最高的N个单词</p>
+<p><strong>dictionary.filter_extremes(no_below=5, no_above=0.5, keep_n=100000)</strong><br>1.去掉出现次数低于no_below的<br>2.去掉出现次数高于no_above的。注意这个小数指的是百分数<br>3.在1和2的基础上，保留出现频率前keep_n的单词</p>
+<p><strong>dictionary.filter_tokens(bad_ids=None, good_ids=None)</strong><br>有两种用法，一种是去掉bad_id对应的词，另一种是保留good_id对应的词而去掉其他词。注意这里bad_ids和good_ids都是列表形式</p>
+<p><strong>dictionary.compacity()</strong><br>在执行完前面的过滤操作以后，可能会造成单词的序号之间有空隙，这时就可以使用该函数来对词典来进行重新排序，去掉这些空隙。</p>
+</blockquote>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> NLP </tag>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[自然语言处理之TF-IDF应用(python)]]></title>
       <url>http://blog.acring.me/2018/01/29/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E4%B9%8BTF-IDF%E5%BA%94%E7%94%A8(python)/</url>
       <content type="html"><![CDATA[<h1 id="自然语言处理之TF-IDF应用-python"><a href="#自然语言处理之TF-IDF应用-python" class="headerlink" title="自然语言处理之TF-IDF应用(python)"></a>自然语言处理之TF-IDF应用(python)</h1><p>笔记参考:</p>
@@ -51,7 +133,7 @@
 <p>剩下这两行代码即是计算相似度, 先将所有文章的<strong>TF-IDF表示</strong>作为参数调用稀疏向量相似性计算函数similarities.SparseMatrixSimilarity(), 以<strong>词典的大小</strong>作为<strong>num_features</strong>,这个参数是必须的.</p>
 <p>index[doc_bow]即计算doc_bow这个corpus 和所有corpus的相似程度</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="number">0.49127877</span> <span class="number">0.1534671</span>  <span class="number">0.18675087</span> <span class="number">0.14528745</span> <span class="number">0.</span>         <span class="number">0.</span></div><div class="line"> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.23790929</span>]</div></pre></td></tr></table></figure>
-<p>数字长度为9, 对应9篇文章的相似度, 可以看到测试文章和第一篇文章的相似度最高,为0.49.和实际观察一样,可以说初步得到了正确的应用.</p>
+<p>数字长度为9, 对应测试文章和9篇文章的相似度, 可以看到测试文章和第一篇文章的相似度最高,为0.49.和实际观察一样,可以说初步得到了正确的应用.</p>
 ]]></content>
       
         
@@ -1058,12 +1140,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts662" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts9930" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts662'));
+        var myChart = echarts.init(document.getElementById('echarts9930'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -2413,12 +2495,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts349" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts2526" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts349'));
+        var myChart = echarts.init(document.getElementById('echarts2526'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -3762,12 +3844,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts6692" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts4435" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6692'));
+        var myChart = echarts.init(document.getElementById('echarts4435'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -4122,12 +4204,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts36" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts3257" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts36'));
+        var myChart = echarts.init(document.getElementById('echarts3257'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -4307,12 +4389,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts2404" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts5566" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2404'));
+        var myChart = echarts.init(document.getElementById('echarts5566'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -5065,12 +5147,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts1408" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts6859" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1408'));
+        var myChart = echarts.init(document.getElementById('echarts6859'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -5253,12 +5335,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts2293" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts1344" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2293'));
+        var myChart = echarts.init(document.getElementById('echarts1344'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -5576,12 +5658,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts4228" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts5538" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4228'));
+        var myChart = echarts.init(document.getElementById('echarts5538'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -5668,12 +5750,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts8018" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts1061" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8018'));
+        var myChart = echarts.init(document.getElementById('echarts1061'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {

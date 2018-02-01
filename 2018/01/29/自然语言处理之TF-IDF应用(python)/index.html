@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF应用(python)/index.html">
 <meta property="og:site_name" content="Acring的小屋">
 <meta property="og:description" content="gensim中TF-IDF模块的简单使用">
-<meta property="og:updated_time" content="2018-01-29T14:26:59.036Z">
+<meta property="og:updated_time" content="2018-01-30T02:51:53.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理之TF-IDF应用(python)">
 <meta name="twitter:description" content="gensim中TF-IDF模块的简单使用">
@@ -366,7 +366,7 @@
 <p>剩下这两行代码即是计算相似度, 先将所有文章的<strong>TF-IDF表示</strong>作为参数调用稀疏向量相似性计算函数similarities.SparseMatrixSimilarity(), 以<strong>词典的大小</strong>作为<strong>num_features</strong>,这个参数是必须的.</p>
 <p>index[doc_bow]即计算doc_bow这个corpus 和所有corpus的相似程度</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="number">0.49127877</span> <span class="number">0.1534671</span>  <span class="number">0.18675087</span> <span class="number">0.14528745</span> <span class="number">0.</span>         <span class="number">0.</span></div><div class="line"> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.23790929</span>]</div></pre></td></tr></table></figure>
-<p>数字长度为9, 对应9篇文章的相似度, 可以看到测试文章和第一篇文章的相似度最高,为0.49.和实际观察一样,可以说初步得到了正确的应用.</p>
+<p>数字长度为9, 对应测试文章和9篇文章的相似度, 可以看到测试文章和第一篇文章的相似度最高,为0.49.和实际观察一样,可以说初步得到了正确的应用.</p>
 
       
     </div>
@@ -378,7 +378,7 @@
         <p><span>本文标题:</span><a href="/2018/01/29/自然语言处理之TF-IDF应用(python)/">自然语言处理之TF-IDF应用(python)</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Acring</a></p>
         <p><span>发布时间:</span>2018-01-29, 22:20:51</p>
-        <p><span>最后更新:</span>2018-01-29, 22:26:59</p>
+        <p><span>最后更新:</span>2018-01-30, 10:51:53</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/01/29/自然语言处理之TF-IDF应用(python)/" title="自然语言处理之TF-IDF应用(python)">http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF应用(python)/</a>
             <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/01/29/自然语言处理之TF-IDF应用(python)/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -392,6 +392,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/02/01/Gensim模块处理之dictionary和corpora/">
+                    Gensim模块处理之dictionary和corpora
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -478,7 +484,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2018/02/01/Gensim模块处理之dictionary和corpora/" title="上一篇: Gensim模块处理之dictionary和corpora">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -490,7 +498,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF应用(python)/">自然语言处理之TF-IDF应用(python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/">自然语言处理之TF-IDF算法基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/">Word2Vec学习笔记之应用篇(Python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Word2Vec学习笔记之基础篇/">Word2Vec学习笔记之基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/Angular2-Go极速网页开发/">Angular2-Go极速网页开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/Vimium/">Vimium</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/网络森林1/">网络森林</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/08/JUnit测试入门/">Junit测试入门1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/25/广州大学数据分析(13-15届)/">广州大学数据分析(13-15届)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/海盗分金/">博弈论之五个海盗分金币的问题(以及推广到更多的海盗)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/在Unity中调用Android原生Activity的方法/">在Unity中调用Android原生Activity的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/First/">First</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/02/01/Gensim模块处理之dictionary和corpora/">Gensim模块处理之dictionary和corpora</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF应用(python)/">自然语言处理之TF-IDF应用(python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/">自然语言处理之TF-IDF算法基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/">Word2Vec学习笔记之应用篇(Python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Word2Vec学习笔记之基础篇/">Word2Vec学习笔记之基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/Angular2-Go极速网页开发/">Angular2-Go极速网页开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/Vimium/">Vimium</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/网络森林1/">网络森林</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/08/JUnit测试入门/">Junit测试入门1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/25/广州大学数据分析(13-15届)/">广州大学数据分析(13-15届)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/海盗分金/">博弈论之五个海盗分金币的问题(以及推广到更多的海盗)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/在Unity中调用Android原生Activity的方法/">在Unity中调用Android原生Activity的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/First/">First</a></li></ul>
 
 
 
