@@ -42,12 +42,34 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-02fb8db8e1ba796f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>在这里我们用到了<strong>顺序关系</strong>的事件, 我们可以直接用编号<code>1.</code> 来表示, 区别在于这部分一般会被渲染器缩进, 查看美观.接着我们用到了<strong>代办事项</strong>, 用<code>- [ ]</code> 来表示未做, <code>- [x]</code> 来表示已做.</p>
 <p>接着, 我们要引经据典来论证博主的颜值, 第三段可以这样写</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="section">## 这绝不是我听风就是雨</span></div><div class="line"></div><div class="line">关于博主的帅, 我绝不是瞎掰, 鲁迅就说过</div><div class="line"></div><div class="line"><span class="quote">&gt; 学医救不了中国人</span></div><div class="line"></div><div class="line">从这句话就能充分体现出鲁迅对博主帅的认同.</div><div class="line"></div><div class="line">另外你可以用这个公式算一算博主的帅气值</div><div class="line"></div><div class="line">$$ E=mc^2 $$</div><div class="line"></div><div class="line">用这个程序跑一下看看博主帅不帅</div><div class="line"></div><div class="line">​<span class="code">```python</span></div><div class="line">def shuai():</div><div class="line">	while true:</div><div class="line">    	print("博主真的帅")</div><div class="line">​</div></pre></td></tr></table></figure>
-<p>还不信的话我给你们发个网址,你们可以去看看<a href="http://blog.acring.me/">博主的帅照</a></p>
-<p>不然我直接放出来吧</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3026741-f95fdd4133804742.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TIM图片20180202152821.jpg"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">渲染结果如下</div><div class="line"></div><div class="line">![image.png](http://upload-images.jianshu.io/upload_images/3026741-1a8a33914a7ca917.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</div><div class="line"></div><div class="line">这里用到了很多方式来论证博主的帅</div><div class="line"></div><div class="line">1. 引用别人的话</div><div class="line"></div><div class="line">`&gt;` 可以用来引用别人的话, 这是一种规范, 当然也可以不遵守</div><div class="line"></div><div class="line">1. 数学表达式</div><div class="line"></div><div class="line">`$$xxx$$` 可以用来写各种数学表达式, 渲染成比较容易查看的模式, 不过数学表达式的写法又是一套规则了,有兴趣的可以去了解下</div><div class="line"></div><div class="line">1. 引用代码</div><div class="line"></div><div class="line">```markdown</div><div class="line">​```python</div><div class="line"></div><div class="line">​</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这样子的格式是引用程序代码,  第一个三引号后面表明代码的语言, 渲染器就能帮你高亮代码, 是不是看起来舒服很多.</div><div class="line"></div><div class="line">1. 创建连接</div><div class="line"></div><div class="line">`[]()`可以把某段文字加上链接跳转,当点击这段文字时就会跳转到指定的页面, 中括号`[]`写的是文本, `()` 小括号里写的是链接,</div><div class="line"></div><div class="line">1. 创建图片</div><div class="line"></div><div class="line">我们也可以直接在文章中添加想要的图片, 可以用 `![]()` 的方式相当于在链接的前面加了个感叹号, 不过这时的`()` 里填的就应该是图片地址了.</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">最后基本的用法中还有个表格, 不过我编不下去了, 就自己看看吧</div><div class="line"></div><div class="line">![image.png](http://upload-images.jianshu.io/upload_images/3026741-bc13530eee66eff4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">```markdown</div><div class="line"></div><div class="line">| 项目   |     价格 |  数量  |</div><div class="line">| ---- | -----: | :--: |</div><div class="line">| 计算机  | 1600 |  5   |</div><div class="line">| 手机   |   12 |  12  |</div><div class="line">| 管线   |    1 | 234  |</div></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="section">## 这绝不是我听风就是雨</span></div><div class="line"></div><div class="line">关于博主的帅, 我绝不是瞎掰, 鲁迅就说过</div><div class="line"></div><div class="line"><span class="quote">&gt; 学医救不了中国人</span></div><div class="line"></div><div class="line">从这句话就能充分体现出鲁迅对博主帅的认同.</div><div class="line"></div><div class="line">另外你可以用这个公式算一算博主的帅气值</div><div class="line"></div><div class="line">$$ E=mc^2 $$</div><div class="line"></div><div class="line">用这个程序跑一下看看博主帅不帅</div><div class="line"></div><div class="line">\<span class="code">`\`</span>\`python</div><div class="line">def shuai():</div><div class="line"><span class="code">	while true:</span></div><div class="line"><span class="code">    	print("博主真的帅")</span></div><div class="line">\<span class="code">`\`</span>\`</div><div class="line"></div><div class="line"></div><div class="line">还不信的话我给你们发个网址,你们可以去看看[<span class="string">博主的帅照</span>](<span class="link">http://blog.acring.me/</span>)</div><div class="line"></div><div class="line">不然我直接放出来吧</div><div class="line"></div><div class="line">![<span class="string">TIM图片20180202152821.jpg</span>](<span class="link">http://upload-images.jianshu.io/upload_images/3026741-f95fdd4133804742.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</span>)</div></pre></td></tr></table></figure>
+<p>渲染结果如下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-1a8a33914a7ca917.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>这里用到了很多方式来论证博主的帅</p>
+<ol>
+<li>引用别人的话</li>
+</ol>
+<p><code>&gt;</code> 可以用来引用别人的话, 这是一种规范, 当然也可以不遵守</p>
+<ol>
+<li>数学表达式</li>
+</ol>
+<p><code>$$xxx$$</code> 可以用来写各种数学表达式, 渲染成比较容易查看的模式, 不过数学表达式的写法又是一套规则了,有兴趣的可以去了解下</p>
+<ol>
+<li>引用代码</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\<span class="code">`\`</span>\`python</div><div class="line"></div><div class="line">\<span class="code">`\`</span>\`</div></pre></td></tr></table></figure>
+<p>这样子的格式是引用程序代码,  第一个三引号后面表明代码的语言, 渲染器就能帮你高亮代码, 是不是看起来舒服很多.</p>
+<ol>
+<li>创建连接</li>
+</ol>
+<p><code>[]()</code>可以把某段文字加上链接跳转,当点击这段文字时就会跳转到指定的页面, 中括号<code>[]</code>写的是文本, <code>()</code> 小括号里写的是链接,</p>
+<ol>
+<li>创建图片</li>
+</ol>
+<p>我们也可以直接在文章中添加想要的图片, 可以用 <code>![]()</code> 的方式相当于在链接的前面加了个感叹号, 不过这时的<code>()</code> 里填的就应该是图片地址了.</p>
+<p>最后基本的用法中还有个表格, 不过我编不下去了, 就自己看看吧</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-bc13530eee66eff4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">| 项目   |     价格 |  数量  |</div><div class="line">| ---- | -----: | :--: |</div><div class="line">| 计算机  | 1600 |  5   |</div><div class="line">| 手机   |   12 |  12  |</div><div class="line">| 管线   |    1 | 234  |</div></pre></td></tr></table></figure>
 <p>效果如下.</p>
 <table>
 <thead>
@@ -75,7 +97,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>markdown能让我的写作变得更加有效率和舒服, 不用担心排版的问题,而是更多的专注在内容的层次, 深度,组织结构,我们还可以用些转换工具(typora自带,其它没接触)从markdonw文件直接转换 成pdf或者word, 达到一份文件, 各种格式的目的, 极快的加大了我们学习工作的效率, 所以为啥你还不试试用markdown开始你的创作之路呢?</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>markdown能让我的写作变得更加有效率和舒服, 不用担心排版的问题,而是更多的专注在内容的层次, 深度,组织结构,我们还可以用些转换工具(typora自带,其它没接触)从markdown文件直接转换 成pdf或者word, 达到一份文件, 各种格式的目的, 极快的加大了我们学习工作的效率, 所以为啥你还不试试用markdown开始你的创作之路呢?</p>
 ]]></content>
       
         
@@ -1226,12 +1248,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts9429" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts5419" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9429'));
+        var myChart = echarts.init(document.getElementById('echarts5419'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -2581,12 +2603,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts4125" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts715" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4125'));
+        var myChart = echarts.init(document.getElementById('echarts715'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -3930,12 +3952,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts2331" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts1158" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2331'));
+        var myChart = echarts.init(document.getElementById('echarts1158'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -4290,12 +4312,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts86" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts6680" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts86'));
+        var myChart = echarts.init(document.getElementById('echarts6680'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -4475,12 +4497,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts5217" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts8886" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5217'));
+        var myChart = echarts.init(document.getElementById('echarts8886'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -5233,12 +5255,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts3312" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts1372" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3312'));
+        var myChart = echarts.init(document.getElementById('echarts1372'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -5421,12 +5443,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts4959" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts9689" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4959'));
+        var myChart = echarts.init(document.getElementById('echarts9689'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -5744,12 +5766,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts9486" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts3311" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9486'));
+        var myChart = echarts.init(document.getElementById('echarts3311'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -5836,12 +5858,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts4791" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts5278" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4791'));
+        var myChart = echarts.init(document.getElementById('echarts5278'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {
