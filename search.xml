@@ -4,6 +4,92 @@
   
     
     <entry>
+      <title><![CDATA[瞎扯一扯markdown]]></title>
+      <url>http://blog.acring.me/2018/02/02/%E7%9E%8E%E6%89%AF%E4%B8%80%E6%89%AFmarkdown/</url>
+      <content type="html"><![CDATA[<h1 id="瞎扯一扯markdown"><a href="#瞎扯一扯markdown" class="headerlink" title="瞎扯一扯markdown"></a>瞎扯一扯markdown</h1><h2 id="markdown是个啥"><a href="#markdown是个啥" class="headerlink" title="markdown是个啥"></a>markdown是个啥</h2><p>markdown是啥?markdown其实就是一种标记语言, 标记语言其实就是一种规则, 以这种规则写出来的文本能被渲染器或者阅读器解析, 以另一种方式呈现出来, 比如说html就是一种标记语言, 浏览器能将html转换成相应的网页供人们浏览, markdown其实也是一样的, 以特定的规则书写markdown, 最终就被解析成相应的界面了.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-74f89103bec15001.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="markdown图个啥"><a href="#markdown图个啥" class="headerlink" title="markdown图个啥"></a>markdown图个啥</h2><p>markdown的创造目的是为了人们能更好的编写文档, 尤其是在网页上显示的时候.</p>
+<p>很久以前, 没有html的时候, 人们都用纯文本书写, 字都一样大,没有段落和层次感, 这种样式实在是太丑了, 不适合查看</p>
+<p>后来诞生了html, 人们可以用html组织样式, 大小, 甚至颜色等等等,非常的方便, 可定制性很高, 但是html的书写和修改相对都比较麻烦, 所有人们吧html相对比较常用的样式一些抽出来作为固定的显示方法, 然后用markdown这种更简单的语法去书写, 最终markdown书写出来的文本是可以直接转换成html的, 那么你说我不会html咋办, 也没事, 一样能很简单的学会markdown的语法.</p>
+<p>markdown是程序员的首选记录文档,笔记的方法, 但是不只是程序员才需要学习markdown, 所有想要用更高效,更优雅的方法记录文档的孩子都需要这个东西.</p>
+<h2 id="markdown怎么写"><a href="#markdown怎么写" class="headerlink" title="markdown怎么写"></a>markdown怎么写</h2><h3 id="渲染器"><a href="#渲染器" class="headerlink" title="渲染器"></a>渲染器</h3><p>我们说markdown本身是纯文本, 只有经过渲染才能变成实际的样式, 就像代码本是所以我们需要一个渲染器, 一边学,一边看.</p>
+<p>在线的markdown编辑器很多, 简书, 作业部落等等, 而且一般都会有示例, 学习还是很容易的.</p>
+<p><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">作业部落cmd markdown</a></p>
+<p>渲染器一般分为左右渲染和实时渲染, 前者是目前的主流, 也就是左边是原文本输入, 右边是渲染的结果</p>
+<p>实时渲染我使用过的就只有 Typora, 但是其精简的设计和所见即所得的使用体验让我爱不释手,强推.</p>
+<p>不过对于新手来说,我建议先从左右渲染开始, 等熟悉语法之后再使用Typora.</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>markdown学啥, 其实学的就是一个语法, 语法学会了, 打的多了自然都会了, 但是这样就落了俗套了, 而且这样的教程网上实在太多了, 我也不想多加赘述, 所以我们必须从markdown每种语法的目的出发, 真正了解markdown的设计思想.</p>
+<h2 id="开始markdown之旅"><a href="#开始markdown之旅" class="headerlink" title="开始markdown之旅"></a>开始markdown之旅</h2><p>假设你现在有些一篇文章论述博主是多么多么帅,我们拿到了一个编辑器</p>
+<p>首先我们需要一个<strong>大大大</strong>的标题来表示我们这片文章的主题</p>
+<p>这时候我们需要一个<code>#</code>来表示, 注意<code>#</code> 和文本之间有空格</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="section"># 震惊,居然有人能这么帅</span></div></pre></td></tr></table></figure>
+<p>然后我们需要一个二级标题来开始我们的论述, 很简单, 两个<code>#</code>, 二级标题的字体比一级标题小一点点, 也就是关于主题的一个论点,或者一个大的段落.有二级标题自然还有三级,四级,五级标题, 不过一般我们用到四级标题就行了.文章不宜有深入的层级.示例如下</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="section">## 从盘古开天地说起</span></div></pre></td></tr></table></figure>
+<p>然后我们开始简单的陈述, 这时候用最简单的字来写就好了,如</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">博主这么帅,是自古以来的固有属性, 是无法被剥夺的,从三个点来说吧</div></pre></td></tr></table></figure>
+<p>然后我们要分点描述博主帅的原因, 原因之间是没有先后关系的,这时候可以用<code>-</code>来写, 如</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">- </span>没啥理由</div><div class="line"><span class="bullet">- </span>帅无罪</div><div class="line"><span class="bullet">- </span>你没得反驳</div></pre></td></tr></table></figure>
+<p>注意<code>-</code>和文字之间是有空格的</p>
+<p>在第一论点的最后, 我们用加粗的字体来阐述自己的态度, 可以用左右各两个<code>*</code>号来包裹文本, 不用空格,如</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="strong">**以上, 博主就是那么帅**</span></div></pre></td></tr></table></figure>
+<p>要是再浮夸点, 可以用斜体, 其实就是左右各一个<code>*</code> 号来表示</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="emphasis">*再说一遍,博主就是那么帅*</span></div></pre></td></tr></table></figure>
+<p>以上渲染出来的样子大概就是下面这样, 是不是既美观又富有层次感( <del>关键是论述还特别有道理</del>).而且我们并没有太多的关注排版, 这一切都交给了渲染器, <strong>这让我们能更加的专注于书写的内容</strong>.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-3160dc9ba662e624.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>感受到markdown的魅力之后我们继续, 来看第二段, 我们要从个人经历来论证博主的帅气, 我们可以这样写</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="section">## 从我的经历说起</span></div><div class="line"></div><div class="line"></div><div class="line">那天我决定去见博主, 流程如下</div><div class="line"></div><div class="line"><span class="bullet">1. </span>我穿衣服</div><div class="line"><span class="bullet">2. </span>打开门</div><div class="line"><span class="bullet">3. </span>搭公交</div><div class="line"><span class="bullet">4. </span>下车</div><div class="line"><span class="bullet">5. </span>见到博主</div><div class="line"><span class="bullet">6. </span>帅瞎眼</div><div class="line"><span class="bullet">7. </span>完</div><div class="line"></div><div class="line">我临终前的愿望</div><div class="line"></div><div class="line"><span class="bullet">- </span>[ ] 再见一次博主的脸</div><div class="line"><span class="bullet">- </span>[x] 没了</div></pre></td></tr></table></figure>
+<p>最终的渲染结果如下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-02fb8db8e1ba796f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>在这里我们用到了<strong>顺序关系</strong>的事件, 我们可以直接用编号<code>1.</code> 来表示, 区别在于这部分一般会被渲染器缩进, 查看美观.接着我们用到了<strong>代办事项</strong>, 用<code>- [ ]</code> 来表示未做, <code>- [x]</code> 来表示已做.</p>
+<p>接着, 我们要引经据典来论证博主的颜值, 第三段可以这样写</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="section">## 这绝不是我听风就是雨</span></div><div class="line"></div><div class="line">关于博主的帅, 我绝不是瞎掰, 鲁迅就说过</div><div class="line"></div><div class="line"><span class="quote">&gt; 学医救不了中国人</span></div><div class="line"></div><div class="line">从这句话就能充分体现出鲁迅对博主帅的认同.</div><div class="line"></div><div class="line">另外你可以用这个公式算一算博主的帅气值</div><div class="line"></div><div class="line">$$ E=mc^2 $$</div><div class="line"></div><div class="line">用这个程序跑一下看看博主帅不帅</div><div class="line"></div><div class="line">​<span class="code">```python</span></div><div class="line">def shuai():</div><div class="line">	while true:</div><div class="line">    	print("博主真的帅")</div><div class="line">​</div></pre></td></tr></table></figure>
+<p>还不信的话我给你们发个网址,你们可以去看看<a href="http://blog.acring.me/">博主的帅照</a></p>
+<p>不然我直接放出来吧</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3026741-f95fdd4133804742.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TIM图片20180202152821.jpg"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">渲染结果如下</div><div class="line"></div><div class="line">![image.png](http://upload-images.jianshu.io/upload_images/3026741-1a8a33914a7ca917.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</div><div class="line"></div><div class="line">这里用到了很多方式来论证博主的帅</div><div class="line"></div><div class="line">1. 引用别人的话</div><div class="line"></div><div class="line">`&gt;` 可以用来引用别人的话, 这是一种规范, 当然也可以不遵守</div><div class="line"></div><div class="line">1. 数学表达式</div><div class="line"></div><div class="line">`$$xxx$$` 可以用来写各种数学表达式, 渲染成比较容易查看的模式, 不过数学表达式的写法又是一套规则了,有兴趣的可以去了解下</div><div class="line"></div><div class="line">1. 引用代码</div><div class="line"></div><div class="line">```markdown</div><div class="line">​```python</div><div class="line"></div><div class="line">​</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这样子的格式是引用程序代码,  第一个三引号后面表明代码的语言, 渲染器就能帮你高亮代码, 是不是看起来舒服很多.</div><div class="line"></div><div class="line">1. 创建连接</div><div class="line"></div><div class="line">`[]()`可以把某段文字加上链接跳转,当点击这段文字时就会跳转到指定的页面, 中括号`[]`写的是文本, `()` 小括号里写的是链接,</div><div class="line"></div><div class="line">1. 创建图片</div><div class="line"></div><div class="line">我们也可以直接在文章中添加想要的图片, 可以用 `![]()` 的方式相当于在链接的前面加了个感叹号, 不过这时的`()` 里填的就应该是图片地址了.</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">最后基本的用法中还有个表格, 不过我编不下去了, 就自己看看吧</div><div class="line"></div><div class="line">![image.png](http://upload-images.jianshu.io/upload_images/3026741-bc13530eee66eff4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">```markdown</div><div class="line"></div><div class="line">| 项目   |     价格 |  数量  |</div><div class="line">| ---- | -----: | :--: |</div><div class="line">| 计算机  | 1600 |  5   |</div><div class="line">| 手机   |   12 |  12  |</div><div class="line">| 管线   |    1 | 234  |</div></pre></td></tr></table></figure>
+<p>效果如下.</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">价格</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算机</td>
+<td style="text-align:right">1600</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td>手机</td>
+<td style="text-align:right">12</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td>管线</td>
+<td style="text-align:right">1</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>markdown能让我的写作变得更加有效率和舒服, 不用担心排版的问题,而是更多的专注在内容的层次, 深度,组织结构,我们还可以用些转换工具(typora自带,其它没接触)从markdonw文件直接转换 成pdf或者word, 达到一份文件, 各种格式的目的, 极快的加大了我们学习工作的效率, 所以为啥你还不试试用markdown开始你的创作之路呢?</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> 效率 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Gensim模块处理之dictionary和corpora]]></title>
       <url>http://blog.acring.me/2018/02/01/Gensim%E6%A8%A1%E5%9D%97%E5%A4%84%E7%90%86%E4%B9%8Bdictionary%E5%92%8Ccorpora/</url>
       <content type="html"><![CDATA[<h1 id="Gensim模块处理之dictionary和corpora"><a href="#Gensim模块处理之dictionary和corpora" class="headerlink" title="Gensim模块处理之dictionary和corpora"></a>Gensim模块处理之dictionary和corpora</h1><p>参考资料:</p>
@@ -724,9 +810,9 @@
         
         <tags>
             
-            <tag> 工具 </tag>
-            
             <tag> 效率 </tag>
+            
+            <tag> 工具 </tag>
             
         </tags>
         
@@ -1140,12 +1226,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts684" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts4622" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts684'));
+        var myChart = echarts.init(document.getElementById('echarts4622'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -2495,12 +2581,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts341" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts333" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts341'));
+        var myChart = echarts.init(document.getElementById('echarts333'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -3844,12 +3930,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts2958" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts9993" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2958'));
+        var myChart = echarts.init(document.getElementById('echarts9993'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -4204,12 +4290,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts502" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts6336" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts502'));
+        var myChart = echarts.init(document.getElementById('echarts6336'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -4389,12 +4475,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts7430" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts7732" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7430'));
+        var myChart = echarts.init(document.getElementById('echarts7732'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -5147,12 +5233,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts8531" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts716" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8531'));
+        var myChart = echarts.init(document.getElementById('echarts716'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -5335,12 +5421,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts1842" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts5450" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1842'));
+        var myChart = echarts.init(document.getElementById('echarts5450'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -5658,12 +5744,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts9782" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts2449" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9782'));
+        var myChart = echarts.init(document.getElementById('echarts2449'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -5750,12 +5836,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts9040" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts1520" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9040'));
+        var myChart = echarts.init(document.getElementById('echarts1520'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {
