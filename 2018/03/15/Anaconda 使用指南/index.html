@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Acring" />
+
+
+
+<meta name="description" content="用Anaconda优雅地管理自己的python环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anaconda完全入门指南">
+<meta property="og:url" content="http://blog.acring.me/2018/03/15/Anaconda 使用指南/index.html">
+<meta property="og:site_name" content="Acring的小屋">
+<meta property="og:description" content="用Anaconda优雅地管理自己的python环境">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-5a10016d9cebf11d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-c4fea7520ea7c810.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-6ec93340fe2010dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-a511c6109ba7a70f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-63545935a35d56b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-dd23119033baf8ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-866fce7b82bb30b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-597f0901fbcefd03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3026741-d09afc34a52b4903.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-15T05:40:41.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Anaconda完全入门指南">
+<meta name="twitter:description" content="用Anaconda优雅地管理自己的python环境">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3026741-5a10016d9cebf11d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Acring的小屋" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/ring.jpg">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Anaconda完全入门指南 | Acring的小屋</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+<script src="http://echarts.baidu.com/dist/echarts.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/province/guangdong.js"></script> -->
+
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/ring.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Acring</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Love You Like the Movies</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/Acring" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/ac-shou-huan" title="知乎"></a>
+                            
+                                <a class="fa 简书" href="http://www.jianshu.com/u/dd47393a75cb" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity3D/">Unity3D</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博弈论/">博弈论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据分析/">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境搭建/">环境搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://polluxLee.github.io">PolluxLee</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.jitashe.net/">吉他社</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://www.chuhaiba.cn/">出海吧</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.ursb.me/">Airing</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://recallhyx.github.io">recall</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">小小一只手环，妄想探索全世界</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Acring</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/ring.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Acring</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Love You Like the Movies</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/Acring" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/ac-shou-huan" title="知乎"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="http://www.jianshu.com/u/dd47393a75cb" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Anaconda 使用指南" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/03/15/Anaconda 使用指南/" class="article-date">
+      <time datetime="2018-03-15T05:39:30.000Z" itemprop="datePublished">2018-03-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Anaconda完全入门指南
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境搭建/">环境搭建</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="Anaconda-完全入门指南"><a href="#Anaconda-完全入门指南" class="headerlink" title="Anaconda 完全入门指南"></a>Anaconda 完全入门指南</h1><p>参考文章:</p>
+<ul>
+<li><a href="http://python.jobbole.com/87522/" target="_blank" rel="external">致Python初学者：Anaconda入门使用指南</a></li>
+<li><a href="http://python.jobbole.com/86236/" target="_blank" rel="external">Anaconda使用总结</a></li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>很多学习python的初学者甚至学了有一段时间的人接触到anaconda或者其他虚拟环境工具时觉得无从下手, 其主要原因就是不明白这些工具究竟有什么用, 是用来做什么的, 为什么要这么做, 比如笔者一开始也是不明白为啥除了python之外我还需要这么一个东西, 他和python到底有啥联系和区别, 为啥能用来管理python.</p>
+<p>在使用过之后我才逐渐发现其实anaconda等环境管理工具究竟在做啥, 以及为什么我们需要他们来管理我们的python环境</p>
+<p>首先我们需要先去了解Anaconda诞生的目的.再去了解Anaconda的使用方法.</p>
+<h2 id="Python本身"><a href="#Python本身" class="headerlink" title="Python本身"></a>Python本身</h2><p>首先我们需要从python本身说起, 从根源寻找问题, 我们在使用python语言编写程序之前需要下载一个python解释器, 这才是python的本体, 没了python解释器, 我们即使写了无比正确优雅的python脚本也没办法运行, 那这个解释器在哪呢.就在你安装python的地方,比如我的在<code>C:\Users\Acring\AppData\Local\Programs\Python\Python36-32</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-5a10016d9cebf11d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>项目结构如上图,这里有我们很熟悉的python.exe, 也就是Python解释器</p>
+<p>除此之外还有个很重要的东西, Lib, 也就是python包文件, 包括自带的包和第三方包</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-c4fea7520ea7c810.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Lib文件夹">\</p>
+<p>Lib目录如上图, 这里有python自带的包, 如笔者常用的日志包logging, 异步包 concurrent, 而所有的第三方包都放在site-packages文件夹里面</p>
+<p>了解了这些我们就对整个python环境有了大概的了解, 其实最关键的, 一个python环境中需要有一个解释器, 和一个包集合.</p>
+<h3 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h3><p>解释器根据python的版本大概分为2和3. python2和3之间无法互相兼容, 也就是说用python2语法写出来的脚本不一定能在python3的解释器中运行.</p>
+<h3 id="包集合"><a href="#包集合" class="headerlink" title="包集合"></a>包集合</h3><p>包集合中包含了自带的包和第三方包, 第三方包我们一般通过pip或者easy_install来下载, 当一个python环境中不包含这个包, 那么引用了这个包的程序不能在该python环境中运行.</p>
+<p>比如说一个爬虫脚本用到了第三方的requests包,而另一台计算机是刚刚装好原始python的, 也就是说根本没有任何第三方包, 那么这个爬虫脚本是无法在另一台机器上运行的.</p>
+<h2 id="问题所在"><a href="#问题所在" class="headerlink" title="问题所在"></a>问题所在</h2><p>python环境解释完了, 那么接下来就要说明这样的环境究竟产生哪些问题, 因为anaconda正式为了解决这些问题而诞生的</p>
+<ol>
+<li>到底该装 Python2 呢还是 Python3 </li>
+</ol>
+<p>python2和python3在语法上是不兼容的, 那我的机器上应该装python2还是python3呢, 可能一开始选一个学习就好了, 但是如果你要开发的程序必须使用python2而不能使用python3,那这时候你就不得不再下载一个python2, 那这时候环境变量该设谁的目录呢, 如果还是切换环境变量岂不是很麻烦.</p>
+<ol>
+<li>包管理</li>
+</ol>
+<p>如果我在本地只有一个python环境那我所有程序用到的各种包都只能放到同一个环境中, 导致环境混乱, 另外当我将写好的程序放到另一电脑上运行时又会遇到缺少相关包, 需要自己手动一个个下载的情况, 实在是烦人, 要是能每个程序开发都选用不同的环境, 而开发好之后又能将该程序需要的环境(第三方包)都独立打包出来就好了.</p>
+<h2 id="Anaconda"><a href="#Anaconda" class="headerlink" title="Anaconda"></a>Anaconda</h2><p>那么接下来就到我们的anaconda上场了, 先让我们安装好Anaconda然后我再来告诉你如何用Anaconda一个个解决我们上面的问题吧.</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://www.anaconda.com/download/" target="_blank" rel="external">官网下载</a></p>
+<p>推荐下载python3版本, 毕竟未来python2是要停止维护的.</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>按照安装程序提示一步步安装就好了, 安装完成之后会多几个应用</p>
+<blockquote>
+<ul>
+<li><strong>Anaconda Navigtor</strong> ：用于管理工具包和环境的图形用户界面，后续涉及的众多管理命令也可以在 Navigator 中手工实现。</li>
+<li><strong>Jupyter notebook</strong> ：基于web的交互式计算环境，可以编辑易于人们阅读的文档，用于展示数据分析的过程。</li>
+<li><strong>qtconsole</strong> ：一个可执行 IPython 的仿终端图形界面程序，相比 Python Shell 界面，qtconsole 可以直接显示代码生成的图形，实现多行代码输入执行，以及内置许多有用的功能和函数。</li>
+<li><strong>spyder</strong> ：一个使用Python语言、跨平台的、科学运算集成开发环境。</li>
+</ul>
+</blockquote>
+<p>暂时先不用管, 了解一下就行了</p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>如果是windows的话需要去 <code>控制面板\系统和安全\系统\高级系统设置\环境变量\用户变量\PATH</code> 中添加 anaconda的安装目录的Scripts文件夹, 比如我的路径是<code>D:\Software\Anaconda\Scripts</code>, 看个人安装路径不同需要自己调整.</p>
+<p>之后就可以打开命令行(最好用管理员模式打开) 输入 <code>conda --version</code></p>
+<p>如果输出<code>conda 4.4.11</code>之类的就说明环境变量设置成功了.</p>
+<p>为了避免可能发生的错误, 我们在命令行输入<code>conda upgrade --all</code> 先把所有工具包进行升级</p>
+<h2 id="管理虚拟环境"><a href="#管理虚拟环境" class="headerlink" title="管理虚拟环境"></a>管理虚拟环境</h2><p>接下来我们就可以用anaconda来创建我们一个个独立的python环境了.接下来的例子都是在命令行操作的,请打开你的命令行吧.</p>
+<h3 id="activate"><a href="#activate" class="headerlink" title="activate"></a>activate</h3><p>activate 能将我们引入anaconda设定的虚拟环境中, 如果你后面什么参数都不加那么会进入anaconda自带的base环境, </p>
+<p>你可以输入python试试, 这样会进入base环境的python解释器, <em>如果你把原来环境中的python环境去除掉会更能体会到</em>, 这个时候在命令行中使用的已经不是你原来的python而是base环境下的python.而命令行前面也会多一个<code>(base)</code> 说明当前我们处于的是base环境下.</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-6ec93340fe2010dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="activate"></p>
+<h3 id="创建自己的虚拟环境"><a href="#创建自己的虚拟环境" class="headerlink" title="创建自己的虚拟环境"></a>创建自己的虚拟环境</h3><p>我们当然不满足一个base环境, 我们应该为自己的程序安装单独的虚拟环境.</p>
+<p>创建一个名称为learn的虚拟环境并指定python版本为3(这里conda会自动找3中最新的版本下载)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda create -n learn python=3</div></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-a511c6109ba7a70f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>于是我们就有了一个learn的虚拟环境, 接下来我们切换到这个环境, 一样还是用activae命令 后面加上要切换的环境名称</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">activate learn</div></pre></td></tr></table></figure>
+<p>如果忘记了名称我们可以先用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda env list</div></pre></td></tr></table></figure>
+<p>去查看所有的环境</p>
+<p>现在的learn环境除了python自带的一些官方包之外是没有其他包的, 一个比较干净的环境我们可以试试</p>
+<p>先输入<code>python</code>打开python解释器然后输入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> requests</div></pre></td></tr></table></figure>
+<p>会报错找不到requests包, 很正常.接下来我们就要演示如何去安装requests包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit()</div></pre></td></tr></table></figure>
+<p>退出python解释器</p>
+<p>输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda install requests</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install requests</div></pre></td></tr></table></figure>
+<p>来安装requests包.</p>
+<p>安装完成之后我们再输入<code>python</code>进入解释器并import requests包, 这次一定就是成功的了.</p>
+<p>那么怎么卸载一个包呢</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda remove requests</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip uninstall requests</div></pre></td></tr></table></figure>
+<p>就行啦.</p>
+<p>要查看当前环境中所有安装了的包可以用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda list</div></pre></td></tr></table></figure>
+<p>如果想要导出当前环境的包信息可以用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda env <span class="built_in">export</span> &gt; environment.yaml</div></pre></td></tr></table></figure>
+<p>将包信息存入yaml文件中.</p>
+<p>当需要重新创建一个相同的虚拟环境时可以用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda env create <span class="_">-f</span> environment.yaml</div></pre></td></tr></table></figure>
+<p>其实命令很简单对不对, 我把一些常用的在下面给出来, 相信自己多打两次就能记住</p>
+<blockquote>
+<p>activate  // 切换到base环境</p>
+<p>activate learn // 切换到learn环境</p>
+<p>conda create -n learn python=3  // 创建一个名为learn的环境并指定python版本为3(的最新版本)</p>
+<p>conda env list // 列出conda管理的所有环境</p>
+<p>conda list // 列出当前环境的所有包</p>
+<p>conda install requests 安装requests包</p>
+<p>conda remove requests 卸载requets包</p>
+<p>conda remove -n learn –all // 删除learn环境及下属所有包</p>
+<p>conda update requests 更新requests包</p>
+<p>conda env export &gt; environment.yaml  // 导出当前环境的包信息</p>
+<p>conda env create -f environment.yaml  // 用配置文件创建新的虚拟环境</p>
+</blockquote>
+<h2 id="深入一下"><a href="#深入一下" class="headerlink" title="深入一下"></a>深入一下</h2><p>或许你会觉得奇怪为啥anaconda能做这些事, 他的原理到底是什么, 我们来看看anaconda的安装目录</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-63545935a35d56b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>这里只截取了一部分, 但是我们和本文章最开头的python环境目录比较一下, 可以发现其实十分的相似, 其实这里就是base环境. 里面有着一个基本的python解释器, lLib里面也有base环境下的各种包文件.</p>
+<p>那我们自己创建的环境去哪了呢, 我们可以看见一个envs, 这里就是我们自己创建的各种虚拟环境的入口, 点进去看看</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-dd23119033baf8ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>可以发现我们之前创建的learn目录就在下面, 再点进去</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-866fce7b82bb30b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>这不就是一个标准的python环境目录吗?</p>
+<hr>
+<p>这么一看, anaconda所谓的创建虚拟环境其实就是安装了一个真实的python环境, 只不过我们可以通过activate,conda等命令去随意的切换我们当前的python环境, 用不同版本的解释器和不同的包环境去运行python脚本.</p>
+<h2 id="与pycharm连接"><a href="#与pycharm连接" class="headerlink" title="与pycharm连接"></a>与pycharm连接</h2><p>在工作环境中我们会集成开发环境去编码, 这里推荐JB公司的pycharm, 而pycharm也能很方便的和anaconda的虚拟环境结合</p>
+<p>在<code>Setting =&gt; Project =&gt; Project Interpreter</code> 里面修改 Project Interpreter , 点击齿轮标志再点击Add Local为你某个环境的python.exe解释器就行了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-597f0901fbcefd03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>比如你要在learn环境中编写程序, 那么就修改为<code>D:\Software\Anaconda\envs\learn</code>, 可以看到这时候下面的依赖包也变成了learn环境中的包了.接下来我们就可以在pycharm中愉快的编码了.</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-d09afc34a52b4903.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>现在你是不是发现用上anaconda就可以十分优雅简单的解决上面所提及的单个python环境所带来的弊端了呢, 而且也明白了其实这一切的实现并没有那么神奇.</p>
+<p>当然anaconda除了包管理之外还在于其丰富数据分析包, 不过那就是另一个内容了, 我们先学会用anaconda去换一种方法管里自己的开发环境, 这已经是一个很大的进步了.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/03/15/Anaconda 使用指南/">Anaconda完全入门指南</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Acring</a></p>
+        <p><span>发布时间:</span>2018-03-15, 13:39:30</p>
+        <p><span>最后更新:</span>2018-03-15, 13:40:41</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/03/15/Anaconda 使用指南/" title="Anaconda完全入门指南">http://blog.acring.me/2018/03/15/Anaconda 使用指南/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/03/15/Anaconda 使用指南/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/02/02/瞎扯一扯markdown/">
+                    瞎扯一扯markdown
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Anaconda-完全入门指南"><span class="toc-number">1.</span> <span class="toc-text">Anaconda 完全入门指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python本身"><span class="toc-number">1.2.</span> <span class="toc-text">Python本身</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解释器"><span class="toc-number">1.2.1.</span> <span class="toc-text">解释器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包集合"><span class="toc-number">1.2.2.</span> <span class="toc-text">包集合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题所在"><span class="toc-number">1.3.</span> <span class="toc-text">问题所在</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Anaconda"><span class="toc-number">1.4.</span> <span class="toc-text">Anaconda</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-number">1.4.1.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">1.4.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量"><span class="toc-number">1.4.3.</span> <span class="toc-text">配置环境变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理虚拟环境"><span class="toc-number">1.5.</span> <span class="toc-text">管理虚拟环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#activate"><span class="toc-number">1.5.1.</span> <span class="toc-text">activate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建自己的虚拟环境"><span class="toc-number">1.5.2.</span> <span class="toc-text">创建自己的虚拟环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入一下"><span class="toc-number">1.6.</span> <span class="toc-text">深入一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#与pycharm连接"><span class="toc-number">1.7.</span> <span class="toc-text">与pycharm连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结语"><span class="toc-number">1.8.</span> <span class="toc-text">结语</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Anaconda完全入门指南　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2128549';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/02/02/瞎扯一扯markdown/" title="下一篇: 瞎扯一扯markdown">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/03/15/Anaconda 使用指南/">Anaconda完全入门指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/02/瞎扯一扯markdown/">瞎扯一扯markdown</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/01/Gensim模块处理之dictionary和corpora/">Gensim模块处理之dictionary和corpora</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF应用(python)/">自然语言处理之TF-IDF应用(python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/29/自然语言处理之TF-IDF算法基础篇/">自然语言处理之TF-IDF算法基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/">Word2Vec学习笔记之应用篇(Python)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Word2Vec学习笔记之基础篇/">Word2Vec学习笔记之基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/19/Angular2-Go极速网页开发/">Angular2-Go极速网页开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/Vimium/">Vimium</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/网络森林1/">网络森林</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/08/JUnit测试入门/">Junit测试入门1</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/25/广州大学数据分析(13-15届)/">广州大学数据分析(13-15届)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/海盗分金/">博弈论之五个海盗分金币的问题(以及推广到更多的海盗)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/18/在Unity中调用Android原生Activity的方法/">在Unity中调用Android原生Activity的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/First/">First</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2018 Acring
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 8;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-96576638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "_(:зゝ∠)_这里有咸鱼一只" + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "\(≧▽≦)/突然又状态满满了" + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
