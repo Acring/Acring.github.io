@@ -4,6 +4,201 @@
   
     
     <entry>
+      <title><![CDATA[git完全入门指南]]></title>
+      <url>http://blog.acring.me/2018/03/26/git%E5%AE%8C%E5%85%A8%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</url>
+      <content type="html"><![CDATA[<h1 id="Git完全入门指南"><a href="#Git完全入门指南" class="headerlink" title="Git完全入门指南"></a>Git完全入门指南</h1><h2 id="教程参考"><a href="#教程参考" class="headerlink" title="教程参考"></a>教程参考</h2><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰Git教程</a></p>
+<p><a href="https://w3ctrain.com/2016/06/26/learn-git-in-30-minutes/" target="_blank" rel="external">三十分钟入门Git</a></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Git是项目版本管控的工具，可以用来追踪，记录文件的变动，无论你是自己一个人做项目还是多人协作项目， 都是十分必要的工具。</p>
+<p>git一般用来：</p>
+<ol>
+<li>备份自己项目中的每一次修改</li>
+<li>将自己的项目上传到远程服务器和别人一同协作</li>
+<li>合并自己和别人对同一个项目的修改</li>
+<li>找回过去的项目版本</li>
+</ol>
+<h2 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h2><h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><p>一行命令搞定</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>在<a href="https://git-scm.com/downloads" target="_blank" rel="external">Git官网</a>上下载安装程序, 按默认选项安装即可，安装完成后在开始菜单中找到<code>git bash</code>， 说明git安装完成！</p>
+<p>安装完成之后要进行设置。设置自己的名字和自己的邮箱。</p>
+<p>打开git bash</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-75884cbf071ab462.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>在git bash命令行中输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"Your Name"</span></div><div class="line">$ git config --global user.email <span class="string">"email@example.com"</span></div></pre></td></tr></table></figure>
+<p><code>--global</code>表示对该机器上的所有git版本库都使用这个配置。</p>
+<p>这里的名字可以比较随意，但邮箱一定要填自己常用的那个，因为之后我们需要用来登录github并提交到github远程服务器。</p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="创建git版本库-git-init"><a href="#创建git版本库-git-init" class="headerlink" title="创建git版本库 - git init"></a>创建git版本库 - git init</h3><p>配置完成之后我们就要开始在本地创建自己的git版本库了。</p>
+<p>我们先进入一个目录并调出git bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> D:\\Document\\git-test</div><div class="line">git init</div></pre></td></tr></table></figure>
+<p>现在在git-test文件夹下就多了一个<code>.git</code>文件夹，这个.git文件夹里面便会去记录我们文件的每一次修改。</p>
+<h3 id="查看工作区状态-git-status"><a href="#查看工作区状态-git-status" class="headerlink" title="查看工作区状态 - git status"></a>查看工作区状态 - git status</h3><p>我们把现在的除了<code>.git</code>文件夹的区域称之为工作区， 因为我们的项目就是放在这个目录下的，我需要查看当前工作区的状态则使用<code>git status</code>命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line"></div><div class="line">Initial commit</div><div class="line"></div><div class="line">nothing to commit (create/copy files and use <span class="string">"git add"</span> to track)</div></pre></td></tr></table></figure>
+<p>这里输出了三行字,我们一行一行来理解</p>
+<ol>
+<li>当前我们在master分支</li>
+<li>初始化提交</li>
+<li>没有文件需要提交</li>
+</ol>
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><p>分支是git中的一个概念，可以理解为树中的枝干，而在我们刚创建一个git版本库的时候我们处于的是master分支，也叫主分支，分支的概念在后面会提到。</p>
+<p>第一行指我们现在处于的是主分支的开发环境， 第二句话指我们刚刚做了初始化git版本库的操作。第三句话是指当前缓冲区中没有文件需要提交。关于缓冲区这个我们也稍后再说。我们先试着添加一个文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ touch git-test.md</div></pre></td></tr></table></figure>
+<p>创建一个叫git-test.md的文件，再执行git status</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line"></div><div class="line">Initial commit</div><div class="line"></div><div class="line">Untracked files:</div><div class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</div><div class="line"></div><div class="line">        git-test.md</div><div class="line"></div><div class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</div></pre></td></tr></table></figure>
+<p>前两句话是一样的就不解释了， 第三句话就很重要了,Untracked files, 没有追踪到的文件，</p>
+<p>然后下面是git-test.md,也就是我们刚刚创建文件，再下面告诉我们没有添加提交但未跟踪的文件存在,</p>
+<p>其实这里就是告诉我们git-test.md还没有在我们的git版本库中，他的修改等不会被git版本库追踪。</p>
+<p>那么我们赶紧把git-test.md加入git版本库进行追踪吧。</p>
+<h4 id="添加到暂存区-git-add"><a href="#添加到暂存区-git-add" class="headerlink" title="添加到暂存区 - git add"></a>添加到暂存区 - git add</h4><p>添加到版本库分为<strong>两步</strong>，第一步是添加到<strong>暂存区</strong>，执行下面的指令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add git-test.md</div></pre></td></tr></table></figure>
+<p><code>git add 文件名</code>即为将文件添加到暂存区了， 如果要添加当前目录下的所有文件用 <code>git add -a</code>。</p>
+<p>再执行 <code>git status</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line"></div><div class="line">Initial commit</div><div class="line"></div><div class="line">Changes to be committed:</div><div class="line">  (use <span class="string">"git rm --cached &lt;file&gt;..."</span> to unstage)</div><div class="line"></div><div class="line">        new file:   git-test.md</div></pre></td></tr></table></figure>
+<p>发现原来的git-test.md没有被追踪的提示消失了，反而提示 被提交的改变为:新文件: git-test.md</p>
+<p>也就是说git版本库已经知道我们创建了一个新的文件了。</p>
+<p>接下来还没完，这只是放在暂存区，还没有真正的保存。真正的保存需要用<code>git commit</code>来确认一次提交</p>
+<h3 id="确认提交-git-commit"><a href="#确认提交-git-commit" class="headerlink" title="确认提交 - git commit"></a>确认提交 - git commit</h3><p>添加到版本库的第二步是<strong>确认提交</strong>，确认提交是我们工作进行到一定程度，一般是完成了一个小功能，想保存一下进度的时候做的，这时候我们顺便会记录一下我们做过的工作，所以<code>git commit</code>一般这么写</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"创建了新文件git-test.md"</span></div><div class="line">[master (root-commit) b989378] 创建了新文件git-test.md</div><div class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</div><div class="line"> create mode 100644 git-test.md</div></pre></td></tr></table></figure>
+<p><code>-m</code> 即message， 表示提交信息</p>
+<p>这里也有3行，主要理解一下前2行:</p>
+<ol>
+<li>master分支下进行了一次提交，提交信息为”创建了新文件git-test.md”, 本次提交的版本号为b989378，这个版本号我们也稍后再详细解释</li>
+<li>提交中有1个文件变化，0个插入，0个删除</li>
+</ol>
+<p>很好，这次提交达到了我们想要的效果。</p>
+<p>再执行<code>git status</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git status</div><div class="line">On branch master</div><div class="line">nothing to commit, working tree clean</div></pre></td></tr></table></figure>
+<p>这次直接提示我们，没有文件需要提交，工作树是干净的。到此我们的一次工作记录就完成了。</p>
+<h3 id="git-add-和git-commit"><a href="#git-add-和git-commit" class="headerlink" title="git add 和git commit"></a>git add 和git commit</h3><p>git add其实已经将你的修改保存下来了， 为什么还要git commit呢， 用游戏类比的话， <strong>add 只是推荐游戏的进行， 但是并没有对游戏存档</strong>， 如果我们想要存档，并可能在以后<strong>回到这个存档点</strong>，我们就需要手动进行一次存档，这就是git commit了。你是没办法回到上一个add的操作点，但是可以回到commit的操作点。回到存档点的方法我们稍后再说。</p>
+<hr>
+<p>我们再来一遍相似的操作。首先我们修改git-test.md的文本内容，添加两行字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">学习git</div><div class="line"></div><div class="line">hello world</div></pre></td></tr></table></figure>
+<p>然后我们查看下暂存区和工作区文件的不同。</p>
+<h3 id="查看不同-git-diff"><a href="#查看不同-git-diff" class="headerlink" title="查看不同 - git diff"></a>查看不同 - git diff</h3><p>我们可以用<code>git diff</code>来查看git跟踪的文件的变化。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ git diff</div><div class="line">diff --git a/git-test.md b/git-test.md</div><div class="line">index e69de29..e13761d 100644</div><div class="line">--- a/git-test.md</div><div class="line">+++ b/git-test.md</div><div class="line">@@ -0,0 +1,3 @@</div><div class="line">+学习git</div><div class="line">+</div><div class="line">+hello world</div></pre></td></tr></table></figure>
+<p>主要关注最后两行， <code>-0,0</code>意思是0到0行被删除了，也就是没有行删除。<code>+1,3</code>意思为1到3行被添加了，添加的内容为<code>学习git</code>，<code>空行</code>,<code>hello world</code>。所以我们用<code>git diff</code>指令就能看出来我们<strong>工作区相对版本库</strong>的改变，<strong>相对版本库</strong>，也就是说是执行了<code>git add</code>之后的改变（<strong>git add即进入版本库的第一步</strong>）， 你现在可以试试输入<code>git add</code>之后再输入<code>git diff</code>，这次就什么都不会输出了。因为工作区和版本库是同步的了。</p>
+<p>继续执行commit来确认提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"添加了两行文字"</span></div><div class="line">[master a26ff1d] 添加了两行文字</div><div class="line"> 1 file changed, 3 insertions(+)</div></pre></td></tr></table></figure>
+<p>这里之所以有个空行是因为我用的markdown编辑器在换行的时候会自动插入一个空行。</p>
+<h3 id="回到过去-git-log-git-reset"><a href="#回到过去-git-log-git-reset" class="headerlink" title="回到过去 - git log; git reset"></a>回到过去 - git log; git reset</h3><p>存档已经有了，我们该试着读档了。假设我们不小心删掉了第二行<code>hello world</code>， 但是我们想回到上一个有<code>hello world</code>的时候。首先我们需要查看我们的存档表。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">log</span></div><div class="line">commit a26ff1da8e69bb2afbd386c24c57706f2175852d</div><div class="line">Author: Acring &lt;392398434@qq.com&gt;</div><div class="line">Date:   Mon Mar 26 11:27:24 2018 +0800</div><div class="line"></div><div class="line">    添加了两行文字</div><div class="line"></div><div class="line">commit b9893787f3cdadecb17e6c0cce0020b3c5a38256</div><div class="line">Author: Acring &lt;392398434@qq.com&gt;</div><div class="line">Date:   Sun Mar 25 22:30:04 2018 +0800</div><div class="line"></div><div class="line">    创建了新文件git-test.md</div></pre></td></tr></table></figure>
+<p>这里显示了每一次提交的信息，包括</p>
+<ol>
+<li>提交版本号</li>
+<li>作者</li>
+<li>提交日期</li>
+<li>提交信息</li>
+</ol>
+<p>我们需要的是版本号，比如这里的有<code>hello world</code> 的存档的版本号为<code>a26ff1da8e69bb2afbd386c24c57706f2175852d</code>， 我们也不用全部记住，其实只需要前几位就行了，接下来用<code>git reset</code>来读档。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard a26ff</div><div class="line">HEAD is now at a26ff1d 添加了两行文字</div></pre></td></tr></table></figure>
+<p>他告诉我们HEAD(头指针)已经指向了我们的a26ff1d开头的存档了，再看看我们的git-test.md文件，是不是<code>hello world</code>又回来了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">graph LR</div><div class="line">	a((b989378))--&gt;b((a26ff1d))</div><div class="line">	b---c((删除hello world))</div><div class="line">	h(HEAD)--&gt;c</div></pre></td></tr></table></figure>
+<p>git中的改变可以看做一条链表，而我们工作处于HEAD(头指针)所指向的那个修改。改变HEAD的位置也就改变了工作区的内容了。</p>
+<blockquote>
+<p>版本回退还有revert checkout 等方法，reset只是相对比较简单的方法，如果有兴趣可以去了解其他的方法，不过版本回退在开始一般用得比较少</p>
+</blockquote>
+<h3 id="无视文件-gitignore"><a href="#无视文件-gitignore" class="headerlink" title="无视文件 - .gitignore"></a>无视文件 - .gitignore</h3><p>在实际项目中有些文件是不需要被提交到git版本库的，比如自己服务器的配置文件(不想开源的时候被人看到)， 第三方包文件夹(文件太大，上传太慢)等等，这时候我们就需要用.gitignore文件去过滤掉这些文件或文件夹。</p>
+<p>首先新建一个文件<code>.gitignore</code> 不需要后缀， 然后用文本编辑器打开并添加一行,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ignored.md</div></pre></td></tr></table></figure>
+<p> 意思是我们准备无视掉这个叫<code>ignored.md</code>的文件。 接着我们创建这个<code>ignored.md</code>文件，里面有没有内容都没关系。</p>
+<p>用git bash 执行命令<code>git add ignored.md</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git add ignored.md</div><div class="line">The following paths are ignored by one of your .gitignore files:</div><div class="line">ignored.md</div><div class="line">Use <span class="_">-f</span> <span class="keyword">if</span> you really want to add them.</div></pre></td></tr></table></figure>
+<p>可以看到add失败了，git提示我们当前路径已经被.gitignore文件设定为无视了，无法被add添加到版本库，除非用<code>-f</code>指令强制执行。有了.gitignore我们就可以放心的用<code>git add -a</code>添加所有文件了， 因为git会自动把.gitignore中提到的文件或文件夹过滤掉不添加。gitignore的语法规则可以自己去百度，其实还是比较简单的。</p>
+<hr>
+<p>以上都是笔者在本地git实践中比较常用的命令了，其实并不多，add commit 是最主要的。</p>
+<p>接下来要开始将git搬上远程服务器进行实践了。</p>
+<hr>
+<h3 id="注册github"><a href="#注册github" class="headerlink" title="注册github"></a>注册github</h3><p>为啥我们要使用github，github是啥？这是我们需要首先明白的问题。</p>
+<p>github提供了一个<strong>git服务器</strong>，这样我们就不需要自己买一台<strong>远程服务器</strong>了，但是github为你免费提供服务器的代价是你的项目是<strong>公开</strong>的，如果不想公开的话必须购买付费服务，你可以把自己的开源项目通过git上传到git服务器，并为这个项目创建一个主页用来分享自己开源项目。</p>
+<p>使用github首先我们需要到<a href="(https://github.com/">官网</a>)注册，注册过程就不多加赘述了，注册完成之后我们需要让github知道我们的计算机是哪台。也就是说我们允许哪台计算机<strong>修改这个账号所拥有的开源项目</strong>。</p>
+<p>github是基于SSH协议来认证计算机的，具体感兴趣可以自己去了解SSH协议， 现在我们只需要知道，我们需要提供一个<strong>公钥</strong>给github， 这个公钥是在我们<strong>本地计算机生成</strong>的。</p>
+<p>生成方法如下, 进入git bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></div></pre></td></tr></table></figure>
+<p>这里的邮箱改成自己的邮箱。之后一路回车，使用默认值。</p>
+<p>注意在生成的过程中会<strong>显示他的生成路径</strong>, 比如我的是<code>(/c/Users/Acring/.ssh/id_rsa)</code>， 记住这个地址</p>
+<p>之后查看自己计算机的上述的<code>.ssh</code>路径，但是我们要用的不是<code>id_rsa</code>,这个是私钥，是不能泄露出去的，我们要用的是<code>id_rsa.pub</code>公钥，打开之后把里面的字符全选复制。</p>
+<p>公钥有了，接下来就是把这个公钥告诉github让github知道我的这台计算机有权利管理github上该账号的项目了。</p>
+<p>在github中进入<code>Setting</code>-&gt;<code>SSH and GPG keys</code> </p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-872ad0899a411c10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>点击<code>New SSH Keys</code>, 随便输入一个Title用来标识自己的计算机，将<strong>刚刚复制的公钥粘贴进去</strong>Key里， 点击<code>Add SSH key</code>保存就行了。</p>
+<h3 id="本地和远程同步"><a href="#本地和远程同步" class="headerlink" title="本地和远程同步"></a>本地和远程同步</h3><p>接下来我们就要把之前我们编辑的git-test项目上传到github上了。<strong>首先我们需要在github上建立一个空的远程git版本库。</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-9579d29f38c55255.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>按顺序填写版本库信息，点击<code>Create repository</code>完成创建。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-e7745f63ecc4e788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>注意上面<strong>画圈的地方</strong>， 后面的URL是这个远程git版本库的地址，前面是上传项目过程中用的连接协议，我们就选SSH协议，好处是不需要每次上传都输入github账号密码，因为我们已经通过<code>SSH Key</code>告诉了github我们现在这台计算机是有项目管理权限的。顺便这个地址我们复制下来。马上就要用到了。</p>
+<p>远程版本库创建完毕，<strong>但是现在本地的版本库还不知道有一个远程版本库哇，我们需要把他们两个关联起来</strong>。</p>
+<p><strong>回到本地</strong>， 在<strong>原来的项目git-test目录下</strong>打开git bash(如果你在开始菜单打开git bash则会处于用户主目录下，要用cd跳转路径), windows下可以在项目目录中点击鼠标右键，可以看到一个git bash，可以很方便的打开。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-ba2cbf8b25518da0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="添加远程版本库地址-git-remote-add"><a href="#添加远程版本库地址-git-remote-add" class="headerlink" title="添加远程版本库地址 - git remote add"></a>添加远程版本库地址 - git remote add</h3><p>之后我们要给本地版本库添加远程服务器地址，这里的远程版本库地址你要改成刚刚自己复制的地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin git@github.com:Acring/git-test.git</div></pre></td></tr></table></figure>
+<p>一般没有输出就代表关联成功了，解释一下:</p>
+<p><code>remote add</code>, 表示添加远程服务器, <code>origin</code>是一个标记，也可以用你喜欢的，习惯性使用origin表示主远程服务器，因为一个项目可能有多个远程版本库。这句话就表示<strong>添加一个以<code>origin</code>命名的远程版本库， 版本库地址为<code>git@github.com:Acring/git-test.git</code></strong></p>
+<hr>
+<p>好了，现在本地已经知道远程版本库的地址了，我们可以把本地项目推送到远程版本库了，推送也就是上传本地版本库中的所有文件，注意是版本库，并不是工作区。</p>
+<h3 id="推送-git-push"><a href="#推送-git-push" class="headerlink" title="推送 - git push"></a>推送 - git push</h3><p>推送需要用到git push，推送之前要确保所有的修改都被commit提交了，防止遗漏。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div><div class="line">Counting objects: 6, done.</div><div class="line">Delta compression using up to 4 threads.</div><div class="line">Compressing objects: 100% (2/2), done.</div><div class="line">Writing objects: 100% (6/6), 489 bytes | 0 bytes/s, done.</div><div class="line">Total 6 (delta 0), reused 0 (delta 0)</div><div class="line">To github.com:Acring/git-test.git</div><div class="line"> * [new branch]      master -&gt; master</div></pre></td></tr></table></figure>
+<p>git push 命令后面需要两个参数，一个是<strong>远程版本库的地址</strong>，我们之前已经设定了origin远程版本库的地址，所以这里用<code>origin</code>，接着是<strong>要提交的本地的分支名称</strong>，上面文章我提到了当创建版本库的时候我们<strong>默认是在master分支</strong>，所以这里写<code>master</code>分支的概念先不用懂。知道我们默认处于master分支就行了。</p>
+<h3 id="SSH警告"><a href="#SSH警告" class="headerlink" title="SSH警告"></a>SSH警告</h3><p>当你第一次使用Git的<code>clone</code>或者<code>push</code>命令连接GitHub时，会得到一个警告：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The authenticity of host &apos;github.com (xx.xx.xx.xx)&apos; can&apos;t be established.</div><div class="line">RSA key fingerprint is xx.xx.xx.xx.xx.</div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure>
+<p>这是因为Git使用SSH连接，而SSH连接在第一次验证GitHub服务器的Key时，需要你确认GitHub的Key的指纹信息是否真的来自GitHub的服务器，输入<code>yes</code>回车即可。</p>
+<p>Git会输出一个警告，告诉你已经把GitHub的Key添加到本机的一个信任列表里了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Warning: Permanently added &apos;github.com&apos; (RSA) to the list of known hosts.</div></pre></td></tr></table></figure>
+<p>这个警告只会出现一次，后面的操作就不会有任何警告了。</p>
+<hr>
+<p>接下来我们要演示的是当两个计算机协同工作时可能出现的情况以及如何去解决。</p>
+<h3 id="克隆远程项目-git-clone"><a href="#克隆远程项目-git-clone" class="headerlink" title="克隆远程项目 - git clone"></a>克隆远程项目 - git clone</h3><p><strong>回到Github上刚刚我们的项目网页</strong>, 刷新，我们发现git-test.md文件以及被推送上来了，那要是我们想从<strong>另一台计算机</strong>上获取下来呢，这时候就要用到我们的<code>git clone</code>命令了.</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-327a6481919d753d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>首先我们还是需要远程版本库的地址，可以用上面我们复制好的，也可以在项目主页的<code>Clone or download</code>中找到远程版本库地址。其实和之前的是一样的。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-c458d7f0ee820a2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>换一个路径来假装是另一台计算机，比如我现在切换到了<code>D:\CODE\github</code>路径下。在当前目录重新打开git bash。执行克隆命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> git@github.com:Acring/git-test.git</div><div class="line">Cloning into <span class="string">'git-test'</span>...</div><div class="line">remote: Counting objects: 6, done.</div><div class="line">remote: Compressing objects: 100% (2/2), done.</div><div class="line">remote: Total 6 (delta 0), reused 6 (delta 0), pack-reused 0</div><div class="line">Receiving objects: 100% (6/6), done.</div></pre></td></tr></table></figure>
+<p>克隆下来之后会发现多了一个git-test文件夹，里面有我们的git-test.md文件。克隆成功!</p>
+<p>github上的开源项目是谁的可以克隆的，你也可以用这个命令来克隆别人的开源项目。</p>
+<h3 id="B电脑修改并推送"><a href="#B电脑修改并推送" class="headerlink" title="B电脑修改并推送"></a>B电脑修改并推送</h3><p>这次我们对刚刚克隆下来的项目进行修改并重新推动到远程版本库， 假装新的路径属于电脑B</p>
+<p>我们把git-test.md中的<code>hello world</code>改成, <code>hello acring</code>，并保存。</p>
+<p>之后<code>add</code>,<code>commit</code>, 二连提交本次修改。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git add git-test.md</div><div class="line"></div><div class="line">$ git commit -m <span class="string">"修改为hello acring"</span></div><div class="line">[master 66c6021] 修改为hello acring</div><div class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</div></pre></td></tr></table></figure>
+<p>然后我们再执行<code>git push origin master</code>将本地的修改推送到远程版本库，<strong>这里要注意，现在clone到的是我们已经在github上提交过公钥的电脑，所以能直接push提交，如果是另一台电脑的话需要再将那台电脑的公钥提交给github，否则github是不会给你随便提push的。</strong></p>
+<h3 id="A电脑修改并推送"><a href="#A电脑修改并推送" class="headerlink" title="A电脑修改并推送"></a>A电脑修改并推送</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div><div class="line">Counting objects: 3, done.</div><div class="line">Writing objects: 100% (3/3), 280 bytes | 0 bytes/s, done.</div><div class="line">Total 3 (delta 0), reused 0 (delta 0)</div><div class="line">To github.com:Acring/git-test.git</div><div class="line">   a26ff1d..66c6021  master -&gt; master</div></pre></td></tr></table></figure>
+<p>提交完成之后在<strong>原本地版本库</strong>也修改一下, 把<code>hello world</code>改成 <code>hello zzq</code>,同样保存,<code>add</code>,<code>commit</code>,</p>
+<p>再push上去,在push之前思考一下，**两台电脑都会hello world这一行做了修改，B电脑已经提交上去了，这时候A电脑要是提交上去会怎么样呢，那到底用A电脑的<code>hello zzq</code>呢，还是B电脑的<code>hello acring</code>呢。</p>
+<p>这样一看似乎会乱套，我们先不管，先试着提交。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div><div class="line">To github.com:Acring/git-test.git</div><div class="line"> ! [rejected]        master -&gt; master (non-fast-forward)</div><div class="line">error: failed to push some refs to <span class="string">'git@github.com:Acring/git-test.git'</span></div><div class="line">hint: Updates were rejected because the tip of your current branch is behind</div><div class="line">hint: its remote counterpart. Integrate the remote changes (e.g.</div><div class="line">hint: <span class="string">'git pull ...'</span>) before pushing again.</div><div class="line">hint: See the <span class="string">'Note about fast-forwards'</span> <span class="keyword">in</span> <span class="string">'git push --help'</span> <span class="keyword">for</span> details.</div></pre></td></tr></table></figure>
+<p>rejected!提交被拒绝了，因为git发现B电脑修改了项目并提交了，而A电脑也修改了项目企图提交，那就会发生项目很多不一致问题，比如上面说的<code>hello world</code>的选择问题。</p>
+<h3 id="先拉取再提交-git-pull"><a href="#先拉取再提交-git-pull" class="headerlink" title="先拉取再提交 - git pull"></a>先拉取再提交 - git pull</h3><p>为了解决可能的冲突问题，A电脑需要先将远程版本库的项目拉取下来进行整合，整合完成之后再提交，这次我们不是克隆整个项目，而是在本地版本库的基础上更新远程版本库的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ git pull origin master</div><div class="line">From github.com:Acring/git-test</div><div class="line"> * branch            master     -&gt; FETCH_HEAD</div><div class="line">Auto-merging git-test.md</div><div class="line">CONFLICT (content): Merge conflict <span class="keyword">in</span> git-test.md</div><div class="line">Automatic merge failed; fix conflicts and <span class="keyword">then</span> commit the result.</div></pre></td></tr></table></figure>
+<p>这里有一个很重要的单词,merge,合并，当拉取远程版本库的项目时，git会首先去<strong>自动合并</strong>同一个被修改的文件。</p>
+<p>比如这里的git-test.md，<strong>假如B电脑修改的不是<code>hello world</code>而是第一行<code>学习git</code></strong>，那两者对同一个文件的修改其实是不冲突的，git会<strong>同时选择AB电脑的修改</strong>，比如假设B修改的是<code>学习git</code>–&gt;<code>不学习git</code>合并后的git-test.md就变成了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">不学习git</div><div class="line"></div><div class="line">hello zzq</div></pre></td></tr></table></figure>
+<hr>
+<p>当然现在的情况显然没有那么乐观，回头看看提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Automatic merge failed; fix conflicts and then commit the result.</div></pre></td></tr></table></figure>
+<p>自动合并失败，请修复冲突(conflicts)并提交最终的修改结果。</p>
+<p>是的，git处理不了两个电脑对<code>hello world</code>的修改，叫我们自己来做定夺了。</p>
+<p>打开git-test.md</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-a5022e8175806aca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>如果用的是Typora请点击下面的标签切换到<strong>源文本</strong>格式，否则Typora会把界面渲染的很奇怪: )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</div><div class="line">hello zzq</div><div class="line">=======</div><div class="line">hello acring</div><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; 66c602160211831315b0a6f8eb17f3cc9cf49cf1</div></pre></td></tr></table></figure>
+<p>主要关注这几行，<code>======</code>上面是A电脑的修改，下面是B电脑的修改，折中一下，我们修改成下面这样那些奇怪的箭头什么的都删掉吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hello zzq&amp;acring</div></pre></td></tr></table></figure>
+<p>修改完成别忘了<code>add</code>,<code>commit</code>二连。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git add git-test.md</div><div class="line"></div><div class="line">Acring@DESKTOP-UBU88S4 MINGW64 /d/Document/git-test (master|MERGING)</div><div class="line">$ git commit -m <span class="string">"merge hello world"</span></div><div class="line">[master 9fe6b47] merge hello world</div></pre></td></tr></table></figure>
+<p>好了，接着再<code>push</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div><div class="line">Counting objects: 6, done.</div><div class="line">Delta compression using up to 4 threads.</div><div class="line">Compressing objects: 100% (2/2), done.</div><div class="line">Writing objects: 100% (6/6), 530 bytes | 0 bytes/s, done.</div><div class="line">Total 6 (delta 0), reused 0 (delta 0)</div><div class="line">To github.com:Acring/git-test.git</div><div class="line">   66c6021..9fe6b47  master -&gt; master</div></pre></td></tr></table></figure>
+<p>这次就没什么问题了。以下是整个过程的流程图，可以重新梳理以下整个过程，并加深对各个命令的理解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">graph TB</div><div class="line">	subgraph github</div><div class="line">	new(创建远程版本库)--&gt;get1(接收A电脑的推送)</div><div class="line">	get1--&gt;get2(接收B电脑的推送)</div><div class="line">	get2--&gt;get3(再次接收A电脑的推送)</div><div class="line">	end</div><div class="line">	subgraph A电脑</div><div class="line">	init(git init)--&gt;c1(创建git-test.md)</div><div class="line">	c1--&gt;c2(修改git-test.md)</div><div class="line">	c2--&gt;add1(git add git-test.md)</div><div class="line">	add1--&gt;commit1(git commit -m &apos;&apos;)</div><div class="line">	new--&gt;remote</div><div class="line">	commit1--&gt;remote(git remote add origin url)</div><div class="line">	remote--&gt;push1(git push origin master)</div><div class="line">	push1--&gt;get1</div><div class="line">	push1--&gt;c3(修改git-test.md)</div><div class="line">	c3--&gt;add2(git add git-test.md)</div><div class="line">	add2--&gt;commit2(git commit -m &apos;&apos;)</div><div class="line">	commit2--&gt;pusherror(push失败)</div><div class="line">	pusherror--&gt;pull1</div><div class="line">	get2--&gt;pull1(git pull origin master)</div><div class="line">	pull1--&gt;merge(手动合并分支)</div><div class="line">	merge--&gt;push2(push成功)</div><div class="line">	push2--&gt;get3</div><div class="line">	end</div><div class="line">	subgraph B电脑</div><div class="line">	get1--&gt;clone(git clone url)</div><div class="line">	clone--&gt;ca(修改git-test.md)</div><div class="line">	ca--&gt;adda(git add git-test.md)</div><div class="line">	adda--&gt;commita(git commit -m &apos;&apos;)</div><div class="line">	commita--&gt;get2</div><div class="line">	end</div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Anaconda完全入门指南]]></title>
       <url>http://blog.acring.me/2018/03/15/Anaconda%20%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
       <content type="html"><![CDATA[<h1 id="Anaconda-使用指南"><a href="#Anaconda-使用指南" class="headerlink" title="Anaconda 使用指南"></a>Anaconda 使用指南</h1><p>参考文章:</p>
@@ -1376,12 +1571,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts193" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts2008" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts193'));
+        var myChart = echarts.init(document.getElementById('echarts2008'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -2731,12 +2926,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts7413" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts9482" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7413'));
+        var myChart = echarts.init(document.getElementById('echarts9482'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -4080,12 +4275,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts5994" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts3694" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5994'));
+        var myChart = echarts.init(document.getElementById('echarts3694'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -4440,12 +4635,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts6882" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts7661" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6882'));
+        var myChart = echarts.init(document.getElementById('echarts7661'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -4625,12 +4820,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts9850" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts3770" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9850'));
+        var myChart = echarts.init(document.getElementById('echarts3770'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -5383,12 +5578,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts7797" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts3340" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7797'));
+        var myChart = echarts.init(document.getElementById('echarts3340'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -5571,12 +5766,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts575" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts4657" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts575'));
+        var myChart = echarts.init(document.getElementById('echarts4657'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -5894,12 +6089,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts6956" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts7846" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6956'));
+        var myChart = echarts.init(document.getElementById('echarts7846'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -5986,12 +6181,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts5619" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts6163" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts5619'));
+        var myChart = echarts.init(document.getElementById('echarts6163'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {
