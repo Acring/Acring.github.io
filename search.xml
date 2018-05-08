@@ -4,6 +4,66 @@
   
     
     <entry>
+      <title><![CDATA[python使用代理问题总结]]></title>
+      <url>http://blog.acring.me/2018/05/08/python%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+      <content type="html"><![CDATA[<h1 id="python爬虫使用代理的问题总结"><a href="#python爬虫使用代理的问题总结" class="headerlink" title="python爬虫使用代理的问题总结"></a>python爬虫使用代理的问题总结</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>最近的业务需要使用代理去爬取信息了，虽然免费代理也能用，但是效率太低，于是买了代理提供商，折腾了两天，总结了一些比较坑的问题</p>
+<ul>
+<li>代理: 芝麻代理</li>
+<li>python库: requests</li>
+<li>python3</li>
+</ul>
+<h2 id="代理提供商"><a href="#代理提供商" class="headerlink" title="代理提供商"></a>代理提供商</h2><ol>
+<li>代理提供商和网络运营商的线路冲突问题</li>
+</ol>
+<p>我使用的是<a href="http://h.zhimaruanjian.com/" target="_blank" rel="external">芝麻代理</a>, 用低价跟别人买的二手的，一开始没有注意一个比较关键的信息–<strong>线路类型</strong>，线路类型指的是你能从什么网络运营商(联通，电信，移动)使用它的代理，对于芝麻代理来说，它支持的线路只有联通和电信，也就是说如果你的网络是移动的话就没办法使用这个代理了，比如我所在学校的校园网使用的就是移动，所以我只能用联通手机开热点给我的电脑用: )</p>
+<p>我顺便调查了一下其他比较好的代理商的线路类型，<a href="http://www.mogumiao.com/" target="_blank" rel="external">蘑菇代理</a>的线路类型也是电信/联通，<a href="http://h.jiguangip.com/" target="_blank" rel="external">极光爬虫代理</a>的线路类型支持所有三大运营商(联通，电信，移动)</p>
+<ol>
+<li>如何查看自己的IP</li>
+</ol>
+<p>这个问题比较简单，但是也稍微提一下吧，我们需要知道自己在公网的IP和线路类型可以访问<a href="https://www.ip.cn/" target="_blank" rel="external">ip.cn</a></p>
+<p>查看，所在位置那里一般都有写运营商。</p>
+<ol>
+<li>IP白名单</li>
+</ol>
+<p>我们要把自己的公网IP添加到代理提供商自己账号下的白名单才能访问代理服务和获取代理IP，但要注意自己的IP地址是可能变化的。</p>
+<h2 id="使用代理"><a href="#使用代理" class="headerlink" title="使用代理"></a>使用代理</h2><ol>
+<li><strong>HTTP/HTTPS</strong></li>
+</ol>
+<p>假设你访问的HTTPS的网页，而你的proxies是这样的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxies = &#123;<span class="string">'http'</span>: <span class="string">'http://xxx.xxx.xxx.xxx:xxxx/'</span>&#125;</div></pre></td></tr></table></figure>
+<p>这样是没用的，因为在请求https协议的网页的时候requests会使用https对应的代理，而上面的proxies并没有提供，所以这时候用的还是你自己的IP。</p>
+<p>所以请求http的网页要用包含http的proxies,而请求https的网页要用包含https的proxies,当然，最保险的方法就是两个都包含</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxies = &#123;<span class="string">'http'</span>: <span class="string">'http://xxx.xxx.xxx.xxx:xxxx/'</span>, <span class="string">'https'</span>: <span class="string">'http://xxx.xxx.xxx.xxx:xxxx/'</span>&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><strong>代理跳转问题</strong></li>
+</ol>
+<p>这个问题困扰我了很久, 是比较坑的问题。<em>**</em></p>
+<p><strong>问题的场景是这样的:</strong></p>
+<p>我需要下载一个文件，下载链接并没有直接返回文件，而是会进行301永久跳转，跳转到真正的下载链接，在没有使用代理的时候，一切正常，我只需要访问下载链接，就能直接下载到文件，也就是说永久跳转和下载两步都自动完成了，</p>
+<p>但是在使用代理的情况下，我并没有的到文件，而是返回了404页面，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>404 Not Found<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">bgcolor</span>=<span class="string">"white"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">center</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>404 Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">center</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span><span class="tag">&lt;<span class="name">center</span>&gt;</span>nginx/1.2.9<span class="tag">&lt;/<span class="name">center</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这个就很奇怪了，折腾了很久也不知道是咋回事，还以为是爬虫没写好，请求头不对之类的。</p>
+<p>但是后来发现其实他确实进行跳转，打印出来的response的url是真正的下载地址。也就是说其实是代理服务器没有把跳转后get的文件返回回来，所以要再用一次get请求请求这个真正的下载地址。这个问题不知道是不是代理的普遍性问题，还是自己的问题。</p>
+<ol>
+<li><strong>session的干扰问题</strong></li>
+</ol>
+<p>这是上面问题的子问题， 如果你直接用requests.get去获取真正的连接的话，这个问题已经解决了，但是如果你用的是requests.session()先去get<strong>下载跳转地址</strong>，然后再去get<strong>真正的下载地址</strong>的话。会发现还是返回404,这个问题初步判断是因为<strong>真正的下载地址的域名</strong>和<strong>下载跳转地址的域名</strong>不同，所以共用的不是一个session身份，所以你带着www的session去获取backup的连接就会导致身份验证出错(这种猜想的问题在于真正的下载链接为啥要做session判断，感觉不合理)， 这只是我的猜想，也可能是本人学疏才浅，没有把握真正的问题。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> 爬虫 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[git完全入门指南]]></title>
       <url>http://blog.acring.me/2018/03/26/git%E5%AE%8C%E5%85%A8%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</url>
       <content type="html"><![CDATA[<h1 id="Git完全入门指南"><a href="#Git完全入门指南" class="headerlink" title="Git完全入门指南"></a>Git完全入门指南</h1><h2 id="教程参考"><a href="#教程参考" class="headerlink" title="教程参考"></a>教程参考</h2><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰Git教程</a></p>
@@ -184,7 +244,7 @@
 <p>好了，接着再<code>push</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div><div class="line">Counting objects: 6, done.</div><div class="line">Delta compression using up to 4 threads.</div><div class="line">Compressing objects: 100% (2/2), done.</div><div class="line">Writing objects: 100% (6/6), 530 bytes | 0 bytes/s, done.</div><div class="line">Total 6 (delta 0), reused 0 (delta 0)</div><div class="line">To github.com:Acring/git-test.git</div><div class="line">   66c6021..9fe6b47  master -&gt; master</div></pre></td></tr></table></figure>
 <p>这次就没什么问题了。以下是整个过程的流程图，可以重新梳理以下整个过程，并加深对各个命令的理解。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">graph TB</div><div class="line">	subgraph github</div><div class="line">	new(创建远程版本库)--&gt;get1(接收A电脑的推送)</div><div class="line">	get1--&gt;get2(接收B电脑的推送)</div><div class="line">	get2--&gt;get3(再次接收A电脑的推送)</div><div class="line">	end</div><div class="line">	subgraph A电脑</div><div class="line">	init(git init)--&gt;c1(创建git-test.md)</div><div class="line">	c1--&gt;c2(修改git-test.md)</div><div class="line">	c2--&gt;add1(git add git-test.md)</div><div class="line">	add1--&gt;commit1(git commit -m &apos;&apos;)</div><div class="line">	new--&gt;remote</div><div class="line">	commit1--&gt;remote(git remote add origin url)</div><div class="line">	remote--&gt;push1(git push origin master)</div><div class="line">	push1--&gt;get1</div><div class="line">	push1--&gt;c3(修改git-test.md)</div><div class="line">	c3--&gt;add2(git add git-test.md)</div><div class="line">	add2--&gt;commit2(git commit -m &apos;&apos;)</div><div class="line">	commit2--&gt;pusherror(push失败)</div><div class="line">	pusherror--&gt;pull1</div><div class="line">	get2--&gt;pull1(git pull origin master)</div><div class="line">	pull1--&gt;merge(手动合并分支)</div><div class="line">	merge--&gt;push2(push成功)</div><div class="line">	push2--&gt;get3</div><div class="line">	end</div><div class="line">	subgraph B电脑</div><div class="line">	get1--&gt;clone(git clone url)</div><div class="line">	clone--&gt;ca(修改git-test.md)</div><div class="line">	ca--&gt;adda(git add git-test.md)</div><div class="line">	adda--&gt;commita(git commit -m &apos;&apos;)</div><div class="line">	commita--&gt;get2</div><div class="line">	end</div></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/3026741-4d77dfe126c922a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 ]]></content>
       
         
@@ -1571,12 +1631,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts2008" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts4213" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2008'));
+        var myChart = echarts.init(document.getElementById('echarts4213'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -2926,12 +2986,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts9482" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts8856" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts9482'));
+        var myChart = echarts.init(document.getElementById('echarts8856'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -4275,12 +4335,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts3694" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts755" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3694'));
+        var myChart = echarts.init(document.getElementById('echarts755'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -4635,12 +4695,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts7661" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts4817" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7661'));
+        var myChart = echarts.init(document.getElementById('echarts4817'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -4820,12 +4880,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts3770" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts7029" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3770'));
+        var myChart = echarts.init(document.getElementById('echarts7029'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -5578,12 +5638,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts3340" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts2336" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts3340'));
+        var myChart = echarts.init(document.getElementById('echarts2336'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -5766,12 +5826,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts4657" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts8612" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4657'));
+        var myChart = echarts.init(document.getElementById('echarts8612'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -6089,12 +6149,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts7846" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts8947" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7846'));
+        var myChart = echarts.init(document.getElementById('echarts8947'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -6181,12 +6241,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts6163" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts1831" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts6163'));
+        var myChart = echarts.init(document.getElementById('echarts1831'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {
@@ -6466,9 +6526,9 @@ option = {
         
         <tags>
             
-            <tag> 博弈论 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 博弈论 </tag>
             
         </tags>
         

@@ -15,18 +15,43 @@
 
 
 
-<meta name="description" content="Acring的第一个小站成立啦">
+<meta name="description" content="python爬虫使用代理的问题总结简介最近的业务需要使用代理去爬取信息了，虽然免费代理也能用，但是效率太低，于是买了代理提供商，折腾了两天，总结了一些比较坑的问题
+
+代理: 芝麻代理
+python库: requests
+python3
+
+代理提供商
+代理提供商和网络运营商的线路冲突问题
+
+我使用的是芝麻代理, 用低价跟别人买的二手的，一开始没有注意一个比较关键的信息–线路类型，线路类型指的是你能从">
 <meta property="og:type" content="article">
-<meta property="og:title" content="First">
-<meta property="og:url" content="http://blog.acring.me/2017/03/15/First/index.html">
+<meta property="og:title" content="python使用代理问题总结">
+<meta property="og:url" content="http://blog.acring.me/2018/05/08/python使用代理问题总结/index.html">
 <meta property="og:site_name" content="Acring的小屋">
-<meta property="og:description" content="Acring的第一个小站成立啦">
-<meta property="og:image" content="http://omudx2uw8.bkt.clouddn.com/ring0.jpg">
-<meta property="og:updated_time" content="2017-03-16T09:11:16.829Z">
+<meta property="og:description" content="python爬虫使用代理的问题总结简介最近的业务需要使用代理去爬取信息了，虽然免费代理也能用，但是效率太低，于是买了代理提供商，折腾了两天，总结了一些比较坑的问题
+
+代理: 芝麻代理
+python库: requests
+python3
+
+代理提供商
+代理提供商和网络运营商的线路冲突问题
+
+我使用的是芝麻代理, 用低价跟别人买的二手的，一开始没有注意一个比较关键的信息–线路类型，线路类型指的是你能从">
+<meta property="og:updated_time" content="2018-05-08T08:45:32.035Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="First">
-<meta name="twitter:description" content="Acring的第一个小站成立啦">
-<meta name="twitter:image" content="http://omudx2uw8.bkt.clouddn.com/ring0.jpg">
+<meta name="twitter:title" content="python使用代理问题总结">
+<meta name="twitter:description" content="python爬虫使用代理的问题总结简介最近的业务需要使用代理去爬取信息了，虽然免费代理也能用，但是效率太低，于是买了代理提供商，折腾了两天，总结了一些比较坑的问题
+
+代理: 芝麻代理
+python库: requests
+python3
+
+代理提供商
+代理提供商和网络运营商的线路冲突问题
+
+我使用的是芝麻代理, 用低价跟别人买的二手的，一开始没有注意一个比较关键的信息–线路类型，线路类型指的是你能从">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +83,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>First | Acring的小屋</title>
+<title>python使用代理问题总结 | Acring的小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -283,11 +308,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-First" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-python使用代理问题总结" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/03/15/First/" class="article-date">
-      <time datetime="2017-03-15T07:42:34.000Z" itemprop="datePublished">2017-03-15</time>
+      <a href="/2018/05/08/python使用代理问题总结/" class="article-date">
+      <time datetime="2018-05-08T08:44:25.000Z" itemprop="datePublished">2018-05-08</time>
 </a>
 
 
@@ -302,7 +327,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      First
+      python使用代理问题总结
     </h1>
   
 
@@ -313,7 +338,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -323,18 +348,48 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Acring的第一个小站成立啦"><a href="#Acring的第一个小站成立啦" class="headerlink" title="Acring的第一个小站成立啦"></a>Acring的第一个小站成立啦</h1><a id="more"></a>
-<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><hr>
-<p>​    从大学开始一脸懵逼的接触计算机到现在已经在计算机领域摸索了两年，终于想着要给自己建一个属于自己的小窝，毕竟一个做计算机的一直没有一个属于自己的域名，博客还是很说不过去的。</p>
-<p>​    最开始的想法是<strong>小熊师兄Airing</strong>给我的，因为我在朋友的推荐下蹭了他在软件工程二专的代理课，大概知道了怎么建站，然后也看了小熊师兄的<a href="https://blog.ursb.me" target="_blank" rel="external">个人博客</a>，感觉他的博客真的相当的漂亮，上面有很多自己的<strong>学习经历</strong>和<strong>想法</strong>，还有自己写的书，自己做的项目，专业的和业余的，当时就觉得师兄是我的<strong>偶像</strong>!!</p>
-<p>​    当然，对我来说，<strong>偶像不是崇拜的对象，而是未来的目标</strong>: )。所以呢，我想着自己会有这么一天，而这一天也终有到了，我有了自己的域名==&gt;acring.me，博客域名==&gt;<a href="http://blog.acring.me">blog.acring.me</a>，虽然还很简陋但是我会慢慢把这装扮的<em>简洁而优雅</em>的，这是我一贯的 风格，最后欢迎大家来我这玩。</p>
-<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><hr>
-<p>​    为什么要建自己的博客，当然是为了<strong>有个地方分享自己想要分享的东西</strong>，我之前没有记录的习惯，虽然做了很多有趣的小东西但一直没有想过要把这些记录下来，一是觉得自己现在玩的东西都太<em>幼稚</em>了，太<em>简单</em>了，没必要记录，更没必要分享给别人，毕竟一堆人比我更优秀，怕是有班门弄斧之嫌.</p>
-<p>​    但是随着自己对计算机更多的喜爱和更多的了解，接触的东西越来越多，如果没有一个地方把这些记录下来，我觉得我即使做了过不久也就忘了，最典型的就是我大一做的抢课脚本，现在已经维护不了了，怕是之后要重写了。我的记忆力也不是相当出色的，我能熟练运用一门编程语言的唯一优势就是我会经常去使用它，而一旦不使用，比如<em>HTML</em>和<em>CSS</em>，我就忘了该怎么开始了，所以记录的习惯变得越来越重要。</p>
-<p>​    同时呢，我觉得自己已经能做出一些一般人想不到或做不出的东西了，这让我越来越希望能把自己的成果分享出去，或是希望更多人得到启发或是希望得到内心的虚荣心，反正结果便是这样了。</p>
-<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><hr>
-<p>​    我依然是一个刚刚走出新手村的萌新，可以叫我<em>AC</em>，也可以叫我<em>手环</em>,或者<em>Acring</em>,这都不重要，<strong>希望你能从我这有所收获，这个比较重要~</strong></p>
-<p><img src="http://omudx2uw8.bkt.clouddn.com/ring0.jpg" alt=""></p>
+        <h1 id="python爬虫使用代理的问题总结"><a href="#python爬虫使用代理的问题总结" class="headerlink" title="python爬虫使用代理的问题总结"></a>python爬虫使用代理的问题总结</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>最近的业务需要使用代理去爬取信息了，虽然免费代理也能用，但是效率太低，于是买了代理提供商，折腾了两天，总结了一些比较坑的问题</p>
+<ul>
+<li>代理: 芝麻代理</li>
+<li>python库: requests</li>
+<li>python3</li>
+</ul>
+<h2 id="代理提供商"><a href="#代理提供商" class="headerlink" title="代理提供商"></a>代理提供商</h2><ol>
+<li>代理提供商和网络运营商的线路冲突问题</li>
+</ol>
+<p>我使用的是<a href="http://h.zhimaruanjian.com/" target="_blank" rel="external">芝麻代理</a>, 用低价跟别人买的二手的，一开始没有注意一个比较关键的信息–<strong>线路类型</strong>，线路类型指的是你能从什么网络运营商(联通，电信，移动)使用它的代理，对于芝麻代理来说，它支持的线路只有联通和电信，也就是说如果你的网络是移动的话就没办法使用这个代理了，比如我所在学校的校园网使用的就是移动，所以我只能用联通手机开热点给我的电脑用: )</p>
+<p>我顺便调查了一下其他比较好的代理商的线路类型，<a href="http://www.mogumiao.com/" target="_blank" rel="external">蘑菇代理</a>的线路类型也是电信/联通，<a href="http://h.jiguangip.com/" target="_blank" rel="external">极光爬虫代理</a>的线路类型支持所有三大运营商(联通，电信，移动)</p>
+<ol>
+<li>如何查看自己的IP</li>
+</ol>
+<p>这个问题比较简单，但是也稍微提一下吧，我们需要知道自己在公网的IP和线路类型可以访问<a href="https://www.ip.cn/" target="_blank" rel="external">ip.cn</a></p>
+<p>查看，所在位置那里一般都有写运营商。</p>
+<ol>
+<li>IP白名单</li>
+</ol>
+<p>我们要把自己的公网IP添加到代理提供商自己账号下的白名单才能访问代理服务和获取代理IP，但要注意自己的IP地址是可能变化的。</p>
+<h2 id="使用代理"><a href="#使用代理" class="headerlink" title="使用代理"></a>使用代理</h2><ol>
+<li><strong>HTTP/HTTPS</strong></li>
+</ol>
+<p>假设你访问的HTTPS的网页，而你的proxies是这样的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxies = &#123;<span class="string">'http'</span>: <span class="string">'http://xxx.xxx.xxx.xxx:xxxx/'</span>&#125;</div></pre></td></tr></table></figure>
+<p>这样是没用的，因为在请求https协议的网页的时候requests会使用https对应的代理，而上面的proxies并没有提供，所以这时候用的还是你自己的IP。</p>
+<p>所以请求http的网页要用包含http的proxies,而请求https的网页要用包含https的proxies,当然，最保险的方法就是两个都包含</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxies = &#123;<span class="string">'http'</span>: <span class="string">'http://xxx.xxx.xxx.xxx:xxxx/'</span>, <span class="string">'https'</span>: <span class="string">'http://xxx.xxx.xxx.xxx:xxxx/'</span>&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><strong>代理跳转问题</strong></li>
+</ol>
+<p>这个问题困扰我了很久, 是比较坑的问题。<em>**</em></p>
+<p><strong>问题的场景是这样的:</strong></p>
+<p>我需要下载一个文件，下载链接并没有直接返回文件，而是会进行301永久跳转，跳转到真正的下载链接，在没有使用代理的时候，一切正常，我只需要访问下载链接，就能直接下载到文件，也就是说永久跳转和下载两步都自动完成了，</p>
+<p>但是在使用代理的情况下，我并没有的到文件，而是返回了404页面，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>404 Not Found<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">bgcolor</span>=<span class="string">"white"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">center</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>404 Not Found<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">center</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span><span class="tag">&lt;<span class="name">center</span>&gt;</span>nginx/1.2.9<span class="tag">&lt;/<span class="name">center</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这个就很奇怪了，折腾了很久也不知道是咋回事，还以为是爬虫没写好，请求头不对之类的。</p>
+<p>但是后来发现其实他确实进行跳转，打印出来的response的url是真正的下载地址。也就是说其实是代理服务器没有把跳转后get的文件返回回来，所以要再用一次get请求请求这个真正的下载地址。这个问题不知道是不是代理的普遍性问题，还是自己的问题。</p>
+<ol>
+<li><strong>session的干扰问题</strong></li>
+</ol>
+<p>这是上面问题的子问题， 如果你直接用requests.get去获取真正的连接的话，这个问题已经解决了，但是如果你用的是requests.session()先去get<strong>下载跳转地址</strong>，然后再去get<strong>真正的下载地址</strong>的话。会发现还是返回404,这个问题初步判断是因为<strong>真正的下载地址的域名</strong>和<strong>下载跳转地址的域名</strong>不同，所以共用的不是一个session身份，所以你带着www的session去获取backup的连接就会导致身份验证出错(这种猜想的问题在于真正的下载链接为啥要做session判断，感觉不合理)， 这只是我的猜想，也可能是本人学疏才浅，没有把握真正的问题。</p>
 
       
     </div>
@@ -343,13 +398,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/03/15/First/">First</a></p>
+        <p><span>本文标题:</span><a href="/2018/05/08/python使用代理问题总结/">python使用代理问题总结</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Acring</a></p>
-        <p><span>发布时间:</span>2017-03-15, 15:42:34</p>
-        <p><span>最后更新:</span>2017-03-16, 17:11:16</p>
+        <p><span>发布时间:</span>2018-05-08, 16:44:25</p>
+        <p><span>最后更新:</span>2018-05-08, 16:45:32</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/03/15/First/" title="First">http://blog.acring.me/2017/03/15/First/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2017/03/15/First/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/05/08/python使用代理问题总结/" title="python使用代理问题总结">http://blog.acring.me/2018/05/08/python使用代理问题总结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/05/08/python使用代理问题总结/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -361,12 +416,12 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/03/18/在Unity中调用Android原生Activity的方法/">
-                    在Unity中调用Android原生Activity的方法
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/03/26/git完全入门指南/">
+                    git完全入门指南
                 </a>
             </div>
-        
         
     </nav>
 
@@ -376,7 +431,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Acring的第一个小站成立啦"><span class="toc-number">1.</span> <span class="toc-text">Acring的第一个小站成立啦</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一"><span class="toc-number">1.1.</span> <span class="toc-text">一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二"><span class="toc-number">1.2.</span> <span class="toc-text">二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三"><span class="toc-number">1.3.</span> <span class="toc-text">三</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#python爬虫使用代理的问题总结"><span class="toc-number">1.</span> <span class="toc-text">python爬虫使用代理的问题总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代理提供商"><span class="toc-number">1.2.</span> <span class="toc-text">代理提供商</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用代理"><span class="toc-number">1.3.</span> <span class="toc-text">使用代理</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -412,7 +467,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"First　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"python使用代理问题总结　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -446,15 +501,15 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/03/18/在Unity中调用Android原生Activity的方法/" title="上一篇: 在Unity中调用Android原生Activity的方法">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2018/03/26/git完全入门指南/" title="下一篇: git完全入门指南">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
