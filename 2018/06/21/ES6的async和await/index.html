@@ -15,18 +15,19 @@
 
 
 
-<meta name="description" content="初步涉及自然语言处理和词向量">
+<meta name="description" content="ES6的async 和 awaitasyncasync 是用来表示函数是异步的，定义的函数会返回一个promise 对象，可以使用then方法添加回调函数
+1234567async function demo01() &amp;#123;    return 123;&amp;#125;demo01().then(val =&amp;gt; &amp;#123;    console.log(val);// 123&amp;#125;)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Word2Vec学习笔记之基础篇">
-<meta property="og:url" content="http://blog.acring.me/2018/01/25/Word2Vec学习笔记之基础篇/index.html">
+<meta property="og:title" content="'ES6的async和await'">
+<meta property="og:url" content="http://blog.acring.me/2018/06/21/ES6的async和await/index.html">
 <meta property="og:site_name" content="Acring的小屋">
-<meta property="og:description" content="初步涉及自然语言处理和词向量">
-<meta property="og:image" content="http://img.blog.csdn.net/20140525154453750">
-<meta property="og:updated_time" content="2018-02-01T07:26:42.007Z">
+<meta property="og:description" content="ES6的async 和 awaitasyncasync 是用来表示函数是异步的，定义的函数会返回一个promise 对象，可以使用then方法添加回调函数
+1234567async function demo01() &amp;#123;    return 123;&amp;#125;demo01().then(val =&amp;gt; &amp;#123;    console.log(val);// 123&amp;#125;)">
+<meta property="og:updated_time" content="2018-06-21T05:25:05.122Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Word2Vec学习笔记之基础篇">
-<meta name="twitter:description" content="初步涉及自然语言处理和词向量">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20140525154453750">
+<meta name="twitter:title" content="'ES6的async和await'">
+<meta name="twitter:description" content="ES6的async 和 awaitasyncasync 是用来表示函数是异步的，定义的函数会返回一个promise 对象，可以使用then方法添加回调函数
+1234567async function demo01() &amp;#123;    return 123;&amp;#125;demo01().then(val =&amp;gt; &amp;#123;    console.log(val);// 123&amp;#125;)">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Word2Vec学习笔记之基础篇 | Acring的小屋</title>
+<title>&#39;ES6的async和await&#39; | Acring的小屋</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -283,11 +284,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-Word2Vec学习笔记之基础篇" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ES6的async和await" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/01/25/Word2Vec学习笔记之基础篇/" class="article-date">
-      <time datetime="2018-01-25T03:31:12.000Z" itemprop="datePublished">2018-01-25</time>
+      <a href="/2018/06/21/ES6的async和await/" class="article-date">
+      <time datetime="2018-06-21T05:24:45.000Z" itemprop="datePublished">2018-06-21</time>
 </a>
 
 
@@ -302,7 +303,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Word2Vec学习笔记之基础篇
+      &#39;ES6的async和await&#39;
     </h1>
   
 
@@ -313,7 +314,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -323,70 +324,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="Word2Vec学习笔记之基础篇"><a href="#Word2Vec学习笔记之基础篇" class="headerlink" title="Word2Vec学习笔记之基础篇"></a>Word2Vec学习笔记之基础篇</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>自然语言处理属于深度学习中的一个分支，但是相对其他分支发展一直比较缓慢，在2013年末，Google发布的word2vec工具引起了一帮人的热捧，都认为这是深度学习在自然语言领域一项了不起的应用，word2vec本身并不是特别的难，只是简单三层神经网络，但是在某种程度上说他的应用是十分有前景的。</p>
-<p>Word2Vec(word to vector)是一种把词表征转化成实数值向量来区分其之间的差别的一种深度学习算法，对于训练好的模型，我们可以刻画出任意两个词语之间的相似度，用向量距离的形式。</p>
-<p>学习材料:</p>
-<p><a href="http://blog.csdn.net/mytestmy/article/details/26961315" target="_blank" rel="external">深度学习word2vec笔记之基础篇</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/26306795" target="_blank" rel="external">[NLP] 秒懂词向量Word2vec的本质</a></p>
-<p><a href="http://techblog.youdao.com/?p=915" target="_blank" rel="external">Deep Learning实战之word2vec</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/33045371" target="_blank" rel="external">学习 Word2Vec 之前，你需要知道这些</a></p>
-<hr>
-<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><h3 id="词向量"><a href="#词向量" class="headerlink" title="词向量"></a>词向量</h3><p>在自然语言相关的任务中，要将自然语言交给计算机处理，计算机可不认识人类的语言，所以要先将自然语言转换成计算机能懂的东西，又要在一定程度上区分出不同词语的区别，人们就想到了用向量来表示不同的词语</p>
-<h4 id="one-hot-representation-向量表示法"><a href="#one-hot-representation-向量表示法" class="headerlink" title="one-hot representation 向量表示法"></a>one-hot representation 向量表示法</h4><p>人们首先想到了一种比较简单的向量表示方法是<strong>one-hot representation</strong>, 就是用一个很长的向量来表示一个词，向量的长度为词典的大小或者说不同词语的数量，比如说</p>
-<p>现在有4个词语 <code>苹果</code>, <code>香蕉</code>, <code>水果</code>, <code>卡车</code>, 用one-hot representation表示法可以这样表示:</p>
-<p>苹果: [1,0,0,0]</p>
-<p>香蕉: [0,1,0,0]</p>
-<p>水果:[0,0,1,0]</p>
-<p>卡车:[0,0,0,1]</p>
-<p>这种表示方式非常的简洁，也就是给每个词分配一个唯一的ID，如果要编程的话，用Hash表给每个词分配一个编号就可以了，这种方式已经能在NLP的绝大多数问题上完成需要的任务了。</p>
-<p>但是这种词表示方式有两个缺点:</p>
-<ol>
-<li>容易受维数灾难的困扰，也就是当向量的长度过长，会导致计算变得困难(具体本人也不熟悉)</li>
-<li>不能很好的刻画词与词之间的相似性(词汇鸿沟): 任意两个词之间都是孤立的，光从向量上看不出两个词之间有关系，就像上面的例子，我们并不能看出苹果和香蕉，以及水果和卡车之间有啥关系</li>
-</ol>
-<p>所以在这种表示方法的基础上，人们有想到了另一种表示法，也是Word2Vec中运用的向量表示法Distributed Representation</p>
-<h4 id="Distributed-Representation-向量表示法"><a href="#Distributed-Representation-向量表示法" class="headerlink" title="Distributed Representation 向量表示法"></a>Distributed Representation 向量表示法</h4><p>这种向量表示方法也很简单，就是直接用一个普通的向量表示一个词，这种向量一般长这样<code>[0.795, -0.568, 0.156, 0.455, ...]</code>, 这种向量表示法的向量维度不是由词典大小决定的，一般由我们自己选定，一般50维和100维比较常见，这样的话维度不会太高，所以我们学习的Word2Vec本质上就是将one-hot representation向量表示转化成distributed representation 向量表示法.</p>
-<p>经过训练的词语被转化成这种形式后，一般其向量具有空间上的意义，也就是将这些向量放在一起形成一个词向量空间，而每个向量都其中的一个点，这个空间是多维的，所以想象起来可能比较困难，但是我们其实不关心他们所在的具体位置，只要知道如何计算其中两个向量的”距离”就行了，因为所谓两个词的”距离”，表示的就是这两个词之间的语法，语义之间的相似性。</p>
-<p><strong>从这里就能看出来Word2Vec的最终目的就是通过将词转换成向量,在通过向量的”距离”来观察两个词之间的相似度</strong></p>
-<p>那么接下来我们看看要如何去做,这里暂时不会涉及到具体的算法知识,只是大概的过程描述</p>
-<h2 id="相似词假说"><a href="#相似词假说" class="headerlink" title="相似词假说"></a>相似词假说</h2><h3 id="分布式假说"><a href="#分布式假说" class="headerlink" title="分布式假说"></a>分布式假说</h3><p>一个词由周围词来推断,相似的词会出现在相似的语境中,</p>
-<h3 id="分布模型"><a href="#分布模型" class="headerlink" title="分布模型"></a>分布模型</h3><p>相似词在相似的上下文中, 例如今天天空中有很多星星,今天天空中有太阳,这两个句子中的太阳和星星就具有相似的上下文,具有纵向相似性.</p>
-<p><strong>从这两个似乎很有道理的假说中就能推出我们要在意的两个语言模型-CBOW和Skip-Gram模型,他们都是Word2Vec工具中用到的模型</strong></p>
-<blockquote>
-<p>Word2Vec 是代码项目的名字，只是计算 word embedding 的一个工具，是 CBOW 和 Skip-Gram 这两个模型开源出来的工具。连续实值词表达也叫词嵌入 word embedding。</p>
-</blockquote>
-<h2 id="过程概述"><a href="#过程概述" class="headerlink" title="过程概述"></a>过程概述</h2><p>再用一个具体的例子来说明:</p>
-<ul>
-<li>如果在一个语料库中,吴彦祖帅到没朋友这句话经常出现,那么最终的训练结果中,[吴彦祖]这个词语会和[帅],[没朋友],这两个词的相似度非常高</li>
-<li>如果在同一个语料库中,手环帅到没朋友这句话也经常出现,那么在最终的训练结果中[手环]这个词语会和[吴彦祖]的相似度也非常高.</li>
-<li>我们可以推断,手环和吴彦祖一样帅</li>
-</ul>
-<h2 id="CBOW模型"><a href="#CBOW模型" class="headerlink" title="CBOW模型"></a>CBOW模型</h2><p>CBOW模型是利用词的上下文来预测当前的单词,比如输入[帅], [没朋友]会输出一个[手环] (或者吴彦祖)</p>
-<h2 id="Skip-Gram模型"><a href="#Skip-Gram模型" class="headerlink" title="Skip-Gram模型"></a>Skip-Gram模型</h2><p>Skip-Gram模型是利用词来预测上下文,比如输入[吴彦祖],会输出[手环],[帅],[没朋友]</p>
-<p>在这里不做模型的具体解析,只是额外介绍一下语言模型的大概概念,以更好的理解自然语言处理的基础问题</p>
-<h2 id="统计语言模型"><a href="#统计语言模型" class="headerlink" title="统计语言模型"></a>统计语言模型</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>语言模型其实就是看一句话是不是正常人说出来的话.</p>
-<p>比如说我们要计算一句话[吴彦祖帅到没朋友]是自然语言的概率,我们先要分词(将一个句子分成一个个词语,英文靠空格分词,中文就比较麻烦了),这句话就变成了[吴彦祖,帅,没朋友] (这里忽略掉到字比较好讲解)</p>
-<p>一句话是自然语言的概率从数学上我们给出的公式是 $P(s) = P(w_1,w_2,w<em>3..w</em>{i}) = p(w_1)p(w_2|w_1)p(w_3|w_1,w_2)…p(w_i|w_1,w_2,…w_i-1)$, </p>
-<p>$w_i$ 代表第i个词语</p>
-<p>用上面的例子来说</p>
-<p>$p(吴彦祖)$ 表示”吴彦祖”这个词在语料库中出现的概率;</p>
-<p>$p(帅|吴彦祖)$ 表示”帅”这个词在”吴彦祖”后面出现的概率</p>
-<p>$p(没朋友|吴彦祖,帅)$ 表示”没朋友”出现在”吴彦祖帅”后面的概率</p>
-<p>最后把这几个概率乘起来就是”吴彦祖帅到没朋友”这句话出现的概率了.</p>
-<p>这种方法简单直接,但是太过暴力了,计算一句话要计算这么多概率,三个词的句子要扫描3次语料库,计算三个子句出现的概率,如果语料库巨大且句子的词语数量较多的话,运算时间会出奇的慢,根本没有使用价值.</p>
-<p>所以为了偷懒,我们可以用更简单的计算方式 -N-gram模型</p>
-<h3 id="N-gram模型"><a href="#N-gram模型" class="headerlink" title="N-gram模型"></a>N-gram模型</h3><p>N-gram模型的核心就在这个N上, N-gram只管这个词前面的n-1个词,加上自己总共n个词,计算概率时指考虑这n个词来计算,即</p>
-<p>$P(s) = P(w_1,w_2,…w<em>i) = \prod</em>{i=1}^T{P(w_i|Context_i)}= p(w<em>i| w</em>{i-n+1}, w<em>{i-n+2},…w</em>{i-1})$</p>
-<p>其中，如果$Context_i$是空的话，就是它自己p(w)，另外如“没朋友”的Context就是“吴彦祖”、“帅”，其余的对号入座。</p>
-<p>如果n取2则”吴彦祖帅到没朋友”就只考虑”帅”和”没朋友”之间的出现概率了</p>
-<p>这里如果n取得比较小的话，就比较省事了，当然也要看到n取得太小，会特别影响效果的，有可能计算出来的那个概率很不准。怎么平衡这个效果和计算就是大牛们的事情了，据大牛们的核算，n取2效果都还凑合，n取3就相当不错了，n取4就顶不住了。看下面的一些数据，假设词表中词的个数 |V| = 20,000 词，那么有下面的一些数据。</p>
-<p><img src="http://img.blog.csdn.net/20140525154453750" alt="img"></p>
-<p>照图中的数据看去，取n=3是目前计算能力的上限了。在实践中用的最多的就是bigram(n=2)和trigram(n=3)了，而且效果也基本够了。</p>
-<h3 id="N-pos模型"><a href="#N-pos模型" class="headerlink" title="N-pos模型"></a>N-pos模型</h3><p>N-pos模型是先将不同的词分为不同的词性(Part of Speech),之后再用上述方法计算,具体就不过多赘述了.</p>
-<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>在应用中有更多的方法被开发出来,比如用函数直接你和计算$p(w_i|Context_i)$ ,就是说不是根据庞大的语料库统计出来,而是直接把Context和wi代入函数计算出来,这样就不用统计那个庞大的语料库了,这就是更深入的内容了.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文只是从概念上说明了Word2Vec这个工具的涉及的基础内容,NLP中常用的词向量的表示方法,还有Word2Vec中的词向量表示法,介绍了Word2Vec这个工具的思想本质-两个语言学假说,然后稍微介绍了Word2Vec中常用的两种模型的基础思想,和目的,最后简单介绍了统计语言模型中的目的,这是自然语言中的基础课题,对我们理解自然语言处理有很大的帮助</p>
-<p>博主也是NLP的新手,并不能保证所述文字的正确性,只是从其他博客中提取要点加以自己的理解,请理性看待.</p>
-<p>接下来是关于Word2Vec的基础应用篇,这个应该会更加有趣.</p>
+        <h2 id="ES6的async-和-await"><a href="#ES6的async-和-await" class="headerlink" title="ES6的async 和 await"></a>ES6的async 和 await</h2><h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><p>async 是用来表示函数是异步的，定义的函数会返回一个promise 对象，可以使用then方法添加回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">demo01</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">123</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">demo01().then(<span class="function"><span class="params">val</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(val);<span class="comment">// 123</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>async是为了await准备的, 因为await只能在async函数内部使用</p>
+<h3 id="await"><a href="#await" class="headerlink" title="await"></a>await</h3><p>await是async wait 的简写，只能在async函数内部使用,</p>
+<p>await的作用是将异步的<strong>函数转换成同步函数</strong>，即await的是promise对象会造成等待异步函数执行完成再执行接下来的语句</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">second</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            resolve(<span class="string">' enough sleep~'</span>);</div><div class="line">        &#125;, second);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">normalFunc</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'normalFunc'</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">awaitDemo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">await</span> normalFunc();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'something, ~~'</span>);</div><div class="line">    <span class="keyword">let</span> result = <span class="keyword">await</span> sleep(<span class="number">2000</span>);</div><div class="line">    <span class="built_in">console</span>.log(result);<span class="comment">// 两秒之后会被打印出来</span></div><div class="line">&#125;</div><div class="line">awaitDemo();</div></pre></td></tr></table></figure>
+<p>上面首先执行一个同步函数，<code>normalFunc</code>会立刻输出，然后输出，<code>something, ~~</code>, 然后因为sleep返回的是promise对象，await会执行sleep中的promise函数并等待这个函数返回，然后将值赋给result. 本来setTimeout是异步函数，但是在await的作用下，会等待SetTimeout执行完成，即<strong>异步转同步</strong>, 最后会输出<code>enough sleep~~</code>.</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>使用async和await相对promise的优点在于解决了pormise的回调地狱的问题，如果你有三个异步请求，且下一个异步请求的条件依赖于上一个请求的结果，则你需要写多层回调， 代码深度越来越深会导致结构不明了的问题。新的解决方案就可以很好的解决这个问题.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//我们仍然使用 setTimeout 来模拟异步请求</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">second, param</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            resolve(param);</div><div class="line">        &#125;, second);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> result1 = <span class="keyword">await</span> request(<span class="number">2000</span>, <span class="string">'req01'</span>);</div><div class="line">    <span class="keyword">let</span> result2 = <span class="keyword">await</span> request(<span class="number">1000</span>, <span class="string">'req02'</span> + result1);</div><div class="line">    <span class="keyword">let</span> result3 = <span class="keyword">await</span> request(<span class="number">500</span>, <span class="string">'req03'</span> + result2);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`</span></div><div class="line">        <span class="subst">$&#123;result3&#125;</span></div><div class="line">        <span class="subst">$&#123;result2&#125;</span></div><div class="line">        <span class="subst">$&#123;result1&#125;</span></div><div class="line">    `);</div><div class="line">&#125;</div><div class="line"></div><div class="line">test();</div></pre></td></tr></table></figure>
+<p>在上面的例子中，我们先要利用requests获取一个数据然后放到第二个请求的请求参数里面去，那用await就可以等待第一个请求完成再执行第二个请求，而因为test函数本身是async认证的异步函数，所以不会阻塞整个js程序执行。又完美的解决了promise的回调地狱的问题，优秀。</p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>请求不一定都是正确返回的，有时候会返回reject错误。这时候我们就要用try catch去拦截这个错误了.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">second</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            reject(<span class="string">'get a error'</span>);</div><div class="line">        &#125;, second);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">errorDemo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> result = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</div><div class="line">    <span class="built_in">console</span>.log(result);</div><div class="line">&#125;</div><div class="line">errorDemo();<span class="comment">// VM706:11 Uncaught (in promise) want to sleep~</span></div><div class="line"></div><div class="line"><span class="comment">// 为了处理Promise.reject 的情况我们应该将代码块用 try catch 包裹一下</span></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">errorDemoSuper</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">let</span> result = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</div><div class="line">        <span class="built_in">console</span>.log(result);</div><div class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</div><div class="line">        <span class="built_in">console</span>.log(err);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">errorDemoSuper();<span class="comment">// get a error</span></div></pre></td></tr></table></figure>
+<h2 id="错误的使用场景"><a href="#错误的使用场景" class="headerlink" title="错误的使用场景"></a>错误的使用场景</h2><p>如果你明白了我上面所说的，你就会知道await的使用场景一般是管理，具有先后执行顺序的异步执行函数，但是对于没有关系的并行函数，千万不要随便用await，因为await会阻塞后面的异步函数。明明应该同时发出的请求被你停止下来了，这就会导致整个程序变得慢下来。</p>
+<p>## </p>
 
       
     </div>
@@ -395,13 +346,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/01/25/Word2Vec学习笔记之基础篇/">Word2Vec学习笔记之基础篇</a></p>
+        <p><span>本文标题:</span><a href="/2018/06/21/ES6的async和await/">&#39;ES6的async和await&#39;</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Acring</a></p>
-        <p><span>发布时间:</span>2018-01-25, 11:31:12</p>
-        <p><span>最后更新:</span>2018-02-01, 15:26:42</p>
+        <p><span>发布时间:</span>2018-06-21, 13:24:45</p>
+        <p><span>最后更新:</span>2018-06-21, 13:25:05</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/01/25/Word2Vec学习笔记之基础篇/" title="Word2Vec学习笔记之基础篇">http://blog.acring.me/2018/01/25/Word2Vec学习笔记之基础篇/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/01/25/Word2Vec学习笔记之基础篇/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/06/21/ES6的async和await/" title="&#39;ES6的async和await&#39;">http://blog.acring.me/2018/06/21/ES6的async和await/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.acring.me/2018/06/21/ES6的async和await/　　作者: Acring" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -413,16 +364,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/">
-                    Word2Vec学习笔记之应用篇(Python)
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/01/19/Angular2-Go极速网页开发/">
-                    Angular2-Go极速网页开发
+                <a href="/2018/06/21/js匿名函数/">
+                    &#39;js匿名函数&#39;
                 </a>
             </div>
         
@@ -434,7 +379,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Word2Vec学习笔记之基础篇"><span class="toc-number">1.</span> <span class="toc-text">Word2Vec学习笔记之基础篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背景知识"><span class="toc-number">1.2.</span> <span class="toc-text">背景知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#词向量"><span class="toc-number">1.2.1.</span> <span class="toc-text">词向量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#one-hot-representation-向量表示法"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">one-hot representation 向量表示法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Distributed-Representation-向量表示法"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Distributed Representation 向量表示法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相似词假说"><span class="toc-number">1.3.</span> <span class="toc-text">相似词假说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分布式假说"><span class="toc-number">1.3.1.</span> <span class="toc-text">分布式假说</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分布模型"><span class="toc-number">1.3.2.</span> <span class="toc-text">分布模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过程概述"><span class="toc-number">1.4.</span> <span class="toc-text">过程概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CBOW模型"><span class="toc-number">1.5.</span> <span class="toc-text">CBOW模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Skip-Gram模型"><span class="toc-number">1.6.</span> <span class="toc-text">Skip-Gram模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#统计语言模型"><span class="toc-number">1.7.</span> <span class="toc-text">统计语言模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">1.7.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#N-gram模型"><span class="toc-number">1.7.2.</span> <span class="toc-text">N-gram模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#N-pos模型"><span class="toc-number">1.7.3.</span> <span class="toc-text">N-pos模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展"><span class="toc-number">1.7.4.</span> <span class="toc-text">扩展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.8.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ES6的async-和-await"><span class="toc-number">1.</span> <span class="toc-text">ES6的async 和 await</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#async"><span class="toc-number">1.1.</span> <span class="toc-text">async</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#await"><span class="toc-number">1.2.</span> <span class="toc-text">await</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优点"><span class="toc-number">2.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误处理"><span class="toc-number">3.</span> <span class="toc-text">错误处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误的使用场景"><span class="toc-number">4.</span> <span class="toc-text">错误的使用场景</span></a></li></ol>
         
     </div>
     <style>
@@ -470,7 +415,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Word2Vec学习笔记之基础篇　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"'ES6的async和await'　| Acring的小屋　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -504,15 +449,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/01/27/Word2Vec学习笔记之应用篇(Python)/" title="上一篇: Word2Vec学习笔记之应用篇(Python)">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/01/19/Angular2-Go极速网页开发/" title="下一篇: Angular2-Go极速网页开发">
+            <a href="/2018/06/21/js匿名函数/" title="下一篇: &#39;js匿名函数&#39;">
                 <i class="fa fa-angle-right"></i>
             </a>
         

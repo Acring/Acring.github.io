@@ -4,6 +4,91 @@
   
     
     <entry>
+      <title><![CDATA['ES6的async和await']]></title>
+      <url>http://blog.acring.me/2018/06/21/ES6%E7%9A%84async%E5%92%8Cawait/</url>
+      <content type="html"><![CDATA[<h2 id="ES6的async-和-await"><a href="#ES6的async-和-await" class="headerlink" title="ES6的async 和 await"></a>ES6的async 和 await</h2><h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><p>async 是用来表示函数是异步的，定义的函数会返回一个promise 对象，可以使用then方法添加回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">demo01</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">123</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">demo01().then(<span class="function"><span class="params">val</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(val);<span class="comment">// 123</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>async是为了await准备的, 因为await只能在async函数内部使用</p>
+<h3 id="await"><a href="#await" class="headerlink" title="await"></a>await</h3><p>await是async wait 的简写，只能在async函数内部使用,</p>
+<p>await的作用是将异步的<strong>函数转换成同步函数</strong>，即await的是promise对象会造成等待异步函数执行完成再执行接下来的语句</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">second</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            resolve(<span class="string">' enough sleep~'</span>);</div><div class="line">        &#125;, second);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">normalFunc</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'normalFunc'</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">awaitDemo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">await</span> normalFunc();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'something, ~~'</span>);</div><div class="line">    <span class="keyword">let</span> result = <span class="keyword">await</span> sleep(<span class="number">2000</span>);</div><div class="line">    <span class="built_in">console</span>.log(result);<span class="comment">// 两秒之后会被打印出来</span></div><div class="line">&#125;</div><div class="line">awaitDemo();</div></pre></td></tr></table></figure>
+<p>上面首先执行一个同步函数，<code>normalFunc</code>会立刻输出，然后输出，<code>something, ~~</code>, 然后因为sleep返回的是promise对象，await会执行sleep中的promise函数并等待这个函数返回，然后将值赋给result. 本来setTimeout是异步函数，但是在await的作用下，会等待SetTimeout执行完成，即<strong>异步转同步</strong>, 最后会输出<code>enough sleep~~</code>.</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>使用async和await相对promise的优点在于解决了pormise的回调地狱的问题，如果你有三个异步请求，且下一个异步请求的条件依赖于上一个请求的结果，则你需要写多层回调， 代码深度越来越深会导致结构不明了的问题。新的解决方案就可以很好的解决这个问题.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//我们仍然使用 setTimeout 来模拟异步请求</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">second, param</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            resolve(param);</div><div class="line">        &#125;, second);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> result1 = <span class="keyword">await</span> request(<span class="number">2000</span>, <span class="string">'req01'</span>);</div><div class="line">    <span class="keyword">let</span> result2 = <span class="keyword">await</span> request(<span class="number">1000</span>, <span class="string">'req02'</span> + result1);</div><div class="line">    <span class="keyword">let</span> result3 = <span class="keyword">await</span> request(<span class="number">500</span>, <span class="string">'req03'</span> + result2);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`</span></div><div class="line">        <span class="subst">$&#123;result3&#125;</span></div><div class="line">        <span class="subst">$&#123;result2&#125;</span></div><div class="line">        <span class="subst">$&#123;result1&#125;</span></div><div class="line">    `);</div><div class="line">&#125;</div><div class="line"></div><div class="line">test();</div></pre></td></tr></table></figure>
+<p>在上面的例子中，我们先要利用requests获取一个数据然后放到第二个请求的请求参数里面去，那用await就可以等待第一个请求完成再执行第二个请求，而因为test函数本身是async认证的异步函数，所以不会阻塞整个js程序执行。又完美的解决了promise的回调地狱的问题，优秀。</p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>请求不一定都是正确返回的，有时候会返回reject错误。这时候我们就要用try catch去拦截这个错误了.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">second</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            reject(<span class="string">'get a error'</span>);</div><div class="line">        &#125;, second);</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">errorDemo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> result = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</div><div class="line">    <span class="built_in">console</span>.log(result);</div><div class="line">&#125;</div><div class="line">errorDemo();<span class="comment">// VM706:11 Uncaught (in promise) want to sleep~</span></div><div class="line"></div><div class="line"><span class="comment">// 为了处理Promise.reject 的情况我们应该将代码块用 try catch 包裹一下</span></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">errorDemoSuper</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">let</span> result = <span class="keyword">await</span> sleep(<span class="number">1000</span>);</div><div class="line">        <span class="built_in">console</span>.log(result);</div><div class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</div><div class="line">        <span class="built_in">console</span>.log(err);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">errorDemoSuper();<span class="comment">// get a error</span></div></pre></td></tr></table></figure>
+<h2 id="错误的使用场景"><a href="#错误的使用场景" class="headerlink" title="错误的使用场景"></a>错误的使用场景</h2><p>如果你明白了我上面所说的，你就会知道await的使用场景一般是管理，具有先后执行顺序的异步执行函数，但是对于没有关系的并行函数，千万不要随便用await，因为await会阻塞后面的异步函数。明明应该同时发出的请求被你停止下来了，这就会导致整个程序变得慢下来。</p>
+<p>## </p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> javascript </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA['js匿名函数']]></title>
+      <url>http://blog.acring.me/2018/06/21/js%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/</url>
+      <content type="html"><![CDATA[<h1 id="js匿名函数"><a href="#js匿名函数" class="headerlink" title="js匿名函数"></a>js匿名函数</h1><p>当我们想在js全局作用域中运行函数，一般会怎么做呢</p>
+<p>一般可能会这么做， 就是直接放在最外层</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        </div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">	    a = <span class="number">1</span>;</div><div class="line">        b = <span class="number">2</span>;</div><div class="line">        <span class="built_in">console</span>.log(a+b);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这种方式的坏处在于，如果是一个团队开发的情况下，都在全局作用域中这么写，可能会导致变量冲突，被别人不小心用同名的变量覆盖掉，这时候我们可以用根据javascript函数作用域链的特性，用匿名函数来处理这种情况</p>
+<p>匿名函数一般形式如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">		<span class="function"><span class="keyword">function</span> (<span class="params">a,b</span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(a+b)</div><div class="line">		&#125;</div><div class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这种方式书写的函数和上面的代码一样，会立即执行，但是不一样的地方在于我把a,b放在了函数里面，这样就不会去污染全局的作用域了.</p>
+<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>匿名函数的写法不只是上面一种, 还可以是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a+b)</div><div class="line">&#125;(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line">-<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a+b)</div><div class="line">&#125;(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line">!<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(a+b)</div><div class="line">&#125;(<span class="number">1</span>, <span class="number">2</span>);</div></pre></td></tr></table></figure>
+<p>虽然看起来好像很诡异，但其实本质很简单， js把</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a+b);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解析成函数表达式，但是这种是会报错的，因为这个函数表达式既没有赋值也没有运算，我们在前面加个运算符</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">+<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line"> 	<span class="built_in">console</span>.log(a+b);   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你会发现报错消失了,但是控制台并没有任何输出，因为我们并没有给出传入值，所以我们再加上传入参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">+<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line"> 	<span class="built_in">console</span>.log(a+b);   </div><div class="line">&#125;(<span class="number">3</span>,<span class="number">4</span>)</div></pre></td></tr></table></figure>
+<p>这时候输出的就是7了，加<code>()</code>的原理是一样的，我们一般用的也是加<code>()</code>的方式，因为运算符会和函数的返回值进行运算，可能造成意想不到的后果, 匿名函数其实还是很容易理解的。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> javascript </tag>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA['爬虫超时类型']]></title>
+      <url>http://blog.acring.me/2018/06/21/%E7%88%AC%E8%99%AB%E8%B6%85%E6%97%B6%E7%B1%BB%E5%9E%8B/</url>
+      <content type="html"><![CDATA[<h2 id="爬虫超时类型"><a href="#爬虫超时类型" class="headerlink" title="爬虫超时类型"></a>爬虫超时类型</h2><ul>
+<li>ConnectTimeout<br>指的是建立<code>连接</code>所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。<br>在<code>java</code>中，网络状况正常的情况下，例如使用<code>HttpClient</code>或者<code>HttpURLConnetion</code>连接时设置参数<code>connectTimeout=5000</code>即5秒，如果连接用时超过5秒就是抛出<code>java.net.SocketException: connetct time out</code>的异常。</li>
+<li>ReadTimeout<br>指的是建立连接后从<code>服务器读取到可用资源</code>所用的时间。<br>在这里我们可以这样理解<code>ReadTimeout</code>：正常情况下，当我们发出请求时可以收到请求的结果，也就是页面上展示的内容，但是当网络状况很差的时候，就会出现页面上无法展示出内容的情况。另外当我们使用爬虫或者其他全自动的程序时，无法判断当前的网络状况是否良好，此时就有了<code>ReadTimeout</code>的用武之地了，通过设置<code>ReadTimeout</code>参数，例：<code>ReadTimeout=5000</code>，超过5秒没有读取到内容时，就认为此次读取不到内容并抛出<code>Java.net.SocketException: read time out</code>的异常。</li>
+</ul>
+<p>两者是不同的，一个是建立连接，一个是建立连接好了，从服务器读取资源的时间，python中的timeout是包含了两种情况，在捕获异常是可以用requests.exception.Timeout去同时捕获<code>requests.exceptions.ConnectTimeout</code>和 <code>requests.exceptions.ReadTimeout</code>, 当然也可以分开捕获，</p>
+<p>requests源码中关于Timeout的介绍:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Timeout</span><span class="params">(RequestException)</span>:</span></div><div class="line">    <span class="string">"""The request timed out.</span></div><div class="line"></div><div class="line">    Catching this error will catch both</div><div class="line">    :exc:`~requests.exceptions.ConnectTimeout` and</div><div class="line">    :exc:`~requests.exceptions.ReadTimeout` errors.</div><div class="line">    """</div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> 爬虫 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[python使用代理问题总结]]></title>
       <url>http://blog.acring.me/2018/05/08/python%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<h1 id="python爬虫使用代理的问题总结"><a href="#python爬虫使用代理的问题总结" class="headerlink" title="python爬虫使用代理的问题总结"></a>python爬虫使用代理的问题总结</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>最近的业务需要使用代理去爬取信息了，虽然免费代理也能用，但是效率太低，于是买了代理提供商，折腾了两天，总结了一些比较坑的问题</p>
@@ -1631,12 +1716,12 @@
     <entry>
       <title><![CDATA[广州大学数据分析(13-15届)]]></title>
       <url>http://blog.acring.me/2017/03/25/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90(13-15%E5%B1%8A)/</url>
-      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts4213" style="width: 100%;height: 750px;margin: 0 auto"></div>
+      <content type="html"><![CDATA[<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><div id="echarts5559" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4213'));
+        var myChart = echarts.init(document.getElementById('echarts5559'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -2986,12 +3071,12 @@
 </blockquote>
 <p>如下图所示是关于广州大学各学院专业的引力关系图，每个点都是<strong>可拖动</strong>的哟,<strong>点的大小</strong>说明了它<strong>所含专业</strong>的数量,放大来<strong>找找自己的专业在哪吧</strong></p>
 <hr>
-<div id="echarts8856" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts5377" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8856'));
+        var myChart = echarts.init(document.getElementById('echarts5377'));
         // 指定图表的配置项和数据
         var option = option = {
     
@@ -4335,12 +4420,12 @@
 <blockquote>
 <p><em>如果觉得看不清自己的学院可以点击右上角切换到饼图查看</em></p>
 </blockquote>
-<div id="echarts755" style="width: 100%;height: 1000px;margin: 0 auto"></div>
+<div id="echarts4899" style="width: 100%;height: 1000px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts755'));
+        var myChart = echarts.init(document.getElementById('echarts4899'));
         // 指定图表的配置项和数据
         var option = isPie = 1
 mychart = myChart
@@ -4695,12 +4780,12 @@ option = {
 </blockquote>
 <p>大学男女比例应该是很多人选择一个大学的重要标准，作为一个综合性大学，广州大学的男女比例还是可观的，至少不像广州工业大学一样男女比例严重失调，15年广州大学全面进入一本后，女生更是数量大幅上升，恩，其实我也不知道这两者有没有实际关系: )</p>
 <p>从下面的图可以看出13届的男女比例还是55开，男生稍微多一点，14届女生开始多于男生，15届女生数量就超了男生一大截了。</p>
-<div id="echarts4817" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts6828" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts4817'));
+        var myChart = echarts.init(document.getElementById('echarts6828'));
         // 指定图表的配置项和数据
         var option = dataStyle = { 
     normal: {
@@ -4880,12 +4965,12 @@ option = {
 </blockquote>
 <p>虽然说广州大学的男女比例还是很人性化的，但是你觉得这就能让你走出单身吗，naive，女生和男生依然是扎堆的，女生身边还是女生，男生见最多的还是(<del>基佬</del>)男生，从这个图就能看出，有的学院的女生比例低的可怕，<del>比如作者所在的计算机学院，</del>尤其是<strong>土木</strong>，<strong>机电</strong>，<strong>计算机</strong>，常年不识人间烟火；而像<strong>人文</strong>，<strong>音舞</strong>这些学院的男生也是像活宝一样的存在。</p>
 <p><em>所以想要脱单还是要靠自己的努力，不然和在广工这种大学差不多，除了平时在路上能多饱点眼福以外，综合性大学并不能帮你更多:)</em></p>
-<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts7029" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<p><em>点击下面三个圈圈图标可以一直显示学院名称，方便查看</em><br><div id="echarts3249" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts7029'));
+        var myChart = echarts.init(document.getElementById('echarts3249'));
         // 指定图表的配置项和数据
         var option = 
 mychart1 = myChart
@@ -5638,12 +5723,12 @@ option = {
 <p><img src="http://upload-images.jianshu.io/upload_images/3026741-19df3d41e19d1fbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h2 id="少数民族比例和外来人数比例"><a href="#少数民族比例和外来人数比例" class="headerlink" title="少数民族比例和外来人数比例"></a>少数民族比例和外来人数比例</h2><p>查看该部分<a href="http://gallery.echartsjs.com/editor.html?c=xBJoKvog2e" target="_blank" rel="external">Echarts源码</a></p>
 <p>为了更清晰的看出外省及少数民族比例，我又做了下面的饼图，可以看到外来省中湖南的占比是最多的，其中的内高班其实指的是新疆的内地高中，不是新的省份。</p>
-<div id="echarts2336" style="width: 100%;height: 800px;margin: 0 auto"></div>
+<div id="echarts6901" style="width: 100%;height: 800px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts2336'));
+        var myChart = echarts.init(document.getElementById('echarts6901'));
         // 指定图表的配置项和数据
         var option = 
 option = {
@@ -5826,12 +5911,12 @@ option = {
 <p>如果一个大饼并不能让你感受到求学的距离，下面的图或许会让你感觉到，我一直很佩服哪些远离家乡的人，<em>不远万里来到陌生的地方，面对甚是不同的环境，不同的人，不同的习惯</em>。那份乡思大概比本地人要强烈很多吧。</p>
 <p>因为只有来源省份的数据，没有具体位置的数据，所以只能做成点阵图了，其实本来想做成热力图的形式。</p>
 <p>从点的大小可以很清楚的看出<strong>湖南，河南，安徽，甘肃</strong>都是人数占比比较多的省份,<strong>如果你也是远漂的孩子，看看你是从哪来，又有多少人和你来自同一个地方吧。</strong></p>
-<div id="echarts8612" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts9691" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8612'));
+        var myChart = echarts.init(document.getElementById('echarts9691'));
         // 指定图表的配置项和数据
         var option = myHosName = '广州';
 geoCoordMap = {
@@ -6149,12 +6234,12 @@ if (option && typeof option === "object") {
 <blockquote>
 <p>PS:这部分数据可能与实际情况不符，因为这部分记录的是通过学生刚入学登记的手机号码去网上查询服务商的，可能很多人在校期间更换了手机号</p>
 </blockquote>
-<div id="echarts8947" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts2656" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts8947'));
+        var myChart = echarts.init(document.getElementById('echarts2656'));
         // 指定图表的配置项和数据
         var option = 
 
@@ -6241,12 +6326,12 @@ option = {
 <blockquote>
 <p>生日人数最多的一个月份是<strong>8月</strong>，这个月份你的<strong>朋友圈</strong>会很忙~，生日人数最少的是<strong>4月</strong>(居然不是2月)，你可以清闲一点啦</p>
 </blockquote>
-<div id="echarts1831" style="width: 100%;height: 750px;margin: 0 auto"></div>
+<div id="echarts8904" style="width: 100%;height: 750px;margin: 0 auto"></div>
 <!-- <script src="http://echarts.baidu.com/dist/echarts.js"></script> -->
 
 <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('echarts1831'));
+        var myChart = echarts.init(document.getElementById('echarts8904'));
         // 指定图表的配置项和数据
         var option = dataMap = {};
 function dataFormatter(obj) {
@@ -6526,9 +6611,9 @@ option = {
         
         <tags>
             
-            <tag> 算法 </tag>
-            
             <tag> 博弈论 </tag>
+            
+            <tag> 算法 </tag>
             
         </tags>
         
